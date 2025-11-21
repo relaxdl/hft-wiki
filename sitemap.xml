@@ -4,4 +4,20 @@
          <loc>https://example.com/</loc>
          <lastmod>2025-11-21</lastmod>
     </url>
+    <url>
+         <loc>https://example.com/config/</loc>
+         <lastmod>2025-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://example.com/documentation/</loc>
+         <lastmod>2025-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://example.com/installation/</loc>
+         <lastmod>2025-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://example.com/quickstart/</loc>
+         <lastmod>2025-11-21</lastmod>
+    </url>
 </urlset>
