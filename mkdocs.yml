@@ -1,19 +1,15 @@
-site_name: My Project Docs
-site_url: https://example.com
+site_name: HFT Wiki
+site_url: https://relaxdl.github.io/hft-wiki/
 site_description: >-
-  My Project：一个用于自动化交易 / 内部系统的技术文档站点。
+  HFT Wiki：高频交易技术文档中心
 
-repo_name: my-org/my-project
-repo_url: https://github.com/my-org/my-project
+repo_name: relaxdl/hft-wiki
+repo_url: https://github.com/relaxdl/hft-wiki
 
 # 顶部导航 / 左侧导航 的整体结构
 nav:
   - Home: index.md
-  - Documentation:
-      - Overview: docs/index.md
-      - Installation: docs/installation.md
-      - Quickstart: docs/quickstart.md
-      - Configuration: docs/config.md
+  - Documentation: documentation.md
 
 theme:
   name: material
@@ -59,11 +55,8 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/my-org/my-project
+      link: https://github.com/relaxdl/hft-wiki
       name: GitHub
-    - icon: fontawesome/solid/globe
-      link: https://example.com
-      name: Website
 
 plugins:
   - search

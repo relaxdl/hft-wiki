@@ -1,15 +1,11 @@
-# Documentation
+# HFT Wiki
 
-欢迎来到 **My Project** 文档中心。
+高频交易技术文档中心
 
-这里可以放一段简短介绍，例如：
+## 欢迎
 
-- 这个项目是什么
-- 适合谁使用
-- 链接到安装、快速上手、API 等核心页面
+这是一个基于 MkDocs Material 的技术文档站点，提供详细的技术文档和使用指南。
 
-## Quick links
+## 快速导航
 
-- [Installation](installation.md)
-- [Quickstart](quickstart.md)
-- [Configuration](config.md)
+- 📚 [查看文档](documentation.md)
