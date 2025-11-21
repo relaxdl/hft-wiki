@@ -3,8 +3,8 @@ site_url: https://relaxdl.github.io/hft-wiki/
 site_description: >-
   HFT Wiki：高频交易技术文档中心
 
-repo_name: relaxdl/hft-wiki
-repo_url: https://github.com/relaxdl/hft-wiki
+# repo_name: relaxdl/hft-wiki
+# repo_url: https://github.com/relaxdl/hft-wiki
 
 # 顶部导航 / 左侧导航 的整体结构
 nav:
@@ -14,11 +14,11 @@ nav:
 theme:
   name: material
   language: en
-  logo: images/logo.svg           # 可以先不建，后面再加
-  favicon: images/favicon.png     # 同上
+  # logo: images/logo.svg           # 可以先不建，后面再加
+  # favicon: images/favicon.png     # 同上
   icon:
-    logo: material/robot
-    repo: fontawesome/brands/github
+    logo: material/currency-btc
+    # repo: fontawesome/brands/github
 
   features:
     # 导航相关（顶部 Tab + 左侧多级导航 + 页面右侧小目录）
@@ -40,23 +40,24 @@ theme:
 
   palette:
     - scheme: default
-      primary: indigo
-      accent: indigo
+      primary: teal
+      accent: cyan
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
     - scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: teal
+      accent: cyan
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
 
 extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/relaxdl/hft-wiki
-      name: GitHub
+  social: []
+  # social:
+  #   - icon: fontawesome/brands/github
+  #     link: https://github.com/relaxdl/hft-wiki
+  #     name: GitHub
 
 plugins:
   - search
