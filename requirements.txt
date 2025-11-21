@@ -1,0 +1,14 @@
+# MkDocs 核心依赖
+mkdocs>=1.6.0
+mkdocs-material>=9.7.0
+pymdown-extensions>=10.0
+
+# MkDocs 插件
+mkdocs-table-reader-plugin
+mkdocs-git-revision-date-localized-plugin
+mkdocs-charts-plugin
+
+# 图像处理（用于 social cards）
+pillow
+cairosvg
+
