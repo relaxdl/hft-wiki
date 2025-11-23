@@ -3,7 +3,7 @@
 ## 支持的交易所
 
 * Market数据主要包括Public Channel的数据: Level1, Level2, Trade
-  * Level2会实时合成Snapshot
+    * Level2会实时合成Snapshot
 * 个别的Public Channel数据需要认证才能获得高频推送, 例如: Coinbase的Level2
 
 | 交易所名称 | 交易所ID | Market | 交易 |
