@@ -1,15 +1,16 @@
 site_name: HFT Wiki
 site_url: https://wiki.vikingtrading.net/
 site_description: >-
-  HFT Wiki：高频交易技术文档中心
+  HFT Wiki: HFT技术文档中心
 
 # repo_name: relaxdl/hft-wiki
 # repo_url: https://github.com/relaxdl/hft-wiki
 
 # 顶部导航 / 左侧导航 的整体结构
 nav:
-  - Home: index.md
-  - Documentation: documentation.md
+  - 主页: index.md
+  - 文档: 
+    - 支持的平台: common/support_platform.md
 
 theme:
   name: material

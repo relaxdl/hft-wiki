@@ -1,10 +1,10 @@
 # HFT Wiki
 
-高频交易技术文档中心
+Viking Trading高频交易技术文档中心
 
 ## 欢迎
 
-这是一个基于 MkDocs Material 的技术文档站点，提供详细的技术文档和使用指南。
+这是Viking Trading HFT的技术文档站点, 提供HFT相关的技术文档
 
 ## 快速导航
 
