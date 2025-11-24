@@ -14,6 +14,12 @@ C++实现 🔒 *（私有仓库，需要授权访问）*
 * [path_manager.h](https://github.com/relaxdl/hft-lib/blob/main/include/hft/util/path_manager.h)
 * [path_manager.cpp](https://github.com/relaxdl/hft-lib/blob/main/src/hft/util/path_manager.cpp)
 
+测试代码 🔒 *（私有仓库，需要授权访问）*
+
+* [example_path_manager.cpp](https://github.com/relaxdl/hft-lib/blob/main/example/test/example_path_manager.cpp)
+* [test_path_manager.py](https://github.com/relaxdl/hft-lib/blob/main/tools/test_path_manager.py)
+
+
 ## 定义
 
 ### hft root
@@ -359,10 +365,10 @@ C++实现 🔒 *（私有仓库，需要授权访问）*
     Data file path: /tmp/hft/data/okx/ticker/btcusdt_20240101.csv
     ```
 
-### zmq ipc command file
+### ipc command file
 
-* zmq ipc pub/sub file
-* 消息的发送放可以将消息发送到这个地址；命令的执行方订阅这个地址的命令负责执行
+* zmq ipc command pub/sub file
+* 用于命令的发送，命令的发送放可以将命令发送到这个地址；命令的执行方订阅这个地址负责执行
 
 ```
 /tmp/hft/zmq/command/name.ipc
@@ -397,6 +403,58 @@ C++实现 🔒 *（私有仓库，需要授权访问）*
     **▶ 输出：**
     ```
     ZMQ command file path: /tmp/hft/zmq/command/kraken_gateway.ipc
+    ```
+
+### ipc file
+
+* zmq ipc pub/sub file
+* 用于消息的发送，消息的发送放可以将消息发送到这个地址，消息的消费方订阅这个地址消费消息
+
+```
+/tmp/hft/zmq/exchange.channel.ipc
+```
+
+**代码示例：**
+
+=== "C++"
+
+    ```cpp
+    #include "hft/util/path_manager.h"
+    using namespace hft;
+
+    // 枚举版本
+    std::string zmqPath1 = PathManager::getZmqIpcFilePath(Exchange::BINANCE, Channel::TRADE);
+    std::cout << "ZMQ IPC path (enum): " << zmqPath1 << std::endl;
+
+    // 字符串版本
+    std::string zmqPath2 = PathManager::getZmqIpcFilePath("okx", "ticker");
+    std::cout << "ZMQ IPC path: " << zmqPath2 << std::endl;
+    ```
+
+    **▶ 输出：**
+    ```
+    ZMQ IPC path (enum): /tmp/hft/zmq/binance.trade.ipc
+    ZMQ IPC path: /tmp/hft/zmq/okx.ticker.ipc
+    ```
+
+=== "Python"
+
+    ```python
+    import hft
+
+    # 枚举版本
+    zmq_path1 = hft.PathManager.getZmqIpcFilePath(hft.Exchange.BINANCE, hft.Channel.TRADE)
+    print(f"ZMQ IPC path (enum): {zmq_path1}")
+
+    # 字符串版本
+    zmq_path2 = hft.PathManager.getZmqIpcFilePath("okx", "ticker")
+    print(f"ZMQ IPC path: {zmq_path2}")
+    ```
+
+    **▶ 输出：**
+    ```
+    ZMQ IPC path (enum): /tmp/hft/zmq/binance.trade.ipc
+    ZMQ IPC path: /tmp/hft/zmq/okx.ticker.ipc
     ```
 
 ### shm file
