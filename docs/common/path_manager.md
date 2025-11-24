@@ -271,24 +271,240 @@ C++实现 🔒 *（私有仓库，需要授权访问）*
 
 ### stat file
 
+* 统计文件
+
 ```
 /tmp/hft/stat/exchange/type/filename
 ```
 
+**代码示例：**
+
+=== "C++"
+
+    ```cpp
+    #include "hft/util/path_manager.h"
+    using namespace hft;
+
+    std::string statPath = PathManager::getStatFilePath("binance", "trade", "btcusdt_20240101.csv");
+    std::cout << "Stat file path: " << statPath << std::endl;
+    ```
+
+    **▶ 输出：**
+    ```
+    Stat file path: /tmp/hft/stat/binance/trade/btcusdt_20240101.csv
+    ```
+
+=== "Python"
+
+    ```python
+    import hft
+
+    stat_path = hft.PathManager.getStatFilePath("binance", "trade", "btcusdt_20240101.csv")
+    print(f"Stat file path: {stat_path}")
+    ```
+
+    **▶ 输出：**
+    ```
+    Stat file path: /tmp/hft/stat/binance/trade/btcusdt_20240101.csv
+    ```
+
 ### data file
+
+* 交易数据文件
 
 ```
 /tmp/hft/data/exchange/channel/filename
 ```
 
+**代码示例：**
+
+=== "C++"
+
+    ```cpp
+    #include "hft/util/path_manager.h"
+    using namespace hft;
+
+    // 枚举版本
+    std::string dataPath1 = PathManager::getDataFilePath(Exchange::BINANCE, Channel::TRADE, "btcusdt_20240101.csv");
+    std::cout << "Data file path (enum): " << dataPath1 << std::endl;
+
+    // 字符串版本
+    std::string dataPath2 = PathManager::getDataFilePath("okx", "ticker", "btcusdt_20240101.csv");
+    std::cout << "Data file path: " << dataPath2 << std::endl;
+    ```
+
+    **▶ 输出：**
+    ```
+    Data file path (enum): /tmp/hft/data/binance/trade/btcusdt_20240101.csv
+    Data file path: /tmp/hft/data/okx/ticker/btcusdt_20240101.csv
+    ```
+
+=== "Python"
+
+    ```python
+    import hft
+
+    # 枚举版本
+    data_path1 = hft.PathManager.getDataFilePath(hft.Exchange.BINANCE, hft.Channel.TRADE, "btcusdt_20240101.csv")
+    print(f"Data file path (enum): {data_path1}")
+
+    # 字符串版本
+    data_path2 = hft.PathManager.getDataFilePath("okx", "ticker", "btcusdt_20240101.csv")
+    print(f"Data file path: {data_path2}")
+    ```
+
+    **▶ 输出：**
+    ```
+    Data file path (enum): /tmp/hft/data/binance/trade/btcusdt_20240101.csv
+    Data file path: /tmp/hft/data/okx/ticker/btcusdt_20240101.csv
+    ```
+
 ### zmq ipc command file
+
+* zmq ipc pub/sub file
+* 消息的发送放可以将消息发送到这个地址；命令的执行方订阅这个地址的命令负责执行
 
 ```
 /tmp/hft/zmq/command/name.ipc
 ```
 
+**代码示例：**
+
+=== "C++"
+
+    ```cpp
+    #include "hft/util/path_manager.h"
+    using namespace hft;
+
+    std::string zmqCmdPath = PathManager::getZmqIpcCommandFilePath("kraken_gateway");
+    std::cout << "ZMQ command file path: " << zmqCmdPath << std::endl;
+    ```
+
+    **▶ 输出：**
+    ```
+    ZMQ command file path: /tmp/hft/zmq/command/kraken_gateway.ipc
+    ```
+
+=== "Python"
+
+    ```python
+    import hft
+
+    zmq_cmd_path = hft.PathManager.getZmqIpcCommandFilePath("kraken_gateway")
+    print(f"ZMQ command file path: {zmq_cmd_path}")
+    ```
+
+    **▶ 输出：**
+    ```
+    ZMQ command file path: /tmp/hft/zmq/command/kraken_gateway.ipc
+    ```
+
 ### shm file
+
+* share memory file
+* 用于跨进程通讯，可以共享市场的原始数据，也可以共享内部生成的信号，例如：Fair Price, Premium, Volatility等等
 
 ```
 /tmp/hft/shm/exchange.type.symbol.valueType
 ```
+
+**代码示例：**
+
+=== "C++"
+
+    ```cpp
+    #include "hft/util/path_manager.h"
+    using namespace hft;
+
+    // 方式1: Exchange, DataType, Currency, valueType
+    std::string shmPath1 = PathManager::getShmFilePath(
+        Exchange::BINANCE, 
+        DataType::FAIR_PRICE, 
+        Currency::BTC, 
+        "single_quote"
+    );
+    std::cout << "Shm file path (Currency): " << shmPath1 << std::endl;
+
+    // 方式2: Exchange, DataType, CurrencyPair, valueType
+    std::string shmPath2 = PathManager::getShmFilePath(
+        Exchange::BINANCE, 
+        DataType::VOLATILITY, 
+        CurrencyPair::BTC_USDT, 
+        "pair_quote"
+    );
+    std::cout << "Shm file path (CurrencyPair): " << shmPath2 << std::endl;
+
+    // 方式3: Exchange, Channel, CurrencyPair
+    std::string shmPath3 = PathManager::getShmFilePath(
+        Exchange::OKX, 
+        Channel::TRADE, 
+        CurrencyPair::ETH_USDT
+    );
+    std::cout << "Shm file path (Channel): " << shmPath3 << std::endl;
+
+    // 方式4: 字符串版本 - 3参数
+    std::string shmPath4 = PathManager::getShmFilePath("binance", "ticker", "btcusdt");
+    std::cout << "Shm file path (3 params): " << shmPath4 << std::endl;
+
+    // 方式5: 字符串版本 - 4参数
+    std::string shmPath5 = PathManager::getShmFilePath("okx", "fair_price", "eth", "single_quote");
+    std::cout << "Shm file path (4 params): " << shmPath5 << std::endl;
+    ```
+
+    **▶ 输出：**
+    ```
+    Shm file path (Currency): /tmp/hft/shm/binance.fair_price.btc.single_quote
+    Shm file path (CurrencyPair): /tmp/hft/shm/binance.volatility.btcusdt.pair_quote
+    Shm file path (Channel): /tmp/hft/shm/okx.trade.ethusdt
+    Shm file path (3 params): /tmp/hft/shm/binance.ticker.btcusdt
+    Shm file path (4 params): /tmp/hft/shm/okx.fair_price.eth.single_quote
+    ```
+
+=== "Python"
+
+    ```python
+    import hft
+
+    # 方式1: Exchange, DataType, Currency, valueType
+    shm_path1 = hft.PathManager.getShmFilePath(
+        hft.Exchange.BINANCE,
+        hft.DataType.FAIR_PRICE,
+        hft.Currency.BTC,
+        "single_quote"
+    )
+    print(f"Shm file path (Currency): {shm_path1}")
+
+    # 方式2: Exchange, DataType, CurrencyPair, valueType
+    shm_path2 = hft.PathManager.getShmFilePath(
+        hft.Exchange.BINANCE,
+        hft.DataType.VOLATILITY,
+        hft.CurrencyPair.BTC_USDT,
+        "pair_quote"
+    )
+    print(f"Shm file path (CurrencyPair): {shm_path2}")
+
+    # 方式3: Exchange, Channel, CurrencyPair
+    shm_path3 = hft.PathManager.getShmFilePath(
+        hft.Exchange.OKX,
+        hft.Channel.TRADE,
+        hft.CurrencyPair.ETH_USDT
+    )
+    print(f"Shm file path (Channel): {shm_path3}")
+
+    # 方式4: 字符串版本 - 3参数
+    shm_path4 = hft.PathManager.getShmFilePath("binance", "ticker", "btcusdt")
+    print(f"Shm file path (3 params): {shm_path4}")
+
+    # 方式5: 字符串版本 - 4参数
+    shm_path5 = hft.PathManager.getShmFilePath("okx", "fair_price", "eth", "single_quote")
+    print(f"Shm file path (4 params): {shm_path5}")
+    ```
+
+    **▶ 输出：**
+    ```
+    Shm file path (Currency): /tmp/hft/shm/binance.fair_price.btc.single_quote
+    Shm file path (CurrencyPair): /tmp/hft/shm/binance.volatility.btcusdt.pair_quote
+    Shm file path (Channel): /tmp/hft/shm/okx.trade.ethusdt
+    Shm file path (3 params): /tmp/hft/shm/binance.ticker.btcusdt
+    Shm file path (4 params): /tmp/hft/shm/okx.fair_price.eth.single_quote
+    ```
