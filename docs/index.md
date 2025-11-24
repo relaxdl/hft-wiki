@@ -8,4 +8,4 @@ Viking Trading高频交易技术文档中心
 
 ## 快速导航
 
-- 📚 [查看文档](documentation.md)
+- 📚 [查看文档](common/support_platform.md)
