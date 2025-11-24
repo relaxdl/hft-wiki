@@ -1,7 +1,7 @@
-site_name: HFT Wiki
+site_name: HFT技术文档中心
 site_url: https://wiki.vikingtrading.net/
 site_description: >-
-  HFT Wiki: HFT技术文档中心
+  HFT技术文档中心: HFT技术文档中心
 
 # repo_name: relaxdl/hft-wiki
 # repo_url: https://github.com/relaxdl/hft-wiki
@@ -16,7 +16,7 @@ nav:
 
 theme:
   name: material
-  language: en
+  language: zh
   # logo: images/logo.svg           # 可以先不建，后面再加
   # favicon: images/favicon.png     # 同上
   icon:
