@@ -12,7 +12,11 @@ nav:
   - 文档: 
     - 支持的平台: common/support_platform.md
     - 类型定义: common/data_type.md
+    - 数据结构: common/data_structure.md
     - 路径管理: common/path_manager.md
+    - 共享内存: 
+      - 基础: common/shm_basic.md
+      - 最佳实践: common/shm_best_practice.md
 
 theme:
   name: material
@@ -25,21 +29,31 @@ theme:
 
   features:
     # 导航相关（顶部 Tab + 左侧多级导航 + 页面右侧小目录）
-    - navigation.tabs
-    - navigation.sections
-    - navigation.top
     - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    # - navigation.expand 菜单默认不需要展开
+    - navigation.path
     - navigation.indexes
+    - navigation.top
 
     # 内容体验
     - content.code.copy
     - content.tabs.link
     - content.tooltips
 
+    # 目录
+    - toc.follow
+
     # 搜索
     - search.highlight
     - search.suggest
     - search.share
+
+    # 公告
+    - announce.dismiss
 
   palette:
     - scheme: default
