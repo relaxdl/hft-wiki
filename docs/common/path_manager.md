@@ -457,7 +457,7 @@ C++实现 🔒 *（私有仓库，需要授权访问）*
     ZMQ IPC path: /tmp/hft/zmq/okx.ticker.ipc
     ```
 
-### shm file
+### 🔥 shm file
 
 * share memory file
 * 用于跨进程通讯，可以共享市场的原始数据，也可以共享内部生成的信号，例如：Fair Price, Premium, Volatility等等
@@ -465,6 +465,8 @@ C++实现 🔒 *（私有仓库，需要授权访问）*
 ```
 /tmp/hft/shm/exchange.type.symbol.valueType
 ```
+
+详细映射规则参考：[共享内存路径](shm_path.md)
 
 **代码示例：**
 

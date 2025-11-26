@@ -17,6 +17,7 @@ nav:
     - 路径管理: common/path_manager.md
     - 共享内存: 
       - 基础: common/shm_basic.md
+      - 路径: common/shm_path.md
       - 最佳实践: common/shm_best_practice.md
 
 theme:
