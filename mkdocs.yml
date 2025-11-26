@@ -11,8 +11,9 @@ nav:
   - 主页: index.md
   - 文档: 
     - 支持的平台: common/support_platform.md
-    - 类型定义: common/data_type.md
-    - 数据结构: common/data_structure.md
+    - 数据:
+      - 类型定义: common/data_type.md
+      - 数据结构: common/data_structure.md
     - 路径管理: common/path_manager.md
     - 共享内存: 
       - 基础: common/shm_basic.md
@@ -90,7 +91,11 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: true
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.critic
