@@ -141,15 +141,45 @@
     }
     ```
 
-**代码示例：**
 
-TODO
+**示例：获取CurrencyPair的Trade**
+
+=== "C++"
+
+    ```c++ hl_lines="5"
+    #include "hft/util/shm.h"
+
+    Exchange exchange = Exchange::KRAKEN;
+    CurrencyPair symbol = CurrencyPair::BTC_USD;
+    Trade *trade = ShareMemoryTrade::get(exchange, symbol);
+    
+    // 输出成交数据
+    std::cout << "BTC_USD Trade - Side: " << sideToStr(trade->side)
+              << ", Price: " << trade->price
+              << ", Volume: " << trade->volume
+              << ", Time: " << trade->tradeTimestamp << std::endl;
+    ```
+
+=== "Python"
+
+    ```python hl_lines="5"
+    import hft
+    
+    exchange = hft.Exchange.KRAKEN
+    symbol = hft.CurrencyPair.BTC_USD
+    trade = hft.getTrade(exchange, symbol)
+    
+    # 输出成交数据
+    print(f"BTC_USD Trade - Side: {trade.side}, "
+          f"Price: {trade.price}, Volume: {trade.volume}, "
+          f"Time: {trade.tradeTimestamp}")
+    ```
 
 ## Snapshot
 
 * 订单册快照，每个深度的价格和数量
 * 交易系统底层会把数据流实时合成订单册快照，写入共享内存，上层应用可以直接读取最新的订单册快照
-
+* 底层C++在填充Snapshot的时候, askCount、bidCount范围内的数据保证有效，超出askCount、bidCount的部分不保证数据有效性，使用时需自行根据count判断数据范围
 
 === "C++"
 
@@ -216,9 +246,53 @@ TODO
     ```
 
 
-**代码示例：**
+**示例：获取CurrencyPair的Snapshot**
 
-TODO
+=== "C++"
+
+    ```c++ hl_lines="5"
+    #include "hft/util/shm.h"
+
+    Exchange exchange = Exchange::KRAKEN;
+    CurrencyPair symbol = CurrencyPair::BTC_USD;
+    Snapshot *snapshot = ShareMemorySnapshot::get(exchange, symbol);
+    
+    // 输出快照数据
+    std::cout << "BTC_USD Snapshot:" << std::endl;
+    std::cout << "Ask Count: " << snapshot->askCount << std::endl;
+    std::cout << "Best Ask: " << snapshot->asksPrice[0] 
+              << " (" << snapshot->asksVolume[0] << ")" << std::endl;
+    std::cout << "Bid Count: " << snapshot->bidCount << std::endl;
+    std::cout << "Best Bid: " << snapshot->bidsPrice[0] 
+              << " (" << snapshot->bidsVolume[0] << ")" << std::endl;
+    ```
+
+=== "Python"
+
+    ```python hl_lines="5"
+    import hft
+    
+    exchange = hft.Exchange.KRAKEN
+    symbol = hft.CurrencyPair.BTC_USD
+    snapshot = hft.getSnapshot(exchange, symbol)
+    
+    # 输出快照数据
+    print(f"BTC_USD Snapshot:")
+    print(f"Ask Count: {snapshot.askCount}")
+    print(f"Best Ask: {snapshot.asksPrice[0]} ({snapshot.asksVolume[0]})")
+    print(f"Bid Count: {snapshot.bidCount}")
+    print(f"Best Bid: {snapshot.bidsPrice[0]} ({snapshot.bidsVolume[0]})")
+    
+    # 遍历所有卖盘档位
+    print(f"\nAsks (Top 5):")
+    for i in range(min(5, snapshot.askCount)):
+        print(f"  Level {i+1}: {snapshot.asksPrice[i]} @ {snapshot.asksVolume[i]}")
+    
+    # 遍历所有买盘档位
+    print(f"\nBids (Top 5):")
+    for i in range(min(5, snapshot.bidCount)):
+        print(f"  Level {i+1}: {snapshot.bidsPrice[i]} @ {snapshot.bidsVolume[i]}")
+    ```
 
 ### PySnapshot
 
