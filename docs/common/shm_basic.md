@@ -74,7 +74,7 @@ int deleteShmById(int shmid);
     * 在实盘中，我们attach的内存统一都是Ring Buffer封装后的数据结构，有一致的行为模式
     * 虽然封装好的共享内存API提供了overwrite的功能来重新创建一块新的共享内存，但是在实际使用的时候，**我们永远不会删除已有的一块共享内存再去重新创建它**，也就是我们永远不会使用这个参数
     * 目前唯一需要将一块已有的共享内存删除再重新创建的业务场景就是修改了底层的数据结构，在底层基础数据结构稳定的情况下，这个需求非常少。及时有必须要改动的场景，升级的时候，重启服务器，重新刷新整个共享内存即可。这样可以极大简化上层业务逻辑实现
-    * 在实际使用的时候，底层API是不区分生产者和消费者的，上层逻辑自己决定谁是数据的生产者，谁是数据的消费者。任何进程都可以立即获取指向共享内存的指针，读写这块共享内存。我们期望的行为模式是，生产者进程先启动，获取共享内存指针，写入数据；消费者进程再启动，获取共享内存指针，读取数据。但是如果消费者进程先启动，获取共享内存指针，可以直接读取数据，这时候如果不做任何数据的合法性判断，读取的数据是**脏数据**，由于共享内存中所有的数据结构，都包含一个精确到微秒的时间戳，一个简单的判断方式是，看数据的时间戳是否在合法范围内，如果在，数据的payload才真正有效
+    * 在实际使用的时候，底层API是不区分生产者和消费者的，上层逻辑自己决定谁是数据的生产者，谁是数据的消费者。任何进程都可以立即获取指向共享内存的指针，读写这块共享内存。我们期望的行为模式是，生产者进程先启动，获取共享内存指针，写入数据；消费者进程再启动，获取共享内存指针，读取数据。但是如果消费者进程先启动，获取共享内存指针，可以直接读取数据，这时候如果不做任何数据的合法性判断，读取的数据是**脏数据**，由于共享内存中所有的数据结构，都包含一个精确到微秒的时间戳，一个简单的判断方式是，看数据的时间戳是否在合法范围内，如果在，可以认为数据的payload是有效的
 
 ```c++ hl_lines="14 21 28 42"
 class SharedMemoryTickerRingBuffer
@@ -129,7 +129,7 @@ private:
 * Ticker：基础数据结构
 * SharedMemoryTickerData：共享内存布局Ring Buffer
 * SharedMemoryTickerRingBuffer：Ring Buffer管理类，提供操作接口
-* 🔥 SharedMemoryTicker：全局Ring Buffer管理器，上层使用者最终只需要和这个类交互
+* 🔥 SharedMemoryTicker：全局Ring Buffer管理器，管理所有交易所和交易对的Ticker，上层使用者最终只需要和这个类交互
 
 ### 基础数据结构
 
@@ -313,7 +313,7 @@ inline void commit();
 
 #### 案例1：生产者进程（拷贝式写入）
 
-```c++
+```c++ hl_lines="13"
 SharedMemoryTickerRingBuffer buffer(
     Exchange::BINANCE, 
     CurrencyPair::BTC_USDT
@@ -333,7 +333,7 @@ buffer.write(ticker);
 
 * `buffer.getWritable()`和`buffer.commit()`操作必须一一对应
 
-```c++
+```c++ hl_lines="7 17"
 SharedMemoryTickerRingBuffer buffer(
     Exchange::BINANCE, 
     CurrencyPair::BTC_USDT
@@ -355,7 +355,7 @@ buffer.commit();
 
 #### 案例3：消费者进程（数据读取方）
 
-```c++
+```c++ hl_lines="7"
 SharedMemoryTickerRingBuffer buffer(
     Exchange::BINANCE, 
     CurrencyPair::BTC_USDT
@@ -452,7 +452,7 @@ static inline void commit(const Exchange exchange, const CurrencyPair symbol);
 
 #### 🔥 案例1：生产者进程（拷贝式写入）
 
-```c++
+```c++ hl_lines="6"
 // 解析 JSON 到 Ticker
 Ticker ticker = parseFromJson(json);
 
@@ -464,7 +464,7 @@ ShareMemoryTicker::write(ticker);
 #### 🔥 案例2：生产者进程（零拷贝优化）
 
 
-```c++
+```c++ hl_lines="6 20"
 // 交易所和交易对
 Exchange exchange = Exchange::BINANCE;
 CurrencyPair symbol = CurrencyPair::BTC_USDT;
@@ -489,7 +489,7 @@ ShareMemoryTicker::commit(exchange, symbol);
 
 #### 🔥 案例3：消费者进程（数据读取方）
 
-```c++
+```c++ hl_lines="6"
 // 交易所和交易对
 Exchange exchange = Exchange::BINANCE;
 CurrencyPair symbol = CurrencyPair::BTC_USDT;
