@@ -56,6 +56,39 @@
     }
     ```
 
+**示例：获取CurrencyPair的Ticker**
+
+=== "C++"
+
+    ```c++ hl_lines="5"
+    #include "hft/util/shm.h"
+
+    Exchange exchange = Exchange::KRAKEN;
+    CurrencyPair symbol = CurrencyPair::BTC_USD;
+    Ticker *ticker = ShareMemoryTicker::get(exchange, symbol);
+    
+    // 输出行情数据
+    std::cout << "BTC_USD Ticker - Ask: " << ticker->askPrice 
+              << " (" << ticker->askVolume << "), "
+              << "Bid: " << ticker->bidPrice 
+              << " (" << ticker->bidVolume << ")" << std::endl;
+    ```
+
+=== "Python"
+
+    ```python hl_lines="5"
+    import hft
+    
+    exchange = hft.Exchange.KRAKEN
+    symbol = hft.CurrencyPair.BTC_USD
+    ticker = hft.getTicker(exchange, symbol)
+    
+    # 输出行情数据
+    print(f"BTC_USD Ticker - Ask: {ticker.askPrice} ({ticker.askVolume}), "
+          f"Bid: {ticker.bidPrice} ({ticker.bidVolume})")
+    ```
+
+
 ## Trade
 
 * 市场的Trade数据
@@ -107,6 +140,10 @@
         m.def("tradeToStr", &hft::tradeToStr, "trade to str");
     }
     ```
+
+**代码示例：**
+
+TODO
 
 ## Snapshot
 
@@ -178,3 +215,36 @@
     }
     ```
 
+
+**代码示例：**
+
+TODO
+
+### PySnapshot
+
+为什么要有`PySnapshot`这个结构？因为C++导出的`Snapshot`这个结构，**所有字段都是只读的**，不可以修改。这在实盘的场景中是没有问题的。我们实盘的场景是底层C++合成订单册快照，写入共享内存。上层的python应用只需要读取共享内存中的订单册快照进行使用，并不需要修改订单册快照。如果python一侧要做一些其他的逻辑，例如：用历史数据自己合成订单册，可以使用`PySnapshot`这个结构
+
+```python
+import hft
+Snapshot = hft.Snapshot # C++定义的snapshot
+
+# python中定义的snapshot
+class PySnapshot(msgspec.Struct):
+    exchange: Exchange          # 交易所
+    symbol: CurrencyPair        # 交易对
+    timestamp: int              # 服务器时间戳(微秒)
+    localTimestamp: int        # 本地时间戳(微秒)
+    askCount: int              # 卖档数量
+    bidCount: int              # 买档数量
+    asksPrice: List[float]     # 卖价列表
+    asksVolume: List[float]    # 卖量列表
+    bidsPrice: List[float]     # 买价列表
+    bidsVolume: List[float]    # 买量列表
+```
+
+`PySnapshot`这个结构的字段和`Snapshot`完全一致，对于使用者来说，传入`PySnapshot`和`Snapshot`是没有任何区别的。
+
+```python
+def foo(snapshot: Union[PySnapshot, Snapshot]):
+    pass
+```
