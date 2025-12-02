@@ -14,6 +14,7 @@ nav:
     - 数据:
       - 类型定义: common/data_type.md
       - 数据结构: common/data_structure.md
+      - 常用数据结构: common/common_data_structure.md
     - 路径管理: common/path_manager.md
     - 共享内存: 
       - 基础: common/shm_basic.md

@@ -1,0 +1,180 @@
+# 常用数据结构
+
+* 这些数据结构都在C++中定义，通过pybind导出给Python使用
+* C++提供了API，可以直接读取共享内存的这些数据结构
+
+
+## Ticker
+
+* 一档的买卖价格和数量
+
+=== "C++"
+
+    ```c++
+    struct alignas(CACHE_LINE_SIZE) Ticker
+    {
+        Exchange exchange;      // 交易所
+        CurrencyPair symbol;    // 交易对
+        int64_t timestamp;      // 服务器时间戳(微秒)
+        int64_t localTimestamp; // 本地时间戳(微秒)
+        double askPrice;        // 卖一价
+        double askVolume;       // 卖一量
+        double bidPrice;        // 买一价
+        double bidVolume;       // 买一量
+    };
+    ```
+
+=== "C++ PyBind"
+
+    ```c++
+    namespace py = pybind11;
+    PYBIND11_MODULE(hft, m)
+    {
+        py::class_<hft::Ticker>(m, "Ticker")
+            .def(py::init([](hft::Exchange exchange, hft::CurrencyPair symbol, int64_t timestamp, int64_t localTimestamp,
+                             double askPrice, double askVolume, double bidPrice, double bidVolume)
+                          { return hft::Ticker{exchange, symbol, timestamp, localTimestamp, askPrice, askVolume, bidPrice, bidVolume}; }),
+                 py::arg("exchange") = hft::Exchange::UNKNOWN,
+                 py::arg("symbol") = hft::CurrencyPair::UNKNOWN,
+                 py::arg("timestamp") = 0,
+                 py::arg("localTimestamp") = 0,
+                 py::arg("askPrice") = 0.0,
+                 py::arg("askVolume") = 0.0,
+                 py::arg("bidPrice") = 0.0,
+                 py::arg("bidVolume") = 0.0)
+            .def_readwrite("exchange", &hft::Ticker::exchange)
+            .def_readwrite("symbol", &hft::Ticker::symbol)
+            .def_readwrite("timestamp", &hft::Ticker::timestamp)
+            .def_readwrite("localTimestamp", &hft::Ticker::localTimestamp)
+            .def_readwrite("askPrice", &hft::Ticker::askPrice)
+            .def_readwrite("askVolume", &hft::Ticker::askVolume)
+            .def_readwrite("bidPrice", &hft::Ticker::bidPrice)
+            .def_readwrite("bidVolume", &hft::Ticker::bidVolume)
+            .def("__repr__", [](const hft::Ticker &t)
+                 { return tickerToStr(t); });
+        m.def("tickerToStr", &hft::tickerToStr, "ticker to str");
+    }
+    ```
+
+## Trade
+
+* 市场的Trade数据
+
+=== "C++"
+
+    ```c++
+    struct alignas(CACHE_LINE_SIZE) Trade
+    {
+        Exchange exchange;      // 交易所
+        CurrencyPair symbol;    // 交易对
+        int64_t timestamp;      // 服务器时间戳(微秒)
+        int64_t localTimestamp; // 本地时间戳(微秒)
+        int64_t tradeTimestamp; // 成交时间戳(微秒)
+        Side side;              // 买卖方向
+        double price;           // 成交价格
+        double volume;          // 成交量
+    };
+    ```
+
+=== "C++ PyBind"
+
+    ```c++
+    namespace py = pybind11;
+    PYBIND11_MODULE(hft, m)
+    {
+        py::class_<hft::Trade>(m, "Trade")
+            .def(py::init([](hft::Exchange exchange, hft::CurrencyPair symbol, int64_t timestamp, int64_t localTimestamp,
+                                int64_t tradeTimestamp, hft::Side side, double price, double volume)
+                            { return hft::Trade{exchange, symbol, timestamp, localTimestamp, tradeTimestamp, side, price, volume}; }),
+                    py::arg("exchange") = hft::Exchange::UNKNOWN,
+                    py::arg("symbol") = hft::CurrencyPair::UNKNOWN,
+                    py::arg("timestamp") = 0,
+                    py::arg("localTimestamp") = 0,
+                    py::arg("tradeTimestamp") = 0,
+                    py::arg("side") = hft::Side::UNKNOWN,
+                    py::arg("price") = 0.0,
+                    py::arg("volume") = 0.0)
+            .def_readwrite("exchange", &hft::Trade::exchange)
+            .def_readwrite("symbol", &hft::Trade::symbol)
+            .def_readwrite("timestamp", &hft::Trade::timestamp)
+            .def_readwrite("localTimestamp", &hft::Trade::localTimestamp)
+            .def_readwrite("tradeTimestamp", &hft::Trade::tradeTimestamp)
+            .def_readwrite("side", &hft::Trade::side)
+            .def_readwrite("price", &hft::Trade::price)
+            .def_readwrite("volume", &hft::Trade::volume)
+            .def("__repr__", [](const hft::Trade &t)
+                    { return tradeToStr(t); });
+        m.def("tradeToStr", &hft::tradeToStr, "trade to str");
+    }
+    ```
+
+## Snapshot
+
+* 订单册快照，每个深度的价格和数量
+* 交易系统底层会把数据流实时合成订单册快照，写入共享内存，上层应用可以直接读取最新的订单册快照
+
+
+=== "C++"
+
+    ```c++
+    struct alignas(CACHE_LINE_SIZE) Snapshot
+    {
+        Exchange exchange;      // 交易所
+        CurrencyPair symbol;    // 交易对
+        int64_t timestamp;      // 服务器时间戳(微秒)
+        int64_t localTimestamp; // 本地时间戳(微秒)
+        int askCount;           // 卖档数量
+        int bidCount;           // 买档数量
+
+        static constexpr int MAX_DEPTH = 256;
+        double asksPrice[MAX_DEPTH];  // 卖价列表
+        double asksVolume[MAX_DEPTH]; // 卖量列表
+        double bidsPrice[MAX_DEPTH];  // 买价列表
+        double bidsVolume[MAX_DEPTH]; // 买量列表
+    };
+    ```
+
+=== "C++ PyBind"
+
+    ```c++
+    namespace py = pybind11;
+    PYBIND11_MODULE(hft, m)
+    {
+        py::class_<hft::Snapshot>(m, "Snapshot")
+        .def(py::init<>())
+        .def_readonly("exchange", &hft::Snapshot::exchange)
+        .def_readonly("symbol", &hft::Snapshot::symbol)
+        .def_readonly("timestamp", &hft::Snapshot::timestamp)
+        .def_readonly("localTimestamp", &hft::Snapshot::localTimestamp)
+        .def_readonly("askCount", &hft::Snapshot::askCount)
+        .def_readonly("bidCount", &hft::Snapshot::bidCount)
+        .def_property_readonly("asksPrice",
+                                [](const hft::Snapshot &s)
+                                {
+                                    return py::array_t<double>(
+                                        {hft::Snapshot::MAX_DEPTH}, {sizeof(double)}, s.asksPrice, py::capsule([]() {}));
+                                })
+        .def_property_readonly("asksVolume",
+                                [](const hft::Snapshot &s)
+                                {
+                                    return py::array_t<double>(
+                                        {hft::Snapshot::MAX_DEPTH}, {sizeof(double)}, s.asksVolume, py::capsule([]() {}));
+                                })
+        .def_property_readonly("bidsPrice",
+                                [](const hft::Snapshot &s)
+                                {
+                                    return py::array_t<double>(
+                                        {hft::Snapshot::MAX_DEPTH}, {sizeof(double)}, s.bidsPrice, py::capsule([]() {}));
+                                })
+        .def_property_readonly("bidsVolume",
+                                [](const hft::Snapshot &s)
+                                {
+                                    return py::array_t<double>(
+                                        {hft::Snapshot::MAX_DEPTH}, {sizeof(double)}, s.bidsVolume, py::capsule([]() {}));
+                                })
+        .def("__repr__", [](const hft::Snapshot &s)
+                { return snapshot5ToStr(s); });
+        m.def("snapshot5ToStr", &hft::snapshot5ToStr, "snapshot5 to str");
+    }
+    ```
+
