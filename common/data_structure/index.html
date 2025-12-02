@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://wiki.vikingtrading.net/common/data_type/">
+        <link rel="canonical" href="https://wiki.vikingtrading.net/common/data_structure/">
       
       
-        <link rel="prev" href="../support_platform/">
+        <link rel="prev" href="../data_type/">
       
       
-        <link rel="next" href="../data_structure/">
+        <link rel="next" href="../common_data_structure/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>类型定义 - HFT技术文档中心</title>
+        <title>数据结构 - HFT技术文档中心</title>
       
     
     
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              类型定义
+              数据结构
             
           </span>
         </div>
@@ -474,6 +474,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    类型定义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -493,7 +521,7 @@
   <span class="md-ellipsis">
     
   
-    类型定义
+    数据结构
   
 
     
@@ -511,7 +539,7 @@
   <span class="md-ellipsis">
     
   
-    类型定义
+    数据结构
   
 
     
@@ -535,45 +563,6 @@
       目录
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#python-enum-vs-intenum" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Python Enum vs IntEnum
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Python Enum vs IntEnum">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        特性对比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        代码示例
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#c" class="md-nav__link">
@@ -696,34 +685,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../data_structure/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    数据结构
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -977,45 +938,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#python-enum-vs-intenum" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Python Enum vs IntEnum
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Python Enum vs IntEnum">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        特性对比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        代码示例
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#c" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1193,7 +1115,7 @@
     
     
       <li class="md-path__item">
-        <a href="./" class="md-path__link">
+        <a href="../data_type/" class="md-path__link">
           
   <span class="md-ellipsis">
     数据
@@ -1215,200 +1137,23 @@
 
 
 
-<h1 id="_1">类型定义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="_1">数据结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <ul>
-<li>为了效率，系统内部所有的类型定义统一使用枚举而不是字符串，这会涉及到跨语言转换和网络传输的问题，需要有一套规则保证跨语言和网络传输的一致和高效</li>
-<li>跨语言：我们在C++会定义一套enum的数据类型，这套数据类型通过pybind导出给Python使用</li>
-<li>网络传输：在protobuf中，定义一套同样的enum数据类型，用于网络传输，<strong>保证定义的顺序一致</strong>，在传输两端可以直接进行类型的强制转换</li>
+<li>跨语言：所有的数据结构都在C++中定义，通过pybind导出给Python使用</li>
+<li>网络传输：在protobuf中，定义一套同样的数据结构，用于网络传输，可以通过自定义的类型转换方法与C++和Python中的结构进行相互转换</li>
 </ul>
-<h2 id="python-enum-vs-intenum">Python Enum vs IntEnum<a class="headerlink" href="#python-enum-vs-intenum" title="Permanent link">&para;</a></h2>
-<ul>
-<li>在我们的系统中，涉及到跨语言的部分，并不直接使用Python中的enum，而是使用C++中定义的enum，通过pybind导出给Python来使用，这里只是为了明确下Python enum的行为</li>
-<li>在Python中，<code>Enum</code>和<code>IntEnum</code>是两种常用的枚举类型</li>
-</ul>
-<h3 id="_2">特性对比<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>特性</th>
-<th>Enum</th>
-<th>IntEnum</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>name</td>
-<td>✅</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>value</td>
-<td>✅</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>Color(1)</td>
-<td>✅</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>Color["RED"]</td>
-<td>✅</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>int(xxx)</td>
-<td>❌</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>与 int 比较</td>
-<td>❌</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>&lt; &gt; 比较</td>
-<td>❌</td>
-<td>✅</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_3">代码示例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<ul>
-<li>高亮的三行是<code>IntEnum</code>独有的行为，我们通过pybind导出的enum行为和<code>IntEnum</code>一致，可以方便的和int做相互转换</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">IntEnum</span>
-
-<span class="c1"># 定义普通 Enum</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ColorEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="n">RED</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">GREEN</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">BLUE</span> <span class="o">=</span> <span class="mi">3</span>
-
-<span class="c1"># 定义 IntEnum</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ColorIntEnum</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
-    <span class="n">RED</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">GREEN</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">BLUE</span> <span class="o">=</span> <span class="mi">3</span>
-
-<span class="c1"># 共同特性</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ColorEnum</span><span class="o">.</span><span class="n">RED</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>        <span class="c1"># &quot;RED&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ColorEnum</span><span class="o">.</span><span class="n">RED</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>       <span class="c1"># 1</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ColorEnum</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>              <span class="c1"># ColorEnum.RED</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ColorEnum</span><span class="p">[</span><span class="s2">&quot;RED&quot;</span><span class="p">])</span>          <span class="c1"># ColorEnum.RED</span>
-
-<span class="c1"># IntEnum 独有特性</span>
-<span class="hll"><span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ColorIntEnum</span><span class="o">.</span><span class="n">RED</span><span class="p">))</span>     <span class="c1"># 1 (Enum 不支持)</span>
-</span><span class="hll"><span class="nb">print</span><span class="p">(</span><span class="n">ColorIntEnum</span><span class="o">.</span><span class="n">RED</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>     <span class="c1"># True (Enum 返回 False)</span>
-</span><span class="hll"><span class="nb">print</span><span class="p">(</span><span class="n">ColorIntEnum</span><span class="o">.</span><span class="n">RED</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span>      <span class="c1"># True (Enum 会报错)</span>
-</span></code></pre></div>
 <h2 id="c">C++<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
-<p>下面以exchange为例说明类型的定义方式</p>
+<ul>
+<li>下面以<code>Ticker</code>为例说明数据结构的定义方式</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<ul>
+<li>C++中的成员变量使用<code>lowerCamelCase</code>命名规则，所以导出给Python使用的时候，也是<code>lowerCamelCase</code>的命名风格</li>
+<li>Protobuf中的成员变量使用官方推荐的<code>snake_case</code>命名风格</li>
+</ul>
+</div>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Protobuf</label><label for="__tabbed_1_3">C++ PyBind</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Exchange</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">uint8_t</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">UNKNOWN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="n">BINANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">    </span><span class="n">COINBASE</span><span class="p">,</span>
-<span class="w">    </span><span class="n">KRAKEN</span><span class="p">,</span>
-<span class="w">    </span><span class="n">BITSTAMP</span><span class="p">,</span>
-<span class="w">    </span><span class="n">OKX</span><span class="p">,</span>
-<span class="w">    </span><span class="n">IB</span><span class="p">,</span>
-<span class="w">    </span><span class="n">BYBIT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">BINANCE_FUTURE</span><span class="p">,</span>
-<span class="w">    </span><span class="n">OKX_SWAP</span><span class="p">,</span>
-<span class="w">    </span><span class="n">KUCOIN</span><span class="p">,</span>
-<span class="w">    </span><span class="n">KRAKEN_FUTURE</span><span class="p">,</span>
-<span class="w">    </span><span class="n">BINANCE_DELIVERY</span><span class="p">,</span>
-<span class="w">    </span><span class="n">GATE_FUTURE</span><span class="p">,</span>
-<span class="w">    </span><span class="n">BYBIT_FUTURE</span><span class="p">,</span>
-<span class="w">    </span><span class="n">UPBIT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">BITGET</span><span class="p">,</span>
-<span class="w">    </span><span class="n">BITGET_FUTURE</span><span class="p">,</span>
-<span class="w">    </span><span class="n">GATE</span><span class="p">,</span>
-<span class="w">    </span><span class="n">KUCOIN_FUTURE</span><span class="p">,</span>
-<span class="w">    </span><span class="n">RPC</span>
-<span class="p">};</span>
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<ul>
-<li>定义的顺序需要和C++保持一致，才可以直接使用强制类型转换</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kd">enum</span><span class="w"> </span><span class="n">Exchange</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="na">EXCHANGE_UNKNOWN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">  </span><span class="na">BINANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">  </span><span class="na">COINBASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<span class="w">  </span><span class="na">KRAKEN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="w">  </span><span class="na">BITSTAMP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
-<span class="w">  </span><span class="na">OKX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-<span class="w">  </span><span class="na">IB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
-<span class="w">  </span><span class="na">BYBIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
-<span class="w">  </span><span class="na">BINANCE_FUTURE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
-<span class="w">  </span><span class="na">OKX_SWAP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span>
-<span class="w">  </span><span class="na">KUCOIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
-<span class="w">  </span><span class="na">KRAKEN_FUTURE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">;</span>
-<span class="w">  </span><span class="na">BINANCE_DELIVERY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
-<span class="w">  </span><span class="na">GATE_FUTURE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span>
-<span class="w">  </span><span class="na">BYBIT_FUTURE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">14</span><span class="p">;</span>
-<span class="w">  </span><span class="na">UPBIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span><span class="p">;</span>
-<span class="w">  </span><span class="na">BITGET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
-<span class="w">  </span><span class="na">BITGET_FUTURE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">17</span><span class="p">;</span>
-<span class="w">  </span><span class="na">GATE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">18</span><span class="p">;</span>
-<span class="w">  </span><span class="na">KUCOIN_FUTURE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">19</span><span class="p">;</span>
-<span class="w">  </span><span class="na">RPC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<ul>
-<li>在导出的时候，需要加<code>py::arithmetic()</code>才有Python中IntEnum类型的行为</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">namespace</span><span class="w"> </span><span class="nn">py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">pybind11</span><span class="p">;</span>
-<span class="n">PYBIND11_MODULE</span><span class="p">(</span><span class="n">hft</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="n">py</span><span class="o">::</span><span class="n">enum_</span><span class="o">&lt;</span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Exchange&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">py</span><span class="o">::</span><span class="n">arithmetic</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;HFT Exchange&quot;</span><span class="p">)</span>
-</span><span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;UNKNOWN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">UNKNOWN</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;BINANCE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">BINANCE</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;COINBASE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">COINBASE</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;KRAKEN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">KRAKEN</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;BITSTAMP&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">BITSTAMP</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;OKX&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">OKX</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;IB&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">IB</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;BYBIT&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">BYBIT</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;BINANCE_FUTURE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">BINANCE_FUTURE</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;OKX_SWAP&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">OKX_SWAP</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;KUCOIN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">KUCOIN</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;KRAKEN_FUTURE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">KRAKEN_FUTURE</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;BINANCE_DELIVERY&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">BINANCE_DELIVERY</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;GATE_FUTURE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">GATE_FUTURE</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;BYBIT_FUTURE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">BYBIT_FUTURE</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;UPBIT&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">UPBIT</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;BITGET&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">BITGET</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;BITGET_FUTURE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">BITGET_FUTURE</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;GATE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">GATE</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;KUCOIN_FUTURE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">KUCOIN_FUTURE</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;RPC&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">RPC</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">export_values</span><span class="p">();</span>
-<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">def</span><span class="p">(</span><span class="s">&quot;exchangeToStr&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">exchangeToStr</span><span class="p">,</span><span class="w"> </span><span class="n">py</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;e&quot;</span><span class="p">));</span>
-<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">def</span><span class="p">(</span><span class="s">&quot;strToExchange&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">strToExchange</span><span class="p">,</span><span class="w"> </span><span class="n">py</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;str&quot;</span><span class="p">));</span>
-<span class="p">}</span>
-</code></pre></div>
-</div>
-</div>
-</div>
-<h3 id="c-python">C++ -&gt; Python<a class="headerlink" href="#c-python" title="Permanent link">&para;</a></h3>
-<p>C++通过pybind导出的类型在Python中直接使用</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
-<span class="n">Exchange</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">Exchange</span>
-
-<span class="hll"><span class="n">exchange</span> <span class="o">=</span> <span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span>
-</span></code></pre></div>
-<h3 id="c-protobuf">C++ -&gt; Protobuf<a class="headerlink" href="#c-protobuf" title="Permanent link">&para;</a></h3>
-<p>C++的类型转换成Protobuf的类型</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Protobuf</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">alignas</span><span class="p">(</span><span class="n">CACHE_LINE_SIZE</span><span class="p">)</span><span class="w"> </span><span class="n">Ticker</span>
@@ -1437,16 +1182,65 @@
 <span class="p">}</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">namespace</span><span class="w"> </span><span class="nn">py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">pybind11</span><span class="p">;</span>
+<span class="n">PYBIND11_MODULE</span><span class="p">(</span><span class="n">hft</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">py</span><span class="o">::</span><span class="n">class_</span><span class="o">&lt;</span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ticker&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">def</span><span class="p">(</span><span class="n">py</span><span class="o">::</span><span class="n">init</span><span class="p">([](</span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="w"> </span><span class="n">exchange</span><span class="p">,</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">CurrencyPair</span><span class="w"> </span><span class="n">symbol</span><span class="p">,</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">timestamp</span><span class="p">,</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">localTimestamp</span><span class="p">,</span>
+<span class="w">                         </span><span class="kt">double</span><span class="w"> </span><span class="n">askPrice</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">askVolume</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">bidPrice</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">bidVolume</span><span class="p">)</span>
+<span class="w">                      </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="p">{</span><span class="n">exchange</span><span class="p">,</span><span class="w"> </span><span class="n">symbol</span><span class="p">,</span><span class="w"> </span><span class="n">timestamp</span><span class="p">,</span><span class="w"> </span><span class="n">localTimestamp</span><span class="p">,</span><span class="w"> </span><span class="n">askPrice</span><span class="p">,</span><span class="w"> </span><span class="n">askVolume</span><span class="p">,</span><span class="w"> </span><span class="n">bidPrice</span><span class="p">,</span><span class="w"> </span><span class="n">bidVolume</span><span class="p">};</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">             </span><span class="n">py</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;exchange&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Exchange</span><span class="o">::</span><span class="n">UNKNOWN</span><span class="p">,</span>
+<span class="w">             </span><span class="n">py</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;symbol&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">CurrencyPair</span><span class="o">::</span><span class="n">UNKNOWN</span><span class="p">,</span>
+<span class="w">             </span><span class="n">py</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;timestamp&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">             </span><span class="n">py</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;localTimestamp&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">             </span><span class="n">py</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;askPrice&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">             </span><span class="n">py</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;askVolume&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">             </span><span class="n">py</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;bidPrice&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">             </span><span class="n">py</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;bidVolume&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">def_readwrite</span><span class="p">(</span><span class="s">&quot;exchange&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="o">::</span><span class="n">exchange</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">def_readwrite</span><span class="p">(</span><span class="s">&quot;symbol&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="o">::</span><span class="n">symbol</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">def_readwrite</span><span class="p">(</span><span class="s">&quot;timestamp&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="o">::</span><span class="n">timestamp</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">def_readwrite</span><span class="p">(</span><span class="s">&quot;localTimestamp&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="o">::</span><span class="n">localTimestamp</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">def_readwrite</span><span class="p">(</span><span class="s">&quot;askPrice&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="o">::</span><span class="n">askPrice</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">def_readwrite</span><span class="p">(</span><span class="s">&quot;askVolume&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="o">::</span><span class="n">askVolume</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">def_readwrite</span><span class="p">(</span><span class="s">&quot;bidPrice&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="o">::</span><span class="n">bidPrice</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">def_readwrite</span><span class="p">(</span><span class="s">&quot;bidVolume&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="o">::</span><span class="n">bidVolume</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">def</span><span class="p">(</span><span class="s">&quot;__repr__&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">hft</span><span class="o">::</span><span class="n">Ticker</span><span class="w"> </span><span class="o">&amp;</span><span class="n">t</span><span class="p">)</span>
+<span class="w">             </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">tickerToStr</span><span class="p">(</span><span class="n">t</span><span class="p">);</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">def</span><span class="p">(</span><span class="s">&quot;tickerToStr&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hft</span><span class="o">::</span><span class="n">tickerToStr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ticker to str&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 </div>
 </div>
+</div>
+<h3 id="c-python">C++ -&gt; Python<a class="headerlink" href="#c-python" title="Permanent link">&para;</a></h3>
+<p>C++通过pybind导出的数据结构，在Python中直接使用</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+<span class="n">Exchange</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">Exchange</span>
+<span class="n">CurrencyPair</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">CurrencyPair</span>
+<span class="n">Ticker</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">Ticker</span>
+
+<span class="n">ticker</span> <span class="o">=</span> <span class="n">Ticker</span><span class="p">(</span>
+    <span class="n">exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">CurrencyPair</span><span class="o">.</span><span class="n">BTC_USDT</span><span class="p">,</span>
+    <span class="n">timestamp</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1_000_000</span><span class="p">),</span>
+    <span class="n">localTimestamp</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1_000_000</span><span class="p">),</span>
+    <span class="n">askPrice</span><span class="o">=</span><span class="mf">110101.2</span><span class="p">,</span>
+    <span class="n">askVolume</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">bidPrice</span><span class="o">=</span><span class="mf">110101.1</span><span class="p">,</span>
+    <span class="n">bidVolume</span><span class="o">=</span><span class="mf">2.0</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="c-protobuf">C++ -&gt; Protobuf<a class="headerlink" href="#c-protobuf" title="Permanent link">&para;</a></h3>
 <ul>
-<li>由于enum定义的顺序一致，可以直接<code>static_cast</code>强制转换</li>
+<li>C++的数据结构转换成Python的数据结构</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">tickerToProto</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Ticker</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ticker</span><span class="p">,</span><span class="w"> </span><span class="n">proto</span><span class="o">::</span><span class="n">Ticker</span><span class="w"> </span><span class="o">&amp;</span><span class="n">protoTicker</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">set_exchange</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">proto</span><span class="o">::</span><span class="n">Exchange</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ticker</span><span class="p">.</span><span class="n">exchange</span><span class="p">));</span>
-</span><span class="hll"><span class="w">    </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">set_symbol</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">proto</span><span class="o">::</span><span class="n">CurrencyPair</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ticker</span><span class="p">.</span><span class="n">symbol</span><span class="p">));</span>
-</span><span class="w">    </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">set_timestamp</span><span class="p">(</span><span class="n">ticker</span><span class="p">.</span><span class="n">timestamp</span><span class="p">);</span>
+<span class="w">    </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">set_exchange</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">proto</span><span class="o">::</span><span class="n">Exchange</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ticker</span><span class="p">.</span><span class="n">exchange</span><span class="p">));</span>
+<span class="w">    </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">set_symbol</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">proto</span><span class="o">::</span><span class="n">CurrencyPair</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ticker</span><span class="p">.</span><span class="n">symbol</span><span class="p">));</span>
+<span class="w">    </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">set_timestamp</span><span class="p">(</span><span class="n">ticker</span><span class="p">.</span><span class="n">timestamp</span><span class="p">);</span>
 <span class="w">    </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">set_local_timestamp</span><span class="p">(</span><span class="n">ticker</span><span class="p">.</span><span class="n">localTimestamp</span><span class="p">);</span>
 <span class="w">    </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">set_ask_price</span><span class="p">(</span><span class="n">ticker</span><span class="p">.</span><span class="n">askPrice</span><span class="p">);</span>
 <span class="w">    </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">set_ask_volume</span><span class="p">(</span><span class="n">ticker</span><span class="p">.</span><span class="n">askVolume</span><span class="p">);</span>
@@ -1457,26 +1251,34 @@
 <h2 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h2>
 <h3 id="python-c">Python -&gt; C++<a class="headerlink" href="#python-c" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Python和C++交互的唯一方式就是调用pybind导出的API，这些C++ API接口的参数会自动做类型转换</li>
+<li>Python的数据结构转换成C++的数据结构</li>
+<li>Python和C++交互的唯一方式就是调用pybind导出的API，这些C++ API接口的参数会自动做数据类型的转换</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
 
-<span class="n">Exchange</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">Exchange</span>
-<span class="n">exchange_to_str</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">exchangeToStr</span>
+<span class="c1"># 构造 Ticker 对象</span>
+<span class="n">ticker</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">Ticker</span><span class="p">()</span>
+<span class="n">ticker</span><span class="o">.</span><span class="n">exchange</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span>
+<span class="n">ticker</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">CurrencyPair</span><span class="o">.</span><span class="n">BTC_USD</span>
+<span class="n">ticker</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1_000_000</span><span class="p">)</span>
+<span class="n">ticker</span><span class="o">.</span><span class="n">localTimestamp</span> <span class="o">=</span> <span class="n">ticker</span><span class="o">.</span><span class="n">timestamp</span>
+<span class="n">ticker</span><span class="o">.</span><span class="n">askPrice</span> <span class="o">=</span> <span class="mf">50000.0</span>
+<span class="n">ticker</span><span class="o">.</span><span class="n">askVolume</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">ticker</span><span class="o">.</span><span class="n">bidPrice</span> <span class="o">=</span> <span class="mf">49999.0</span>
+<span class="n">ticker</span><span class="o">.</span><span class="n">bidVolume</span> <span class="o">=</span> <span class="mf">2.0</span>
 
-<span class="n">exchange</span> <span class="o">=</span> <span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span>
-<span class="hll"><span class="n">exchange_str</span> <span class="o">=</span> <span class="n">exchange_to_str</span><span class="p">(</span><span class="n">exchange</span><span class="p">)</span>
+<span class="c1"># 写入共享内存</span>
+<span class="hll"><span class="n">hft</span><span class="o">.</span><span class="n">writeTicker</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="python-protobuf">Python -&gt; Protobuf<a class="headerlink" href="#python-protobuf" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Python的类型转换成Protobuf的类型，由于我们定义的顺序一致，可以直接强制转换，效率最高</li>
-<li>由于pybind导出enum的时候增加了<code>py::arithmetic()</code>，导出的enum有类似IntEnum的行为，所以可以直接使用<code>int(exchange)</code>的方式做转换</li>
+<li>Python的数据结构转换成Protobuf的数据结构</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hft_to_pb_ticker</span><span class="p">(</span><span class="n">hft_ticker</span><span class="p">:</span> <span class="n">Ticker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pb</span><span class="o">.</span><span class="n">Ticker</span><span class="p">:</span>
     <span class="n">pb_ticker</span> <span class="o">=</span> <span class="n">pb</span><span class="o">.</span><span class="n">Ticker</span><span class="p">()</span>
-<span class="hll">    <span class="n">pb_ticker</span><span class="o">.</span><span class="n">exchange</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hft_ticker</span><span class="o">.</span><span class="n">exchange</span><span class="p">)</span>
-</span><span class="hll">    <span class="n">pb_ticker</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hft_ticker</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span>
-</span>    <span class="n">pb_ticker</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">hft_ticker</span><span class="o">.</span><span class="n">timestamp</span>
+    <span class="n">pb_ticker</span><span class="o">.</span><span class="n">exchange</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hft_ticker</span><span class="o">.</span><span class="n">exchange</span><span class="p">)</span>
+    <span class="n">pb_ticker</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hft_ticker</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span>
+    <span class="n">pb_ticker</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">hft_ticker</span><span class="o">.</span><span class="n">timestamp</span>
     <span class="n">pb_ticker</span><span class="o">.</span><span class="n">local_timestamp</span> <span class="o">=</span> <span class="n">hft_ticker</span><span class="o">.</span><span class="n">localTimestamp</span>
     <span class="n">pb_ticker</span><span class="o">.</span><span class="n">ask_price</span> <span class="o">=</span> <span class="n">hft_ticker</span><span class="o">.</span><span class="n">askPrice</span>
     <span class="n">pb_ticker</span><span class="o">.</span><span class="n">ask_volume</span> <span class="o">=</span> <span class="n">hft_ticker</span><span class="o">.</span><span class="n">askVolume</span>
@@ -1484,25 +1286,17 @@
     <span class="n">pb_ticker</span><span class="o">.</span><span class="n">bid_volume</span> <span class="o">=</span> <span class="n">hft_ticker</span><span class="o">.</span><span class="n">bidVolume</span>
     <span class="k">return</span> <span class="n">pb_ticker</span>
 </code></pre></div>
-<p>也可以用下面的方式做转换，效率比较低，不采用。优点是对两边enum定义的顺序没有要求，可以不一致</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hft_to_pb_ticker</span><span class="p">(</span><span class="n">hft_ticker</span><span class="p">:</span> <span class="n">Ticker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pb</span><span class="o">.</span><span class="n">Ticker</span><span class="p">:</span>
-    <span class="n">pb_ticker</span> <span class="o">=</span> <span class="n">pb</span><span class="o">.</span><span class="n">Ticker</span><span class="p">()</span>
-<span class="hll">    <span class="n">pb_ticker</span><span class="o">.</span><span class="n">exchange</span> <span class="o">=</span> <span class="n">pb</span><span class="o">.</span><span class="n">Exchange</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="n">hft_ticker</span><span class="o">.</span><span class="n">exchange</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</span><span class="hll">    <span class="n">pb_ticker</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">pb</span><span class="o">.</span><span class="n">CurrencyPair</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="n">hft_ticker</span><span class="o">.</span><span class="n">symbol</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</span>    <span class="o">...</span>
-</code></pre></div>
 <h2 id="protobuf">Protobuf<a class="headerlink" href="#protobuf" title="Permanent link">&para;</a></h2>
 <h3 id="protobuf-c">Protobuf -&gt; C++<a class="headerlink" href="#protobuf-c" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Protobuf的类型转换成C++的类型</li>
-<li>由于enum定义的顺序一致，可以直接<code>static_cast</code>强制转换</li>
+<li>Protobuf的数据结构转换成C++的数据结构</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">protoToTicker</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">proto</span><span class="o">::</span><span class="n">Ticker</span><span class="w"> </span><span class="o">&amp;</span><span class="n">protoTicker</span><span class="p">,</span><span class="w"> </span><span class="n">Ticker</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ticker</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">ticker</span><span class="p">.</span><span class="n">exchange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Exchange</span><span class="o">&gt;</span><span class="p">(</span><span class="n">protoTicker</span><span class="p">.</span><span class="n">exchange</span><span class="p">());</span>
-<span class="hll"><span class="w">    </span><span class="n">ticker</span><span class="p">.</span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">CurrencyPair</span><span class="o">&gt;</span><span class="p">(</span><span class="n">protoTicker</span><span class="p">.</span><span class="n">symbol</span><span class="p">());</span>
-</span><span class="hll"><span class="w">    </span><span class="n">ticker</span><span class="p">.</span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">timestamp</span><span class="p">();</span>
-</span><span class="w">    </span><span class="n">ticker</span><span class="p">.</span><span class="n">localTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">local_timestamp</span><span class="p">();</span>
+<span class="w">    </span><span class="n">ticker</span><span class="p">.</span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">CurrencyPair</span><span class="o">&gt;</span><span class="p">(</span><span class="n">protoTicker</span><span class="p">.</span><span class="n">symbol</span><span class="p">());</span>
+<span class="w">    </span><span class="n">ticker</span><span class="p">.</span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">timestamp</span><span class="p">();</span>
+<span class="w">    </span><span class="n">ticker</span><span class="p">.</span><span class="n">localTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">local_timestamp</span><span class="p">();</span>
 <span class="w">    </span><span class="n">ticker</span><span class="p">.</span><span class="n">askPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">ask_price</span><span class="p">();</span>
 <span class="w">    </span><span class="n">ticker</span><span class="p">.</span><span class="n">askVolume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">ask_volume</span><span class="p">();</span>
 <span class="w">    </span><span class="n">ticker</span><span class="p">.</span><span class="n">bidPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">protoTicker</span><span class="p">.</span><span class="n">bid_price</span><span class="p">();</span>
@@ -1511,15 +1305,14 @@
 </code></pre></div>
 <h3 id="protobuf-python">Protobuf -&gt; Python<a class="headerlink" href="#protobuf-python" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Protobuf的类型转换成Python的类型</li>
-<li><code>Exchange(int)</code>的转换方式</li>
+<li>Protobuf的数据结构转换成Python的数据结构</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">pb_to_hft_ticker</span><span class="p">(</span><span class="n">pb_ticker</span><span class="p">:</span> <span class="n">pb</span><span class="o">.</span><span class="n">Ticker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Ticker</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">Ticker</span><span class="p">(</span>
         <span class="n">exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="p">(</span><span class="n">pb_ticker</span><span class="o">.</span><span class="n">exchange</span><span class="p">),</span>
-<span class="hll">        <span class="n">symbol</span><span class="o">=</span><span class="n">CurrencyPair</span><span class="p">(</span><span class="n">pb_ticker</span><span class="o">.</span><span class="n">symbol</span><span class="p">),</span>
-</span><span class="hll">        <span class="n">timestamp</span><span class="o">=</span><span class="n">pb_ticker</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
-</span>        <span class="n">localTimestamp</span><span class="o">=</span><span class="n">pb_ticker</span><span class="o">.</span><span class="n">local_timestamp</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="o">=</span><span class="n">CurrencyPair</span><span class="p">(</span><span class="n">pb_ticker</span><span class="o">.</span><span class="n">symbol</span><span class="p">),</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">pb_ticker</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+        <span class="n">localTimestamp</span><span class="o">=</span><span class="n">pb_ticker</span><span class="o">.</span><span class="n">local_timestamp</span><span class="p">,</span>
         <span class="n">askPrice</span><span class="o">=</span><span class="n">pb_ticker</span><span class="o">.</span><span class="n">ask_price</span><span class="p">,</span>
         <span class="n">askVolume</span><span class="o">=</span><span class="n">pb_ticker</span><span class="o">.</span><span class="n">ask_volume</span><span class="p">,</span>
         <span class="n">bidPrice</span><span class="o">=</span><span class="n">pb_ticker</span><span class="o">.</span><span class="n">bid_price</span><span class="p">,</span>

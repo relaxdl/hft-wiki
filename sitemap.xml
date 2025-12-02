@@ -2,18 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://wiki.vikingtrading.net/</loc>
-         <lastmod>2025-11-25</lastmod>
+         <lastmod>2025-12-02</lastmod>
+    </url>
+    <url>
+         <loc>https://wiki.vikingtrading.net/common/common_data_structure/</loc>
+         <lastmod>2025-12-02</lastmod>
+    </url>
+    <url>
+         <loc>https://wiki.vikingtrading.net/common/data_structure/</loc>
+         <lastmod>2025-12-02</lastmod>
     </url>
     <url>
          <loc>https://wiki.vikingtrading.net/common/data_type/</loc>
-         <lastmod>2025-11-25</lastmod>
+         <lastmod>2025-12-02</lastmod>
     </url>
     <url>
          <loc>https://wiki.vikingtrading.net/common/path_manager/</loc>
-         <lastmod>2025-11-25</lastmod>
+         <lastmod>2025-12-02</lastmod>
+    </url>
+    <url>
+         <loc>https://wiki.vikingtrading.net/common/shm_basic/</loc>
+         <lastmod>2025-12-02</lastmod>
+    </url>
+    <url>
+         <loc>https://wiki.vikingtrading.net/common/shm_best_practice/</loc>
+         <lastmod>2025-12-02</lastmod>
+    </url>
+    <url>
+         <loc>https://wiki.vikingtrading.net/common/shm_path/</loc>
+         <lastmod>2025-12-02</lastmod>
     </url>
     <url>
          <loc>https://wiki.vikingtrading.net/common/support_platform/</loc>
-         <lastmod>2025-11-25</lastmod>
+         <lastmod>2025-12-02</lastmod>
     </url>
 </urlset>
