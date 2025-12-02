@@ -2,7 +2,7 @@
 
 * 为了效率，系统内部所有的类型定义统一使用枚举而不是字符串，这会涉及到跨语言转换和网络传输的问题，需要有一套规则保证跨语言和网络传输的一致和高效
 * 跨语言：我们在C++会定义一套enum的数据类型，这套数据类型通过pybind导出给Python使用
-* 网络传输：在protobuf中，定义一套同样的enum数据类型，用于网络传输，保证定义的顺序一致，在传输两端可以直接进行类型的强制转换
+* 网络传输：在protobuf中，定义一套同样的enum数据类型，用于网络传输，**保证定义的顺序一致**，在传输两端可以直接进行类型的强制转换
 
 ## Python Enum vs IntEnum
 
@@ -55,6 +55,8 @@ print(ColorIntEnum.RED < 2)      # True (Enum 会报错)
 
 ## C++
 
+下面以exchange为例说明类型的定义方式
+
 === "C++"
 
     ```cpp
@@ -85,6 +87,8 @@ print(ColorIntEnum.RED < 2)      # True (Enum 会报错)
     ```
 
 === "Protobuf"
+
+    * 定义的顺序需要和C++保持一致，才可以直接使用强制类型转换
 
     ```protobuf
     enum Exchange {
