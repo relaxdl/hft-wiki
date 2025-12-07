@@ -1,8 +1,13 @@
 # 转账
 
+文档描述了一个多账户资产管理模块，对多个交易所的多个账户的多个钱包进行统一封装，提供：
+
+* **转账功能**：账户间、钱包间、跨交易所的资产转移
+* **余额查询**：统一的余额获取接口
+
 ## 账户体系
 
-转账系统基于底层的账户体系来工作
+转账系统基于底层的账户体系来工作，统一的账户体系，屏蔽了不同交易所，不同钱包类型的差异。转账系统在使用的时候，不需要关心底层的这些差异
 
 ### 账户命名规范
 
@@ -96,3 +101,62 @@ kraken.future的底层配置信息
 | api_key + api_secret | API 请求签名认证 |
 | uid | Future 账户间转账时标识目标账户 |
 
+## 获取资产
+
+### 统一接口
+
+* 可以获取不同交易所，不同子账户，不同钱包内的资产
+
+!!! note "注意"
+
+    * 对于不同交易所，不同子账户，不同钱包内的资产可能会返回负数，负数的含义会不一样
+    * 对于kraken，资产返回负数表示该资产支持借贷，并且目前自己的资产已经用完，开始使用借贷的部分，会返回负数，这时候该资产是无法转出的
+    * 对于kraken future，usd返回负数表示表示有欠款，未实现盈亏还没有结算，这时候是无法转usd出来的
+    * 函数使用之前，`AccountType`要预先配置好对应的`api_key & api_secret`
+    * 该函数只会查询并返回`symbols`对应的资产数量，没有定义在`symbols`中的资产不会返回
+
+```python
+async def get_balances(
+    exchange: Exchange,          # BINANCE / KRAKEN / KRAKEN_FUTURE
+    account: AccountType,        # main / trade / future / close_position
+    symbols: List[Currency] = [],
+) -> Result[Dict[Currency, float], Any]
+```
+
+### 示例
+
+**获取不同交易所，不同子账户，不同钱包内的资产**
+
+
+```python
+from hftpy.exchange.multi_account_api import get_balances
+from hftpy.common import Exchange, Currency
+
+# 查询 Binance trade 账户的 USDC/USDT 余额
+result = await get_balances(
+    Exchange.BINANCE, 
+    "trade", 
+    [Currency.USDC, Currency.USDT]
+)
+
+# 查询 Kraken trade 账户的多个币种余额
+result = await get_balances(
+    Exchange.KRAKEN, 
+    "trade", 
+    [Currency.USD, Currency.BTC, Currency.ETH]
+)
+
+# 查询 Kraken Future main 账户余额
+result = await get_balances(
+    Exchange.KRAKEN_FUTURE, 
+    "main", 
+    [Currency.USD, Currency.USDT]
+)
+
+# 处理结果
+if result.success:
+    for currency, balance in result.data.items():
+        print(f"{currency.name}: {balance}")
+else:
+    print(f"查询失败: {result.error}")
+```
