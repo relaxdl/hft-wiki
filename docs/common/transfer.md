@@ -103,7 +103,7 @@ kraken.future的底层配置信息
 
 ## 获取资产
 
-### 统一接口
+### 🔥 统一接口
 
 * 可以获取不同交易所，不同子账户，不同钱包内的资产
 
@@ -159,4 +159,305 @@ if result.success:
         print(f"{currency.name}: {balance}")
 else:
     print(f"查询失败: {result.error}")
+```
+
+## 转账
+
+### 转账类型分类
+
+* 有三大类的转账
+
+```
+转账类型
+├── 同交易所转账
+│   ├── 类型一：同钱包-跨账户
+│   │   ├── binance_spot_transfer      # Binance Spot 子账户间
+│   │   ├── kraken_spot_transfer       # Kraken Spot 子账户间
+│   │   └── kraken_future_transfer     # Kraken Future 子账户间
+│   └── 类型二：同账户-跨钱包
+│       ├── kraken_spot_to_future_transfer  # Kraken Spot → Kraken Future
+│       └── kraken_future_to_spot_transfer  # Kraken Future → Kraken Spot
+└── 类型三：跨交易所转账
+    ├── kraken_to_binance_withdraw     # Kraken → Binance
+    └── binance_to_kraken_withdraw     # Binance → Kraken
+```
+
+**三种转账维度**
+
+| 维度 | 说明 | 示例 |
+|------|------|------|
+| 类型一：同钱包-跨账户 | 同类型钱包在不同账户间转账 | main.spot → trade.spot |
+| 类型二：同账户-跨钱包 | 同一账户内 Spot 与 Future 间转账 | main.spot → main.future |
+| 类型三：跨交易所转账 | 不同交易所间提币 | kraken.main.spot → binance.trade.spot |
+
+### 权限与约束
+
+| 转账类型 | API 使用权限 | 约束条件 |
+|----------|--------------|----------|
+| Binance Spot 账户间 | 必须用主账户 API | 需要配置 email |
+| Kraken Spot 账户间 | 必须用主账户 API | 需要配置 account_public_id  |
+| Kraken Future 账户间 | 必须用主账户 API | 需要配置 uid |
+| Kraken Spot → Future | 用对应账户自己的 API | 同一子账户内 |
+| Kraken Future → Spot | 用对应账户自己的 API | 同一子账户内 |
+| Kraken → Binance | Kraken 主账户 API | 仅从 main 发起 |
+| Binance → Kraken | Binance 主账户 API | main → main |
+
+### 🔥 统一接口
+
+* 可以在不同交易所，不同子账户，不同钱包内进行转账
+
+!!! note "注意"
+
+    * 函数使用之前，`AccountType`要预先配置好对应的`api_key & api_secret`
+    * 对于不同子账户之间进行转账，参考**权限与约束**中的**约束条件**进行配置
+
+```python
+async def transfer(
+    from_exchange: Exchange,
+    from_account: AccountType,
+    to_exchange: Exchange,
+    to_account: AccountType,
+    symbol: Currency,
+    amount: float,
+) -> Result[Dict, Any]:
+```
+
+## 转账案例
+
+### Binance Spot 账户间
+
+* 可以在任意子账户的spot之间相互转账
+* 只能使用主账户的api key和api secret来执行转账
+* 底层需要设置每个账户的email信息, 如果不指定from_email或者to_email, 也就是设置为None, 默认为主账户
+* 我们在底层已经配置了account和email映射, 可以直接使用
+
+```python
+# 方式一: 使用 底层转账 函数
+result = await binance_spot_transfer(
+    symbol=Currency.USDT,
+    amount=10.0,
+    from_account="trade",
+    to_account="main"
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+
+# 方式二: 使用 统一转账 函数
+result = await transfer(
+    from_exchange=Exchange.BINANCE,
+    from_account="trade",
+    to_exchange=Exchange.BINANCE,
+    to_account="main",
+    symbol=Currency.USDT,
+    amount=10.0
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+```
+
+### Kraken Spot 账户间
+
+* 可以在任意子账户的spot之间相互转账
+* 只能使用主账户的api key和api secret来执行转账
+* 底层需要设置每个账户的public account id信息来标识每个账户
+* 我们在底层已经配置了account和public account id映射, 可以直接使用
+
+```python
+# 方式一: 使用 底层转账 函数
+result = await kraken_spot_transfer(
+    symbol=Currency.USDT,
+    amount=1.0,
+    from_account="future",
+    to_account="close_position"
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+
+# 方式二: 使用 统一转账 函数
+result = await transfer(
+    from_exchange=Exchange.KRAKEN,
+    from_account="future",
+    to_exchange=Exchange.KRAKEN,
+    to_account="close_position",
+    symbol=Currency.USDT,
+    amount=1.0
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+```
+
+### Kraken Future 账户间
+
+* 可以在任意子账户的future之间相互转账
+* 只能使用主账户的api key和api secret来执行转账
+* 底层需要设置每个账户的uid信息来标识每个账户
+* 目前只有 main和 future 账户有配置uid, trade 和 close_position 暂无
+
+```python
+# 方式一: 使用 底层转账 函数
+result = await kraken_future_transfer(
+    symbol=Currency.USDT,
+    amount=10.0,
+    from_account="main",
+    to_account="future"
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+
+# 方式二: 使用 统一转账 函数
+result = await transfer(
+    from_exchange=Exchange.KRAKEN_FUTURE,
+    from_account="main",
+    to_exchange=Exchange.KRAKEN_FUTURE,
+    to_account="future",
+    symbol=Currency.USDT,
+    amount=10.0
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+```
+
+### Kraken Spot → Future
+
+* 使用对应spot账户的api key 和api secret
+* 同一个账户内，从 spot -> future
+
+```python
+# 方式一: 使用 底层转账 函数
+result = await kraken_spot_to_future_transfer(
+    symbol=Currency.USDT,
+    amount=10.0,
+    account="main"
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+
+# 方式二: 使用 统一转账 函数
+result = await transfer(
+    from_exchange=Exchange.KRAKEN,
+    from_account="main",
+    to_exchange=Exchange.KRAKEN_FUTURE,
+    to_account="main",
+    symbol=Currency.USDT,
+    amount=10.0
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+```
+
+### Kraken Future → Spot
+
+* 使用对应future账户的api key 和api secret
+* 同一个账户内，从 future -> spot
+
+```python
+# 方式一: 使用 底层转账 函数
+result = await kraken_future_to_spot_transfer(
+    symbol=Currency.USDT,
+    amount=10.0,
+    account="main"
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")   
+
+# 方式二: 使用 统一转账 函数
+result = await transfer(
+    from_exchange=Exchange.KRAKEN_FUTURE,
+    from_account="main",
+    to_exchange=Exchange.KRAKEN,
+    to_account="main",
+    symbol=Currency.USDT,
+    amount=10.0
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+```
+
+### Kraken → Binance
+
+* 底层使用 Kraken 提现接口将指定币种的资金从账户中提取，发送至预设的提现地址（通过 address 和 key 指定）。地址必须已在 Kraken 后台添加并命名（key）且通过验证。
+* 该API的功能：从 Kraken 主账户提币到 Binance 账户，可以是主账户，也可以是子账户
+* 目标address对应一个目标账户，key对应一个币种，例如：我们要转账到binance子账户，子账户有一个address，一个key对应一个币种
+    * address: `0x....a651`
+    * key: `sub1-usdc`, 币种: usdc
+    * key: `sub1-usdt`, 币种: usdt
+* 所有的配置提前已经设置好，只需要调用提现接口即可，不需要关心address和key的配置细节
+
+```python
+# 方式一: 使用 底层转账 函数
+result = await kraken_to_binance_withdraw(
+    symbol=Currency.USDT,
+    amount=10.0,
+    to_account="trade"
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+
+# 方式二: 使用 统一转账 函数
+result = await transfer(
+    from_exchange=Exchange.KRAKEN,
+    from_account="main",
+    to_exchange=Exchange.BINANCE,
+    to_account="trade",
+    symbol=Currency.USDT,
+    amount=10.0
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+```
+
+### Binance → Kraken
+
+* 从 Binance 主账户提币到 Kraken 主账户。不能转到Kraken的子账户
+* 转所有的币，公用一个address
+* 所有的配置提前已经设置好，只需要调用提现接口即可，不需要关心address的配置细节
+
+```python
+# 方式一: 使用 底层转账 函数
+result = await binance_to_kraken_withdraw(
+    symbol=Currency.USDT,
+    amount=10.0
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
+
+# 方式二: 使用 统一转账 函数
+result = await transfer(
+    from_exchange=Exchange.BINANCE,
+    from_account="main",
+    to_exchange=Exchange.KRAKEN,
+    to_account="main",
+    symbol=Currency.USDT,
+    amount=10.0
+)
+if result.success:
+    logger.info(f"转账成功: {result.data}")
+else:
+    logger.warning(f"转账失败: {result.error}")
 ```
