@@ -20,8 +20,9 @@ nav:
       - 基础: common/shm_basic.md
       - 路径: common/shm_path.md
       - 最佳实践: common/shm_best_practice.md
-    - 高层接口:
-      - 转账: common/transfer.md
+    - 转账:
+      - 统一API: common/transfer_api.md
+      - 任务: common/transfer_task_manager.md
 
 theme:
   name: material

@@ -475,6 +475,10 @@ C++实现 🔒 *（私有仓库，需要授权访问）*
 
 ```
 /tmp/hft/shm/exchange.type.symbol.valueType
+
+/tmp/hft/shm/exchange.channel.symbol
+
+/tmp/hft/shm/namespace.category.key.valueType
 ```
 
 详细映射规则参考：[共享内存路径](shm_path.md)
