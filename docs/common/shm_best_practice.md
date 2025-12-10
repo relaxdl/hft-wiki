@@ -253,6 +253,87 @@ PYBIND11_MODULE(hft, m)
     print(f"USDT_USDC Fair Price - Bid: {usdt_usdc_price.bid}, Ask: {usdt_usdc_price.ask}")
     ```
 
+## Balance
+
+```
+kraken.balance.usdt.single_quote
+```
+
+**示例：写入Currency的Balance**
+
+=== "C++"
+
+    ```c++ hl_lines="8"
+    #include "hft/util/shm.h"
+
+    Exchange exchange = Exchange::KRAKEN;
+    DataType dataType = DataType::BALANCE;
+    Currency currency = Currency::USDT;
+    int64_t now = getCurrentTimestamp();
+    SingleQuote usdtBalance{now, now, 10000.0}; // 余额为10000 USDT
+    ShareMemorySingleQuote::write(exchange, dataType, currency, usdtBalance); // 更新共享内存
+    ```
+
+=== "Python"
+
+    ```python hl_lines="13-17"
+    import hft
+    import time
+
+    write_single_quote_currency = hft.writeSingleQuoteCurrency
+
+    def write_balance(exchange: Exchange, currency: Currency, balance: float, local_timestamp: int = None) -> None:
+        if local_timestamp is None:
+            local_timestamp = int(time.time() * 1_000_000)
+        write_single_quote_currency(
+            exchange,
+            DataType.BALANCE,
+            currency,
+            SingleQuote(timestamp=local_timestamp,
+                        localTimestamp=local_timestamp,
+                        mid=balance)
+        )
+    
+    # 写入USDT余额
+    write_balance(Exchange.KRAKEN, Currency.USDT, 10000.0)
+    ```
+
+**示例：获取Currency的Balance**
+
+=== "C++"
+
+    ```c++ hl_lines="6"
+    #include "hft/util/shm.h"
+
+    Exchange exchange = Exchange::KRAKEN;
+    DataType dataType = DataType::BALANCE;
+    Currency currency = Currency::USDT;
+    SingleQuote *usdtBalance = ShareMemorySingleQuote::get(exchange, dataType, currency);
+    
+    // 输出余额
+    std::cout << "USDT Balance: " << usdtBalance->mid << std::endl;
+    ```
+
+=== "Python"
+
+    ```python hl_lines="6-10"
+    import hft
+
+    get_single_quote_currency = hft.getSingleQuoteCurrency
+    
+    def get_balance(exchange: Exchange, currency: Currency) -> SingleQuote:
+        return get_single_quote_currency(
+            exchange,
+            DataType.BALANCE,
+            currency,
+        )
+    
+    # 获取并输出USDT余额
+    usdt_balance = get_balance(Exchange.KRAKEN, Currency.USDT)
+    print(f"USDT Balance: {usdt_balance.mid}")
+    ```
+
+
 ## Premium
 
 ```
