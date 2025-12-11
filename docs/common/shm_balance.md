@@ -1,6 +1,90 @@
 # 共享内存资产&策略资产
 
+## 核心需求
+
+* 主要解决同一个账户内资金动态分配的问题
+* 支持一个账户下多个子策略的资金分配，一个账户内的资金分成多份，给多个子策略使用。每个子策略对应一个**虚拟账户**，虚拟账户内的钱是这个子策略的最大可用资金，不需要用完
+* 支持资金转出和转出这样的业务场景
+* 发现和交易所资金不一致的时候，有恢复策略
+* 支持跨进程同步，支持借贷
+
 ## 资产
+
+如果一个账户内的资产只对应一个策略，不需要做资金划分，用如下简单的方式就可以跨进程的操作资产
+
+**示例：写入Currency的Balance**
+
+=== "C++"
+
+    ```c++ hl_lines="8"
+    #include "hft/util/shm.h"
+
+    Exchange exchange = Exchange::KRAKEN;
+    DataType dataType = DataType::BALANCE;
+    Currency currency = Currency::USDT;
+    int64_t now = getCurrentTimestamp();
+    SingleQuote usdtBalance{now, now, 10000.0}; // 余额为10000 USDT
+    ShareMemorySingleQuote::write(exchange, dataType, currency, usdtBalance); // 更新共享内存
+    ```
+
+=== "Python"
+
+    ```python hl_lines="13-17"
+    import hft
+    import time
+
+    write_single_quote_currency = hft.writeSingleQuoteCurrency
+
+    def write_balance(exchange: Exchange, currency: Currency, balance: float, local_timestamp: int = None) -> None:
+        if local_timestamp is None:
+            local_timestamp = int(time.time() * 1_000_000)
+        write_single_quote_currency(
+            exchange,
+            DataType.BALANCE,
+            currency,
+            SingleQuote(timestamp=local_timestamp,
+                        localTimestamp=local_timestamp,
+                        mid=balance)
+        )
+    
+    # 写入USDT余额
+    write_balance(Exchange.KRAKEN, Currency.USDT, 10000.0)
+    ```
+
+**示例：获取Currency的Balance**
+
+=== "C++"
+
+    ```c++ hl_lines="6"
+    #include "hft/util/shm.h"
+
+    Exchange exchange = Exchange::KRAKEN;
+    DataType dataType = DataType::BALANCE;
+    Currency currency = Currency::USDT;
+    SingleQuote *usdtBalance = ShareMemorySingleQuote::get(exchange, dataType, currency);
+    
+    // 输出余额
+    std::cout << "USDT Balance: " << usdtBalance->mid << std::endl;
+    ```
+
+=== "Python"
+
+    ```python hl_lines="6-10"
+    import hft
+
+    get_single_quote_currency = hft.getSingleQuoteCurrency
+    
+    def get_balance(exchange: Exchange, currency: Currency) -> SingleQuote:
+        return get_single_quote_currency(
+            exchange,
+            DataType.BALANCE,
+            currency,
+        )
+    
+    # 获取并输出USDT余额
+    usdt_balance = get_balance(Exchange.KRAKEN, Currency.USDT)
+    print(f"USDT Balance: {usdt_balance.mid}")
+    ```
 
 ## 策略资产
 
@@ -76,6 +160,8 @@
 ```
 
 ### API
+
+所有涉及资金操作的API调用之后，会自动再平衡，保证**恒等式**的成立
 
 | 方法 | 说明 |
 |------|------|
@@ -180,3 +266,7 @@ if available + credit_limit < 0:
     manager.reset(hft.Currency.USDC, real_balance)
     # 子策略需要重新申请资金...
 ```
+
+## 借贷
+
+借贷是一个额外的逻辑，账户中存储的资产是不包括借贷额度的。**每种资产的借贷额度配置文件中单独配置**。资产当前的数量+借贷额度，是这个资产当前真正的可用额度。例如：如果一个资产当前的余额是100，借贷额度是50，这个资产的当前可用额度是`100+50=150`；如果一个资产当前的余额是-30，借贷额度是50，这个资产当前可用额度是`-30+50=20`。正常情况下，主策略（资金池）中的资金加上借贷额度，应该是大于等于0的。如果不满足这个条件，表示资金状态出错，需要用`reset`重置资金状态
