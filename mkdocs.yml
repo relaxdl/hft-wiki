@@ -20,10 +20,15 @@ nav:
       - 基础: common/shm_basic.md
       - 路径: common/shm_path.md
       - 最佳实践: common/shm_best_practice.md
+      - 资产&策略资产: common/shm_balance.md
+      - 自定义信号: common/shm_custom_signal.md
     - 转账:
       - 统一API: common/transfer_api.md
       - 任务: common/transfer_task_manager.md
-
+    - 网关:
+      - 资产: common/gateway_balance.md
+      - 订单: common/gateway_order.md
+      
 theme:
   name: material
   language: zh
