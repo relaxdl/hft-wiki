@@ -13,7 +13,7 @@
 
     * 使用[统一API：transfer](transfer_api.md)进行转账
     * **执行转账任务**的时间点可以是撤挂单的间隙，如果转账失败应该重试，直到任务成功为止
-    * 同样的转账任务，也就是`TransferTaskKey`相同的任务，可以重复添加，并不会生成多条转账任务，在任务成功执行前，只会有一条转账任务
+    * **重复转账的问题**：同样的转账任务，也就是`TransferTaskKey`相同的任务，可以重复添加，并不会生成多条转账任务，在任务成功执行前，只会有一条转账任务
     * 这里描述的是单步转账的任务，也就是成功执行一次`A->B`转账操作就结束了。另外还有链式转账任务`A->B->C->D`，链式转账任务依赖于单步转账任务。我们通常的做法是成功执行一次单步`A->B`转账任务后，再创建后续的转账任务链`B->C->D`，有专门的**转账任务执行器**来执行后续的链式转账操作。后续步骤的到账时间未知，涉及到链上提款时间会更久，所以需要一个专门的转账任务执行器来执行后续的转账操作，直到资金成功转入最终的目标账户
 
 **数据结构**
@@ -37,7 +37,8 @@ class TransferTaskValue(NamedTuple):
 **使用示例**
 
 ```python
-from hftpy.common import Exchange, Currency, TransferTaskManager
+import time
+from hftpy.common import Exchange, Currency, TransferTaskManager, TransferTaskKey
 from hftpy.exchange.multi_account_api import transfer
 
 # 创建管理器，设置默认过期时间120秒
@@ -46,6 +47,7 @@ manager = TransferTaskManager(default_expire_seconds=120.0)
 # ========== 生产者：子策略提交转账需求 ==========
 
 # 子策略A：需要从 Kraken trade 转 1000 USDC 到 Kraken main
+# 如果任务已存在则跳过
 manager.add_task(
     from_exchange=Exchange.KRAKEN,
     from_account="trade",
@@ -56,14 +58,25 @@ manager.add_task(
 )
 
 # 子策略B：需要从 Kraken trade 转 500 USD 到 kraken close_position
-manager.add_task(
+# 如果任务已存在则跳过，如果120秒内已成功转账过则不重复提交
+key_b = TransferTaskKey(
     from_exchange=Exchange.KRAKEN,
     from_account="trade",
     to_exchange=Exchange.KRAKEN,
     to_account="close_position",
-    currency=Currency.USD,
-    amount=500.0
+    currency=Currency.USD
 )
+last_success = manager.get_last_success_time(key_b)
+current_time = int(time.time() * 1_000_000)
+if last_success is None or current_time - last_success > 120 * 1_000_000:
+    manager.add_task(
+        from_exchange=Exchange.KRAKEN,
+        from_account="trade",
+        to_exchange=Exchange.KRAKEN,
+        to_account="close_position",
+        currency=Currency.USD,
+        amount=500.0
+    )
 
 # ========== 消费者：执行器遍历并执行 ==========
 
@@ -84,8 +97,11 @@ for key, value in manager.get_all_tasks():
     )
     
     if success:
-        # 转账成功，删除任务
+        # 转账成功，删除任务并记录成功时间
         manager.remove_task(key)
+
+        # 记录成功转账的时间
+        manager.mark_success(key)
     # 转账失败，保留任务，下次重试
 
 # ========== 定期清理过期任务 ==========
