@@ -176,8 +176,12 @@
 
 ### 业务场景
 
+* **StrategyBalance表示一个Exchange，一个Currency的资产**
+* **StrategyBalanceManager管理一个Exchange，所有Currency的资产**
+
 #### 系统启动
 
+* 资产的管理者，例如：网关模块需要执行这部分初始化逻辑
 * 调用`reset`初始化资产
 
 ```python
