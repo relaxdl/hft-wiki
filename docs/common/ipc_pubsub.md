@@ -5,7 +5,7 @@
 对于交易所的消息，策略进程可以直接从交易所订阅，消息经过解析后，会分发到对应的`on_<type>`回调中处理。这在简单的业务场景是没有问题的。对于多进程的业务场景，不同的子策略会跑在不同的进程中，我们希望**只有一个进程从交易所订阅一份数据，然后将处理好的数据分发给不同的策略进程**。最常见的两个业务场景是hft market接收处理ticker stream和trade stream，将处理好的ticker和trade分发出去，gateway接收处理order stream，将处理好的order分发出去。**对于消息的订阅者来说，不需要区分消息到底是直接从交易所订阅的，还是从内部的IPC Channel订阅的，在行为上应该是完全一致的**。
 
 * 目前支持`ticker, trade, my_order, my_order_batch`这样一些常见消息的发布和订阅
-* 一种类型的消息会发布到一个固定的地址，发布消息就是向一个地址pub message，**一个地址只能有一个发布者，可以有多个订阅者**，对于trade，ticker这类消息，发布者通常是hft market，对于order这类消息，发布者通常是gateway，地址如下：
+* 一种类型的消息会发布到一个固定的地址，**发布消息就是向一个地址pub message，一个地址只能有一个发布者，可以有多个订阅者**，对于trade，ticker这类消息，发布者通常是hft market，对于order这类消息，发布者通常是gateway，地址如下：
     * `/hft/zmq/binance.ticker.ipc`
     * `/hft/zmq/binance.trade.ipc`
     * `/hft/zmq/binance.my_order.ipc`
