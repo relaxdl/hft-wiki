@@ -2,10 +2,10 @@
 
 ## 概述
 
-对于交易所的消息，策略进程可以直接从交易所订阅，消息经过解析后，会分发到对应的`on_<type>`回调中处理。这在简单的业务场景是没有问题的。对于多进程的业务场景，不同的子策略会跑在不同的进程中，我们希望只有一个进程从交易所订阅数据，然后将处理好的数据分发给不同的策略进程。最常见的两个业务场景是hft market接收处理ticker stream或者trade stream，将处理好的ticker或者trade分发出去，gateway接收处理order stream，将处理好的order分发出去。对于消息的订阅者来说，不需要区分消息到底是直接从交易所订阅的，还是从内部的IPC Channel订阅的，在行为上应该是完全一致的。
+对于交易所的消息，策略进程可以直接从交易所订阅，消息经过解析后，会分发到对应的`on_<type>`回调中处理。这在简单的业务场景是没有问题的。对于多进程的业务场景，不同的子策略会跑在不同的进程中，我们希望**只有一个进程从交易所订阅一份数据，然后将处理好的数据分发给不同的策略进程**。最常见的两个业务场景是hft market接收处理ticker stream和trade stream，将处理好的ticker和trade分发出去，gateway接收处理order stream，将处理好的order分发出去。**对于消息的订阅者来说，不需要区分消息到底是直接从交易所订阅的，还是从内部的IPC Channel订阅的，在行为上应该是完全一致的**。
 
 * 目前支持`ticker, trade, my_order, my_order_batch`这样一些常见消息的发布和订阅
-* 一种类型的消息会发布到一个固定的地址，**一个地址只能有一个发布者，可以有多个订阅者**，对于trade，ticker这类消息，发布者通常是hft market，对于order这类消息，发布者通常是gateway，地址如下：
+* 一种类型的消息会发布到一个固定的地址，发布消息就是向一个地址pub message，**一个地址只能有一个发布者，可以有多个订阅者**，对于trade，ticker这类消息，发布者通常是hft market，对于order这类消息，发布者通常是gateway，地址如下：
     * `/hft/zmq/binance.ticker.ipc`
     * `/hft/zmq/binance.trade.ipc`
     * `/hft/zmq/binance.my_order.ipc`
@@ -31,6 +31,7 @@
 * **单例模式**：全局只有一个实例。方便socket的全局管理
 * **懒加载**：Socket只在首次使用的时候创建，不需要调用者显示创建，系统底层会根据消息的类型自动创建对应的Socket
 * **多通道的支持**：每个exchange + channel的组合对应一个底层的Socket
+* **是否需要独立的协程来发布消息**：不需要
 
 **使用示例**
 
@@ -86,7 +87,10 @@ await publisher.close()
 这里介绍的是Python一侧的Subscriber的设计
 
 * **观察者模式**：通过`bind_observer()`绑定多个观察者，通常service就是一个观察者
-* **异步并发**：每个订阅通道对应一个独立协程运行，详细的协程设计图在下方
+* **异步并发**：每个订阅通道对应一种类型的消息，需要2个协程和一个队列，详细的协程设计图在下方
+    * 一个独立协程接收数据【Subscriber】
+    * 一个消息队列【Observer】
+    * 一个独立的协程消费数据【Observer】
 * **自动分发**：解析后自动推送到 Observer 队列，Observer的**最佳实践是对于每种类型的消息，启动一个独立的协程消费处理**
 
 **流程图**
@@ -227,14 +231,14 @@ await self.ipc_publisher.send_trade(
 ### Subscriber
 
 * 对于订阅者来说，在service配置中增加如下配置，消息会自动路由到对应的`on_<type>`回调中
-    * service本身就是一个观察者，实现了Subscriber要求的队列属性
+    * service本身就是一个Observer，实现了Subscriber Observer要求的队列属性
     * 在启动的时候，service底层会自动将配置信息转换成订阅参数，进行不同channel的订阅
 * 下面这个例子中，`ticker，trade，my_order`中配置的symbol都可以是空列表，则不进行过滤，会订阅这个channel所有交易对的消息
 
 
 **配置信息：**
 
-```json
+```json hl_lines="9 17 25 33"
 {
     "service.mm_demo": {
         "class_name": "MMDemoService",

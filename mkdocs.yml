@@ -30,7 +30,7 @@ nav:
       - 订单: common/gateway_order.md
     - IPC:
       - 发布&订阅: common/ipc_pubsub.md
-      - Command: common/ipc_command.md
+      - 命令: common/ipc_command.md
       
 theme:
   name: material
