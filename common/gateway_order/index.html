@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://wiki.vikingtrading.net/">
+        <link rel="canonical" href="https://wiki.vikingtrading.net/common/gateway_order/">
       
       
+        <link rel="prev" href="../gateway_balance/">
       
-        <link rel="next" href="common/support_platform/">
+      
+        <link rel="next" href="../ipc_pubsub/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>HFT技术文档中心</title>
+        <title>订单 - HFT技术文档中心</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hft-wiki" class="md-skip">
+        <a href="#gateway" class="md-skip">
           跳转至
         </a>
       
@@ -92,7 +94,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="." title="HFT技术文档中心" class="md-header__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
+    <a href="../.." title="HFT技术文档中心" class="md-header__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.06 11.57A3.9 3.9 0 0 0 18 9c0-1.86-1.27-3.43-3-3.87V3h-2v2h-2V3H9v2H6v2h2v10H6v2h3v2h2v-2h2v2h2v-2c2.21 0 4-1.79 4-4 0-1.45-.78-2.73-1.94-3.43M10 7h4c1.1 0 2 .9 2 2s-.9 2-2 2h-4zm5 10h-5v-4h5c1.1 0 2 .9 2 2s-.9 2-2 2"/></svg>
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              主页
+              订单
             
           </span>
         </div>
@@ -210,11 +212,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -231,11 +231,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="common/support_platform/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../support_platform/" class="md-tabs__link">
           
   
   
@@ -277,7 +279,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="HFT技术文档中心" class="md-nav__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
+    <a href="../.." title="HFT技术文档中心" class="md-nav__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.06 11.57A3.9 3.9 0 0 0 18 9c0-1.86-1.27-3.43-3-3.87V3h-2v2h-2V3H9v2H6v2h2v10H6v2h3v2h2v-2h2v2h2v-2c2.21 0 4-1.79 4-4 0-1.45-.78-2.73-1.94-3.43M10 7h4c1.1 0 2 .9 2 2s-.9 2-2 2h-4zm5 10h-5v-4h5c1.1 0 2 .9 2 2s-.9 2-2 2"/></svg>
@@ -292,37 +294,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    主页
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -338,48 +313,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        欢迎
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        快速导航
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -388,8 +321,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -411,17 +346,20 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -439,7 +377,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -457,7 +395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/support_platform/" class="md-nav__link">
+      <a href="../support_platform/" class="md-nav__link">
         
   
   
@@ -543,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/data_type/" class="md-nav__link">
+      <a href="../data_type/" class="md-nav__link">
         
   
   
@@ -571,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/data_structure/" class="md-nav__link">
+      <a href="../data_structure/" class="md-nav__link">
         
   
   
@@ -599,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/common_data_structure/" class="md-nav__link">
+      <a href="../common_data_structure/" class="md-nav__link">
         
   
   
@@ -635,7 +573,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/path_manager/" class="md-nav__link">
+      <a href="../path_manager/" class="md-nav__link">
         
   
   
@@ -725,7 +663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/shm_basic/" class="md-nav__link">
+      <a href="../shm_basic/" class="md-nav__link">
         
   
   
@@ -753,7 +691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/shm_path/" class="md-nav__link">
+      <a href="../shm_path/" class="md-nav__link">
         
   
   
@@ -781,7 +719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/shm_best_practice/" class="md-nav__link">
+      <a href="../shm_best_practice/" class="md-nav__link">
         
   
   
@@ -809,7 +747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/shm_balance/" class="md-nav__link">
+      <a href="../shm_balance/" class="md-nav__link">
         
   
   
@@ -837,7 +775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/shm_custom_signal/" class="md-nav__link">
+      <a href="../shm_custom_signal/" class="md-nav__link">
         
   
   
@@ -929,7 +867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/transfer_api/" class="md-nav__link">
+      <a href="../transfer_api/" class="md-nav__link">
         
   
   
@@ -957,7 +895,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/transfer_task_manager/" class="md-nav__link">
+      <a href="../transfer_task_manager/" class="md-nav__link">
         
   
   
@@ -990,8 +928,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -1006,11 +946,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
         
           
           <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
@@ -1031,7 +971,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1049,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/gateway_balance/" class="md-nav__link">
+      <a href="../gateway_balance/" class="md-nav__link">
         
   
   
@@ -1074,10 +1014,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="common/gateway_order/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    订单
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1093,6 +1060,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        订单数据流
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        订单状态
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何维护订单
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1169,7 +1189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/ipc_pubsub/" class="md-nav__link">
+      <a href="../ipc_pubsub/" class="md-nav__link">
         
   
   
@@ -1197,7 +1217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/ipc_command/" class="md-nav__link">
+      <a href="../ipc_command/" class="md-nav__link">
         
   
   
@@ -1263,7 +1283,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        欢迎
+        订单数据流
       
     </span>
   </a>
@@ -1274,7 +1294,18 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        快速导航
+        订单状态
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何维护订单
       
     </span>
   </a>
@@ -1299,6 +1330,64 @@
   
 
 
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    主页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../support_platform/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    文档
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../gateway_balance/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    网关
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -1306,15 +1395,96 @@
 
 
 
-<h1 id="hft-wiki">HFT Wiki<a class="headerlink" href="#hft-wiki" title="Permanent link">&para;</a></h1>
-<p>Viking Trading高频交易技术文档中心</p>
-<h2 id="_1">欢迎<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>这是Viking Trading HFT的技术文档站点，提供HFT相关的技术文档。只分享思路，涉及具体实现的部分，默认是无法访问的，需要内部授权才能访问。文档的所有内容，全部手写，是技术点的总结，也是个人高频交易系统设计 &amp; 思考过程的记录，没有任何AGI生成的内容。手工制品，质量保证✨</p>
-<p>文档中总结的API，经过长时间实盘的验证，可以保证逻辑的准确性，稳定行，同时满足高频交易苛刻的性能要求，可以放心大胆的使用！</p>
-<h2 id="_2">快速导航<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h1 id="gateway">gateway的订单管理<a class="headerlink" href="#gateway" title="Permanent link">&para;</a></h1>
 <ul>
-<li>📚 <a href="common/support_platform/">查看文档</a></li>
+<li>网关模块负责管理和同步订单。确保整个系统内，所有的进程拿到的订单快照数据是一致的</li>
+<li><strong>网关模块是订单的唯一维护者，其它所有进程只需要读取本地最新的订单快照数据即可</strong>，订单的同步基于底层的 <a href="../ipc_pubsub/">IPC 发布&amp;订阅</a> 模块来实现的</li>
 </ul>
+<h2 id="_1">订单数据流<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>IPC Command</strong>：mm1/mm2 → Gateway（下单/撤单指令）<ul>
+<li>用 <a href="../ipc_command/">IPC 命令</a> 模块来实现的</li>
+</ul>
+</li>
+<li><strong>同步</strong>：Gateway ↔ Exchange（订单状态双向同步）</li>
+<li><strong>IPC Pub/Sub</strong>：Gateway → mm1/mm2 orders（订单状态广播）</li>
+</ul>
+<div class="highlight"><pre><span></span><code>  ┌──────────────┐     IPC Command      ┌──────────────┐
+  │     mm1      │─────────────────────▶│              │
+  │  (做市策略1)  │                      │              │
+  │              │                      │              │
+  │ ┌──────────┐ │                      │   Gateway    │◀═══════▶┌──────────────┐
+  │ │  orders  │ │◀──┐                  │              │         │   Exchange   │
+  │ └──────────┘ │   │                  │ ┌──────────┐ │         │   (Kraken)   │
+  └──────────────┘   │                  │ │  orders  │ │         │              │
+                     │   IPC Pub/Sub    │ └──────────┘ │         │ ┌──────────┐ │
+  ┌──────────────┐   │   (订单状态)      │              │         │ │  orders  │ │
+  │     mm2      │───│─────────────────▶│              │         │ └──────────┘ │
+  │  (做市策略2)  │   │                  │              │         │              │
+  │              │   │                  └──────────────┘         └──────────────┘
+  │ ┌──────────┐ │   │                         │
+  │ │  orders  │ │◀──┘                         │
+  │ └──────────┘ │                             │
+  └──────────────┘                             │
+                                               │
+                                               ▼
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                │
+│   ╔═══════════╗     ╔═══════════╗     ╔═══════════╗     ╔═══════════╗          │
+│   ║  orders   ║  ≡  ║  orders   ║  ≡  ║  orders   ║  ≡  ║  orders   ║          │
+│   ║   (mm1)   ║     ║   (mm2)   ║     ║ (gateway) ║     ║ (exchange)║          │
+│   ╚═══════════╝     ╚═══════════╝     ╚═══════════╝     ╚═══════════╝          │
+│                                                                                │
+│                        ▲  同步机制保证订单快照一致  ▲                              │
+│                                                                                │
+└────────────────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<p><strong>数据流向</strong></p>
+<div class="highlight"><pre><span></span><code>┌───────────────────────────────────────────────────┐
+│  指令:   mm ──IPC Command──▶ Gateway ──▶ Exchange │
+│  状态:   Exchange ──▶ Gateway ──IPC Pub/Sub──▶ mm │
+└───────────────────────────────────────────────────┘
+</code></pre></div>
+<h2 id="_2">订单状态<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">OrderStatus</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">uint8_t</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">UNKNOWN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">NONE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">NEW</span><span class="p">,</span>
+<span class="w">    </span><span class="n">FAILED</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PARTIAL_FILLED</span><span class="p">,</span>
+<span class="w">    </span><span class="n">FILLED</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CANCELED</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CLOSED</span><span class="p">,</span>
+<span class="w">    </span><span class="n">EXPIRED</span>
+<span class="p">};</span>
+</code></pre></div>
+<h2 id="_3">如何维护订单<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>初始化</strong>：系统初始化的时候，通过REST API或者WS推送获取全量的订单数据，初始化gateway本地订单缓存 → 广播order</li>
+<li><strong>订单状态变化</strong>：每次收到交易所推送的订单状态变化信息，更新gateway本地订单缓存 → 广播order</li>
+<li><strong>下单</strong>：收到系统内部其它组件的下单请求，会立即将这个订单添加到gateway本地订单缓存，不需要等交易所返回 → 广播order</li>
+<li><strong>定时同步</strong>：每60秒 REST API 校验并修正，有具体的校验和修正逻辑，并把修正后的结果广播出去 → 广播order_batch<ul>
+<li>每60秒gateway会广播一次订单snapshot，所有的service在收到订单快照之后，直接覆盖本地的订单列表即可</li>
+<li>所有的service进程在启动之后，都会有大于60秒的预热期，这段时间是不会下单的，确保service在下单前，一定能同步到一份最新的订单数据</li>
+</ul>
+</li>
+<li><strong>错误处理</strong>：撤单的时候，如果遇到订单不存在的的返回值，gateway会把订单从本地缓存删除，同时广播订单<code>CLOSED</code>的消息进行订单的同步 → 广播order<ul>
+<li>只会广播一次。如果gateway本地存在这个订单，才会广播<code>CLOSED</code>消息；如果本地不存在，则直接忽略订单不存在的返回值</li>
+<li>在其它节点同步订单的时候，由于异常导致的僵尸订单会被snapshot覆盖，从而在其它节点上被删除</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<ul>
+<li>总的来说我们采用一种<strong>保守</strong>的订单同步机制，确保本地的订单是交易所订单的<strong>超集</strong>，这种机制在风控，头寸管理，资金管理上更有优势</li>
+<li>不管任何情况发生，有机制<strong>确保订单一定会被撤掉，而不会有订单一直留在交易所的订单册上</strong></li>
+<li>不管任何情况发生，本地都不会有<strong>僵尸订单</strong>长期存在，这些订单一定会被清理掉</li>
+<li>下单之后，会立即将订单添加到本地订单缓存中，不需要等交易所的返回</li>
+<li>下单之后，也可以立即撤单，不需要等交易所推送的下单成功消息</li>
+</ul>
+</div>
 
 
 
@@ -1372,10 +1542,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow", "search.highlight", "search.suggest", "search.share", "announce.dismiss"], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow", "search.highlight", "search.suggest", "search.share", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
     
   </body>

@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://wiki.vikingtrading.net/">
+        <link rel="canonical" href="https://wiki.vikingtrading.net/common/transfer_task_manager/">
       
       
+        <link rel="prev" href="../transfer_api/">
       
-        <link rel="next" href="common/support_platform/">
+      
+        <link rel="next" href="../gateway_balance/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>HFT技术文档中心</title>
+        <title>任务 - HFT技术文档中心</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hft-wiki" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -92,7 +94,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="." title="HFT技术文档中心" class="md-header__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
+    <a href="../.." title="HFT技术文档中心" class="md-header__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.06 11.57A3.9 3.9 0 0 0 18 9c0-1.86-1.27-3.43-3-3.87V3h-2v2h-2V3H9v2H6v2h2v10H6v2h3v2h2v-2h2v2h2v-2c2.21 0 4-1.79 4-4 0-1.45-.78-2.73-1.94-3.43M10 7h4c1.1 0 2 .9 2 2s-.9 2-2 2h-4zm5 10h-5v-4h5c1.1 0 2 .9 2 2s-.9 2-2 2"/></svg>
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              主页
+              任务
             
           </span>
         </div>
@@ -210,11 +212,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -231,11 +231,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="common/support_platform/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../support_platform/" class="md-tabs__link">
           
   
   
@@ -277,7 +279,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="HFT技术文档中心" class="md-nav__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
+    <a href="../.." title="HFT技术文档中心" class="md-nav__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.06 11.57A3.9 3.9 0 0 0 18 9c0-1.86-1.27-3.43-3-3.87V3h-2v2h-2V3H9v2H6v2h2v10H6v2h3v2h2v-2h2v2h2v-2c2.21 0 4-1.79 4-4 0-1.45-.78-2.73-1.94-3.43M10 7h4c1.1 0 2 .9 2 2s-.9 2-2 2h-4zm5 10h-5v-4h5c1.1 0 2 .9 2 2s-.9 2-2 2"/></svg>
@@ -292,37 +294,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    主页
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -338,48 +313,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        欢迎
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        快速导航
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -388,8 +321,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -411,17 +346,20 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -439,7 +377,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -457,7 +395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/support_platform/" class="md-nav__link">
+      <a href="../support_platform/" class="md-nav__link">
         
   
   
@@ -543,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/data_type/" class="md-nav__link">
+      <a href="../data_type/" class="md-nav__link">
         
   
   
@@ -571,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/data_structure/" class="md-nav__link">
+      <a href="../data_structure/" class="md-nav__link">
         
   
   
@@ -599,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/common_data_structure/" class="md-nav__link">
+      <a href="../common_data_structure/" class="md-nav__link">
         
   
   
@@ -635,7 +573,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/path_manager/" class="md-nav__link">
+      <a href="../path_manager/" class="md-nav__link">
         
   
   
@@ -725,7 +663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/shm_basic/" class="md-nav__link">
+      <a href="../shm_basic/" class="md-nav__link">
         
   
   
@@ -753,7 +691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/shm_path/" class="md-nav__link">
+      <a href="../shm_path/" class="md-nav__link">
         
   
   
@@ -781,7 +719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/shm_best_practice/" class="md-nav__link">
+      <a href="../shm_best_practice/" class="md-nav__link">
         
   
   
@@ -809,7 +747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/shm_balance/" class="md-nav__link">
+      <a href="../shm_balance/" class="md-nav__link">
         
   
   
@@ -837,7 +775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/shm_custom_signal/" class="md-nav__link">
+      <a href="../shm_custom_signal/" class="md-nav__link">
         
   
   
@@ -870,8 +808,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -886,11 +826,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
         
           
           <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
@@ -911,7 +851,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -929,7 +869,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/transfer_api/" class="md-nav__link">
+      <a href="../transfer_api/" class="md-nav__link">
         
   
   
@@ -954,10 +894,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="common/transfer_task_manager/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    任务
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -973,6 +940,48 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        业务场景
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        案例
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1049,7 +1058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/gateway_balance/" class="md-nav__link">
+      <a href="../gateway_balance/" class="md-nav__link">
         
   
   
@@ -1077,7 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/gateway_order/" class="md-nav__link">
+      <a href="../gateway_order/" class="md-nav__link">
         
   
   
@@ -1169,7 +1178,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/ipc_pubsub/" class="md-nav__link">
+      <a href="../ipc_pubsub/" class="md-nav__link">
         
   
   
@@ -1197,7 +1206,7 @@
   
   
     <li class="md-nav__item">
-      <a href="common/ipc_command/" class="md-nav__link">
+      <a href="../ipc_command/" class="md-nav__link">
         
   
   
@@ -1260,10 +1269,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        欢迎
+        业务场景
       
     </span>
   </a>
@@ -1271,10 +1280,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        快速导航
+        案例
       
     </span>
   </a>
@@ -1299,6 +1308,64 @@
   
 
 
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    主页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../support_platform/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    文档
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../transfer_api/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    转账
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -1306,15 +1373,106 @@
 
 
 
-<h1 id="hft-wiki">HFT Wiki<a class="headerlink" href="#hft-wiki" title="Permanent link">&para;</a></h1>
-<p>Viking Trading高频交易技术文档中心</p>
-<h2 id="_1">欢迎<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>这是Viking Trading HFT的技术文档站点，提供HFT相关的技术文档。只分享思路，涉及具体实现的部分，默认是无法访问的，需要内部授权才能访问。文档的所有内容，全部手写，是技术点的总结，也是个人高频交易系统设计 &amp; 思考过程的记录，没有任何AGI生成的内容。手工制品，质量保证✨</p>
-<p>文档中总结的API，经过长时间实盘的验证，可以保证逻辑的准确性，稳定行，同时满足高频交易苛刻的性能要求，可以放心大胆的使用！</p>
-<h2 id="_2">快速导航<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h1 id="_1">转账任务<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">业务场景<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>我们有一个账户，里面跑了多个子策略，每个子策略会占用一定的资金。某个逻辑会在某一时刻有资金转出的需求，但是这时候资金往往是被占用的，无法立即执行资金转出操作。我们需要在未来的某个时间点（资金可用的时候）执行转账操作。也就是转账需求的提出，和转账需求的执行是分开的。这个模块就是为了解决这个问题。</p>
+<p>只要有资金转出的需求，不需要关心当前资金是否被占用，只需要<strong>提交一个转账任务</strong>就结束了。会有一个执行器，在合理的时间点遍历所有的转账任务并执行，这在逻辑实现上会变得很简洁。</p>
+<h2 id="_3">案例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
 <ul>
-<li>📚 <a href="common/support_platform/">查看文档</a></li>
+<li>使用<a href="../transfer_api/">统一API：transfer</a>进行转账</li>
+<li><strong>执行转账任务</strong>的时间点可以是撤挂单的间隙，如果转账失败应该重试，直到任务成功为止</li>
+<li><strong>重复转账的问题</strong>：同样的转账任务，也就是<code>TransferTaskKey</code>相同的任务，可以重复添加，并不会生成多条转账任务，在任务成功执行前，只会有一条转账任务</li>
+<li>这里描述的是单步转账的任务，也就是成功执行一次<code>A-&gt;B</code>转账操作就结束了。另外还有链式转账任务<code>A-&gt;B-&gt;C-&gt;D</code>，链式转账任务依赖于单步转账任务。我们通常的做法是成功执行一次单步<code>A-&gt;B</code>转账任务后，再创建后续的转账任务链<code>B-&gt;C-&gt;D</code>，有专门的<strong>转账任务执行器</strong>来执行后续的链式转账操作。后续步骤的到账时间未知，涉及到链上提款时间会更久，所以需要一个专门的转账任务执行器来执行后续的转账操作，直到资金成功转入最终的目标账户</li>
 </ul>
+</div>
+<p><strong>数据结构</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TransferTaskKey</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;转账任务Key&quot;&quot;&quot;</span>
+    <span class="n">from_exchange</span><span class="p">:</span> <span class="n">Exchange</span>
+    <span class="n">from_account</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">to_exchange</span><span class="p">:</span> <span class="n">Exchange</span>
+    <span class="n">to_account</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">currency</span><span class="p">:</span> <span class="n">Currency</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TransferTaskValue</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;转账任务Value&quot;&quot;&quot;</span>
+    <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div>
+<p><strong>使用示例</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">Currency</span><span class="p">,</span> <span class="n">TransferTaskManager</span><span class="p">,</span> <span class="n">TransferTaskKey</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.exchange.multi_account_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">transfer</span>
+
+<span class="c1"># 创建管理器，设置默认过期时间120秒</span>
+<span class="n">manager</span> <span class="o">=</span> <span class="n">TransferTaskManager</span><span class="p">(</span><span class="n">default_expire_seconds</span><span class="o">=</span><span class="mf">120.0</span><span class="p">)</span>
+
+<span class="c1"># ========== 生产者：子策略提交转账需求 ==========</span>
+
+<span class="c1"># 子策略A：需要从 Kraken trade 转 1000 USDC 到 Kraken main</span>
+<span class="c1"># 如果任务已存在则跳过</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
+    <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;trade&quot;</span><span class="p">,</span>
+    <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">currency</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">1000.0</span>
+<span class="p">)</span>
+
+<span class="c1"># 子策略B：需要从 Kraken trade 转 500 USD 到 kraken close_position</span>
+<span class="c1"># 如果任务已存在则跳过，如果120秒内已成功转账过则不重复提交</span>
+<span class="n">key_b</span> <span class="o">=</span> <span class="n">TransferTaskKey</span><span class="p">(</span>
+    <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;trade&quot;</span><span class="p">,</span>
+    <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;close_position&quot;</span><span class="p">,</span>
+    <span class="n">currency</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USD</span>
+<span class="p">)</span>
+<span class="n">last_success</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_last_success_time</span><span class="p">(</span><span class="n">key_b</span><span class="p">)</span>
+<span class="n">current_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1_000_000</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">last_success</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">current_time</span> <span class="o">-</span> <span class="n">last_success</span> <span class="o">&gt;</span> <span class="mi">120</span> <span class="o">*</span> <span class="mi">1_000_000</span><span class="p">:</span>
+    <span class="n">manager</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
+        <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+        <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;trade&quot;</span><span class="p">,</span>
+        <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+        <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;close_position&quot;</span><span class="p">,</span>
+        <span class="n">currency</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USD</span><span class="p">,</span>
+        <span class="n">amount</span><span class="o">=</span><span class="mf">500.0</span>
+    <span class="p">)</span>
+
+<span class="c1"># ========== 消费者：执行器遍历并执行 ==========</span>
+
+<span class="c1"># 获取任务快照（协程安全）</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_all_tasks</span><span class="p">():</span>
+    <span class="c1"># 检查条件：资金是否充足</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">can_transfer</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">from_exchange</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">from_account</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">currency</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">amount</span><span class="p">):</span>
+        <span class="k">continue</span>
+
+    <span class="c1"># 执行转账</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="k">await</span> <span class="n">transfer</span><span class="p">(</span>
+        <span class="n">from_exchange</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">from_exchange</span><span class="p">,</span>
+        <span class="n">from_account</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">from_account</span><span class="p">,</span>
+        <span class="n">to_exchange</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">to_exchange</span><span class="p">,</span>
+        <span class="n">to_account</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">to_account</span><span class="p">,</span>
+        <span class="n">currency</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">currency</span><span class="p">,</span>
+        <span class="n">amount</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">amount</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+        <span class="c1"># 转账成功，删除任务并记录成功时间</span>
+        <span class="n">manager</span><span class="o">.</span><span class="n">remove_task</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="c1"># 记录成功转账的时间</span>
+        <span class="n">manager</span><span class="o">.</span><span class="n">mark_success</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="c1"># 转账失败，保留任务，下次重试</span>
+
+<span class="c1"># ========== 定期清理过期任务 ==========</span>
+<span class="n">cleaned</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">clean_expired_tasks</span><span class="p">()</span>
+</code></pre></div>
 
 
 
@@ -1372,10 +1530,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow", "search.highlight", "search.suggest", "search.share", "announce.dismiss"], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow", "search.highlight", "search.suggest", "search.share", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
     
   </body>

@@ -1,0 +1,1988 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="HFT技术文档中心: HFT技术文档中心">
+      
+      
+      
+        <link rel="canonical" href="https://wiki.vikingtrading.net/common/shm_balance/">
+      
+      
+        <link rel="prev" href="../shm_best_practice/">
+      
+      
+        <link rel="next" href="../shm_custom_signal/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>资产&策略资产 - HFT技术文档中心</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="HFT技术文档中心" class="md-header__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.06 11.57A3.9 3.9 0 0 0 18 9c0-1.86-1.27-3.43-3-3.87V3h-2v2h-2V3H9v2H6v2h2v10H6v2h3v2h2v-2h2v2h2v-2c2.21 0 4-1.79 4-4 0-1.45-.78-2.73-1.94-3.43M10 7h4c1.1 0 2 .9 2 2s-.9 2-2 2h-4zm5 10h-5v-4h5c1.1 0 2 .9 2 2s-.9 2-2 2"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HFT技术文档中心
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              资产&策略资产
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../support_platform/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  文档
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HFT技术文档中心" class="md-nav__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.06 11.57A3.9 3.9 0 0 0 18 9c0-1.86-1.27-3.43-3-3.87V3h-2v2h-2V3H9v2H6v2h2v10H6v2h3v2h2v-2h2v2h2v-2c2.21 0 4-1.79 4-4 0-1.45-.78-2.73-1.94-3.43M10 7h4c1.1 0 2 .9 2 2s-.9 2-2 2h-4zm5 10h-5v-4h5c1.1 0 2 .9 2 2s-.9 2-2 2"/></svg>
+
+    </a>
+    HFT技术文档中心
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    主页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文档
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    文档
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../support_platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    支持的平台
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    类型定义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common_data_structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用数据结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path_manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    路径管理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    共享内存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    共享内存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    路径
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_best_practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最佳实践
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    资产&策略资产
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    资产&策略资产
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心需求
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        资产
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        策略资产
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="策略资产">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        资金流动
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        业务场景
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="业务场景">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        系统启动
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        资产买卖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        子策略申请或者归还资金
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        转账成功
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        错误恢复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        借贷
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_custom_signal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义信号
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    转账
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    转账
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统一API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_task_manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    任务
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    网关
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    网关
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gateway_balance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    资产
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gateway_order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    订单
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IPC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipc_pubsub/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    发布&订阅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipc_command/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心需求
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        资产
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        策略资产
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="策略资产">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        资金流动
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        业务场景
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="业务场景">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        系统启动
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        资产买卖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        子策略申请或者归还资金
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        转账成功
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        错误恢复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        借贷
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    主页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../support_platform/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    文档
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../shm_basic/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    共享内存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">共享内存资产&amp;策略资产<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">核心需求<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>主要解决同一个账户内资金动态分配的问题</li>
+<li>支持一个账户下多个子策略的资金分配，一个账户内的资金分成多份，给多个子策略使用。每个子策略对应一个<strong>虚拟账户</strong>，虚拟账户内的钱是这个子策略的最大可用资金，不需要用完</li>
+<li>支持资金转出和转出这样的业务场景</li>
+<li>发现和交易所资金不一致的时候，有恢复策略</li>
+<li>支持跨进程同步，支持借贷</li>
+</ul>
+<h2 id="_3">资产<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>如果一个账户内的资产只对应一个策略，不需要做资金划分，用如下简单的方式就可以跨进程的操作资产</p>
+<p><strong>示例：写入Currency的Balance</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hft/util/shm.h&quot;</span>
+
+<span class="n">Exchange</span><span class="w"> </span><span class="n">exchange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Exchange</span><span class="o">::</span><span class="n">KRAKEN</span><span class="p">;</span>
+<span class="n">DataType</span><span class="w"> </span><span class="n">dataType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataType</span><span class="o">::</span><span class="n">BALANCE</span><span class="p">;</span>
+<span class="n">Currency</span><span class="w"> </span><span class="n">currency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Currency</span><span class="o">::</span><span class="n">USDT</span><span class="p">;</span>
+<span class="kt">int64_t</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getCurrentTimestamp</span><span class="p">();</span>
+<span class="n">SingleQuote</span><span class="w"> </span><span class="n">usdtBalance</span><span class="p">{</span><span class="n">now</span><span class="p">,</span><span class="w"> </span><span class="n">now</span><span class="p">,</span><span class="w"> </span><span class="mf">10000.0</span><span class="p">};</span><span class="w"> </span><span class="c1">// 余额为10000 USDT</span>
+<span class="hll"><span class="n">ShareMemorySingleQuote</span><span class="o">::</span><span class="n">write</span><span class="p">(</span><span class="n">exchange</span><span class="p">,</span><span class="w"> </span><span class="n">dataType</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">,</span><span class="w"> </span><span class="n">usdtBalance</span><span class="p">);</span><span class="w"> </span><span class="c1">// 更新共享内存</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">write_single_quote_currency</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">writeSingleQuoteCurrency</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">write_balance</span><span class="p">(</span><span class="n">exchange</span><span class="p">:</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">currency</span><span class="p">:</span> <span class="n">Currency</span><span class="p">,</span> <span class="n">balance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">local_timestamp</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">local_timestamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">local_timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1_000_000</span><span class="p">)</span>
+    <span class="n">write_single_quote_currency</span><span class="p">(</span>
+        <span class="n">exchange</span><span class="p">,</span>
+        <span class="n">DataType</span><span class="o">.</span><span class="n">BALANCE</span><span class="p">,</span>
+        <span class="n">currency</span><span class="p">,</span>
+<span class="hll">        <span class="n">SingleQuote</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">local_timestamp</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">localTimestamp</span><span class="o">=</span><span class="n">local_timestamp</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">mid</span><span class="o">=</span><span class="n">balance</span><span class="p">)</span>
+</span><span class="hll">    <span class="p">)</span>
+</span><span class="hll">
+</span><span class="c1"># 写入USDT余额</span>
+<span class="n">write_balance</span><span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>示例：获取Currency的Balance</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hft/util/shm.h&quot;</span>
+
+<span class="n">Exchange</span><span class="w"> </span><span class="n">exchange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Exchange</span><span class="o">::</span><span class="n">KRAKEN</span><span class="p">;</span>
+<span class="n">DataType</span><span class="w"> </span><span class="n">dataType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataType</span><span class="o">::</span><span class="n">BALANCE</span><span class="p">;</span>
+<span class="n">Currency</span><span class="w"> </span><span class="n">currency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Currency</span><span class="o">::</span><span class="n">USDT</span><span class="p">;</span>
+<span class="hll"><span class="n">SingleQuote</span><span class="w"> </span><span class="o">*</span><span class="n">usdtBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShareMemorySingleQuote</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="n">exchange</span><span class="p">,</span><span class="w"> </span><span class="n">dataType</span><span class="p">,</span><span class="w"> </span><span class="n">currency</span><span class="p">);</span>
+</span>
+<span class="c1">// 输出余额</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;USDT Balance: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">usdtBalance</span><span class="o">-&gt;</span><span class="n">mid</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+
+<span class="n">get_single_quote_currency</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">getSingleQuoteCurrency</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_balance</span><span class="p">(</span><span class="n">exchange</span><span class="p">:</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">currency</span><span class="p">:</span> <span class="n">Currency</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleQuote</span><span class="p">:</span>
+<span class="hll">    <span class="k">return</span> <span class="n">get_single_quote_currency</span><span class="p">(</span>
+</span><span class="hll">        <span class="n">exchange</span><span class="p">,</span>
+</span><span class="hll">        <span class="n">DataType</span><span class="o">.</span><span class="n">BALANCE</span><span class="p">,</span>
+</span><span class="hll">        <span class="n">currency</span><span class="p">,</span>
+</span><span class="hll">    <span class="p">)</span>
+</span>
+<span class="c1"># 获取并输出USDT余额</span>
+<span class="n">usdt_balance</span> <span class="o">=</span> <span class="n">get_balance</span><span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;USDT Balance: </span><span class="si">{</span><span class="n">usdt_balance</span><span class="o">.</span><span class="n">mid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="_4">策略资产<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li>模拟虚拟子账户的逻辑，每个虚拟子账户对一个子策略</li>
+<li>最多支持63个子策略(1个主策略/钱包 + 62个其他策略)<ul>
+<li>strategy[0] = 总资金</li>
+<li>strategy[1] = 主策略（也可以理解成钱包或者资金池）</li>
+<li>strategy[2..N] = 其它策略资金（配额）</li>
+</ul>
+</li>
+<li>在使用之前要先初始化，具体的策略数量上层逻辑自己确定，只有<code>strategies[0..strategyCount]</code>范围内的数据保证有效</li>
+</ul>
+<h3 id="_5">结构<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                      StrategyBalance                            │
+│  Exchange: KRAKEN    Currency: USDC    strategyCount: 5         │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│   strategies[64] 数组                                           │
+│                                                                 │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │ [0] 总资金: 10000.0  ◄── 账户真实余额                      │   │
+│   ├─────────────────────────────────────────────────────────┤   │
+│   │ [1] 主策略: 4000.0   ◄── 资金池，其他策略从这里申请          │   │
+│   ├─────────────────────────────────────────────────────────┤   │
+│   │ [2] 策略A:  2000.0   ◄── 子策略占用                       │   │
+│   ├─────────────────────────────────────────────────────────┤   │
+│   │ [3] 策略B:  3000.0   ◄── 子策略占用                       │   │
+│   ├─────────────────────────────────────────────────────────┤   │
+│   │ [4] 策略C:  1000.0   ◄── 子策略占用                       │   │
+│   ├─────────────────────────────────────────────────────────┤   │
+│   │ [5..63] 未使用                                           │   │
+│   └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│   约束: strategies[0] = strategies[1] + strategies[2] + ...     │
+│         10000 = 4000 + 2000 + 3000 + 1000 ✓                     │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="_6">资金流动<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>恒等式</strong>：<code>strategies[0] = sum(strategies[1:strategyCount])</code></li>
+<li><strong>申请资金</strong>：<code>strategies[1] -= amount;  strategies[i] += amount;</code></li>
+<li><strong>归还资金</strong>：<code>strategies[i] -= amount;  strategies[1] += amount;</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code>                    ┌──────────────────────┐
+                    │   [0] 总资金 10000    │
+                    │   (账户真实余额)       │
+                    └──────────────────────┘
+                              │
+                              │ 分配
+                              ▼
+        ┌─────────────────────────────────────────────┐
+        │             [1] 主策略 4000                  │
+        │             (资金池/未分配)                   │
+        └─────────────────────────────────────────────┘
+                │             │             │
+         申请资金│       申请资金│      申请资金│
+                ▼             ▼             ▼
+        ┌───────────┐ ┌───────────┐ ┌───────────┐
+        │[2] 策略A   │ │[3] 策略B  │  │[4] 策略C  │
+        │   2000    │ │   3000    │ │   1000    │
+        └───────────┘ └───────────┘ └───────────┘
+                │             │             │
+         归还资金│       归还资金│      归还资金│
+                └─────────────┼─────────────┘
+                              ▼
+                    ┌──────────────────────┐
+                    │   [1] 主策略 (资金池)  │
+                    └──────────────────────┘
+</code></pre></div>
+<h3 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h3>
+<p>所有涉及资金操作的API调用之后，会自动再平衡，保证<strong>恒等式</strong>的成立</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reset(currency, balance)</code></td>
+<td>重置：总资金=主策略=balance，子策略=0</td>
+</tr>
+<tr>
+<td><code>set(currency, amount, index=0)</code></td>
+<td>设置某索引的值，通常不需要直接使用这个API</td>
+</tr>
+<tr>
+<td><code>adjust(currency, delta, index=0)</code></td>
+<td>增减某索引的值（+/-），通常只会操作总资金</td>
+</tr>
+<tr>
+<td><code>allocate(currency, index, amount)</code></td>
+<td>子策略申请资金</td>
+</tr>
+<tr>
+<td><code>release(currency, index, amount)</code></td>
+<td>子策略归还资金</td>
+</tr>
+<tr>
+<td><code>get(currency)</code></td>
+<td>获取完整 StrategyBalance</td>
+</tr>
+<tr>
+<td><code>get_balance(currency, index=0)</code></td>
+<td>获取某索引的资金，默认返回总资金</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">业务场景<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>StrategyBalance表示一个Exchange，一个Currency的资产</strong></li>
+<li><strong>StrategyBalanceManager管理一个Exchange，所有Currency的资产</strong></li>
+</ul>
+<h4 id="_8">系统启动<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>资产的管理者，例如：网关模块需要执行这部分初始化逻辑</li>
+<li>调用<code>reset</code>初始化资产</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrategyBalanceManager</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+
+<span class="c1"># 创建管理器（Kraken交易所，8个策略槽位）</span>
+<span class="n">manager</span> <span class="o">=</span> <span class="n">StrategyBalanceManager</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> <span class="n">strategy_count</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># 获取账户余额（从交易所API）</span>
+<span class="n">usdc_balance</span> <span class="o">=</span> <span class="mf">10000.0</span>
+<span class="n">usd_balance</span> <span class="o">=</span> <span class="mf">5000.0</span>
+
+<span class="c1"># 初始化各币种资产</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">usdc_balance</span><span class="p">)</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USD</span><span class="p">,</span> <span class="n">usd_balance</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="_9">资产买卖<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>卖出一个资产，或者买入一个资产</strong></li>
+<li>本质是总资金的变化，调用<code>adjust</code>调整总资产</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 买入：买入usdc/usd</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">adjust</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USD</span><span class="p">,</span> <span class="o">-</span><span class="mf">1000.0</span><span class="p">)</span>   <span class="c1"># USD 减少</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">adjust</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">)</span>   <span class="c1"># USDC 增加</span>
+
+<span class="c1"># 卖出：卖出usdc/usd</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">adjust</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="o">-</span><span class="mf">500.0</span><span class="p">)</span>   <span class="c1"># USDC 减少</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">adjust</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USD</span><span class="p">,</span> <span class="mf">500.0</span><span class="p">)</span>     <span class="c1"># USD 增加</span>
+</code></pre></div>
+<h4 id="_10">子策略申请或者归还资金<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>调用<code>allocate</code>或者<code>release</code>来申请或者归还资金</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 策略A（index=2）申请 2000 USDC</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">allocate</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">)</span>
+
+<span class="c1"># 策略B（index=3）申请 3000 USDC</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">allocate</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mf">3000.0</span><span class="p">)</span>
+
+<span class="c1"># 策略A 归还 500 USDC</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mf">500.0</span><span class="p">)</span>
+
+<span class="c1"># 查询各策略资金</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>      <span class="c1"># 总资金</span>
+<span class="n">available</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 主策略（可用）</span>
+<span class="n">strategy_a</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 策略A</span>
+<span class="n">strategy_b</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># 策略B</span>
+</code></pre></div>
+<h4 id="_11">转账成功<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>成功转入或者转出，本质上和买入和卖出一个资产是一样的，调用<code>adjust</code>调整总资产</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 转入 1000 USDC（从其他交易所转入）</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">adjust</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">)</span>
+
+<span class="c1"># 转出 500 USDC（转到其他交易所）</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">adjust</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="o">-</span><span class="mf">500.0</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="_12">错误恢复<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>错误恢复的逻辑</strong>：当发现本地的资产和交易所不一致的时候，调整总资产，子策略的资产不动，同时调整主策略（钱包）的余额，保证恒等式成立</li>
+<li>注意：如果资金修复后，<strong>主策略资金 + 借贷额度 &lt; 0</strong>，表示资金错误是无法修复的，这时候的简单处理方式是<code>reset</code>资产，让每个子策略重新申请自己需要的资产</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 从交易所获取真实余额</span>
+<span class="n">real_balance</span> <span class="o">=</span> <span class="n">从交易所获取的资产</span>
+
+<span class="c1"># 修正总资产（set会自动refresh，重算主策略）</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">real_balance</span><span class="p">)</span>
+
+<span class="c1"># 检查主策略是否为负（考虑借贷额度）</span>
+<span class="n">available</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">credit_limit</span> <span class="o">=</span> <span class="mf">5000.0</span>  <span class="c1"># 借贷额度</span>
+
+<span class="k">if</span> <span class="n">available</span> <span class="o">+</span> <span class="n">credit_limit</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="c1"># 资金错误无法修复，需要重置</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;资金错误无法修复，主策略余额为负且超过借贷额度: </span><span class="si">{</span><span class="n">available</span><span class="si">}</span><span class="s2">, 借贷额度: </span><span class="si">{</span><span class="n">credit_limit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">manager</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">real_balance</span><span class="p">)</span>
+    <span class="c1"># 子策略需要重新申请资金...</span>
+</code></pre></div>
+<h2 id="_13">借贷<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p>借贷是一个额外的逻辑，账户中存储的资产是不包括借贷额度的。<strong>每种资产的借贷额度配置文件中单独配置</strong>。资产当前的数量+借贷额度，是这个资产当前真正的可用额度。例如：如果一个资产当前的余额是100，借贷额度是50，这个资产的当前可用额度是<code>100+50=150</code>；如果一个资产当前的余额是-30，借贷额度是50，这个资产当前可用额度是<code>-30+50=20</code>。正常情况下，主策略（资金池）中的资金加上借贷额度，应该是大于等于0的。如果不满足这个条件，表示资金状态出错，需要用<code>reset</code>重置资金状态</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow", "search.highlight", "search.suggest", "search.share", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2477 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="HFT技术文档中心: HFT技术文档中心">
+      
+      
+      
+        <link rel="canonical" href="https://wiki.vikingtrading.net/common/transfer_api/">
+      
+      
+        <link rel="prev" href="../shm_custom_signal/">
+      
+      
+        <link rel="next" href="../transfer_task_manager/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>统一API - HFT技术文档中心</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="HFT技术文档中心" class="md-header__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.06 11.57A3.9 3.9 0 0 0 18 9c0-1.86-1.27-3.43-3-3.87V3h-2v2h-2V3H9v2H6v2h2v10H6v2h3v2h2v-2h2v2h2v-2c2.21 0 4-1.79 4-4 0-1.45-.78-2.73-1.94-3.43M10 7h4c1.1 0 2 .9 2 2s-.9 2-2 2h-4zm5 10h-5v-4h5c1.1 0 2 .9 2 2s-.9 2-2 2"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HFT技术文档中心
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              统一API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../support_platform/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  文档
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HFT技术文档中心" class="md-nav__button md-logo" aria-label="HFT技术文档中心" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.06 11.57A3.9 3.9 0 0 0 18 9c0-1.86-1.27-3.43-3-3.87V3h-2v2h-2V3H9v2H6v2h2v10H6v2h3v2h2v-2h2v2h2v-2c2.21 0 4-1.79 4-4 0-1.45-.78-2.73-1.94-3.43M10 7h4c1.1 0 2 .9 2 2s-.9 2-2 2h-4zm5 10h-5v-4h5c1.1 0 2 .9 2 2s-.9 2-2 2"/></svg>
+
+    </a>
+    HFT技术文档中心
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    主页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文档
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    文档
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../support_platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    支持的平台
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    类型定义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common_data_structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用数据结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path_manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    路径管理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    共享内存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    共享内存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    路径
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_best_practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最佳实践
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_balance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    资产&策略资产
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_custom_signal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义信号
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    转账
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    转账
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统一API
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统一API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        账户体系
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="账户体系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        账户命名规范
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        账户定义案例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        账户配置案例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="账户配置案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binance 账户
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken 账户
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        获取资产
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="获取资产">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔥 统一接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        转账
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="转账">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        转账类型分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        权限与约束
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔥 统一接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        转账案例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="转账案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binance-spot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binance Spot 账户间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken-spot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken Spot 账户间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken-future" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken Future 账户间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken-spot-future" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken Spot → Future
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken-future-spot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken Future → Spot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken-binance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken → Binance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binance-kraken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binance → Kraken
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_task_manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    任务
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    网关
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    网关
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gateway_balance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    资产
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gateway_order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    订单
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IPC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipc_pubsub/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    发布&订阅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipc_command/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        账户体系
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="账户体系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        账户命名规范
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        账户定义案例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        账户配置案例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="账户配置案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binance 账户
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken 账户
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        获取资产
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="获取资产">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔥 统一接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        转账
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="转账">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        转账类型分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        权限与约束
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔥 统一接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        转账案例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="转账案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binance-spot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binance Spot 账户间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken-spot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken Spot 账户间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken-future" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken Future 账户间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken-spot-future" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken Spot → Future
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken-future-spot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken Future → Spot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken-binance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kraken → Binance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binance-kraken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binance → Kraken
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    主页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../support_platform/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    文档
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    转账
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="api">转账统一API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h1>
+<p>文档描述了一个多账户资产管理模块，对多个交易所的多个账户的多个钱包进行统一封装，提供：</p>
+<ul>
+<li><strong>转账功能</strong>：账户间、钱包间、跨交易所的资产转移</li>
+<li><strong>余额查询</strong>：统一的余额获取接口</li>
+</ul>
+<h2 id="_1">账户体系<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>转账系统基于底层的账户体系来工作，统一的账户体系，屏蔽了不同交易所，不同钱包类型的差异。转账系统在使用的时候，不需要关心底层的这些差异</p>
+<h3 id="_2">账户命名规范<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>采用三段式命名：交易所.账户名.钱包类型</li>
+<li><strong>账户名</strong>是系统内部为每个账户自定义的名字，在转账的时候，用这个名字可以直接转账。同一个交易所的同一个账户名，对应一个子账户</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<ul>
+<li>这是一个简化的抽象，交易所实际的账户体系比这个更复杂，这个简化的抽象可以让转账系统更方便的工作</li>
+<li>三段式的命名，对应到API的接口上，用2个字段就可以描述。交易所和钱包类型，可以用<code>Exchange</code>来标识，<code>Exchange.KRAKEN, Exchange.KRAKEN_FUTURE</code>，账户名称可以是任意预先定义好的字符串</li>
+<li><strong>同一个交易所，不同子账户之间转账，在底层需要有唯一的标识来标识不同的子账户</strong>。不同的交易所需要的配置不一样，例如：binance每个子账户需要配置一个email信息，kraken每个子账户需要配置一个public account id，kraken_future每个子账户需要配置一个uid等。这些信息在底层配置好之后，上层应用在使用API的时候不需要关心转账系统底层的这些差异</li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code>kraken.trade.spot
+   │     │     │
+   │     │     └── 钱包类型: spot / future
+   │     └──────── 账户名称: main / trade / future / close_position
+   └────────────── 交易所: kraken / binance
+</code></pre></div>
+<h3 id="_3">账户定义案例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>账户名称</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Kraken 账户名</span>
+<span class="n">KrakenAccountType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;trade&quot;</span><span class="p">,</span> <span class="s2">&quot;future&quot;</span><span class="p">,</span> <span class="s2">&quot;close_position&quot;</span><span class="p">]</span>
+
+<span class="c1"># Binance 账户名</span>
+<span class="n">BinanceAccountType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;trade&quot;</span><span class="p">]</span>
+
+<span class="c1"># 统一账户名</span>
+<span class="n">AccountType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">KrakenAccountType</span><span class="p">,</span> <span class="n">BinanceAccountType</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>Exchange 枚举与钱包类型</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span>       <span class="c1"># → Binance Spot</span>
+<span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span>        <span class="c1"># → Kraken Spot</span>
+<span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN_FUTURE</span> <span class="c1"># → Kraken Future</span>
+</code></pre></div>
+<p><strong>通过 Exchange + AccountType 的组合，可以唯一确定一个账户：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> <span class="s2">&quot;trade&quot;</span><span class="p">)</span>        <span class="c1"># → kraken.trade.spot</span>
+<span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN_FUTURE</span><span class="p">,</span> <span class="s2">&quot;main&quot;</span><span class="p">)</span>  <span class="c1"># → kraken.main.future</span>
+<span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span> <span class="s2">&quot;trade&quot;</span><span class="p">)</span>       <span class="c1"># → binance.trade.spot</span>
+</code></pre></div>
+<h3 id="_4">账户配置案例<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>下面是具体的案例</p>
+<h4 id="binance">Binance 账户<a class="headerlink" href="#binance" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>账户标识</th>
+<th>账户名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>binance.main.spot</td>
+<td>main</td>
+<td>跨交易所提币出入口</td>
+</tr>
+<tr>
+<td>binance.trade.spot</td>
+<td>trade</td>
+<td>稳定币套利交易</td>
+</tr>
+</tbody>
+</table>
+<p>binance账户的底层配置信息</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api_key + api_secret</td>
+<td>API 请求签名认证</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Spot 账户间转账时标识目标账户</td>
+</tr>
+</tbody>
+</table>
+<h4 id="kraken">Kraken 账户<a class="headerlink" href="#kraken" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>账户标识</th>
+<th>账户名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kraken.main.spot</td>
+<td>main</td>
+<td>跨交易所提币出入口</td>
+</tr>
+<tr>
+<td>kraken.trade.spot</td>
+<td>trade</td>
+<td>日常现货交易</td>
+</tr>
+<tr>
+<td>kraken.future.spot</td>
+<td>future</td>
+<td>空头保证金中转站</td>
+</tr>
+<tr>
+<td>kraken.future.future</td>
+<td>future</td>
+<td>空头合约交易</td>
+</tr>
+<tr>
+<td>kraken.close_position.spot</td>
+<td>close_position</td>
+<td>子账户平仓</td>
+</tr>
+</tbody>
+</table>
+<p>kraken的底层配置信息</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api_key + api_secret</td>
+<td>API 请求签名认证</td>
+</tr>
+<tr>
+<td>account_public_id</td>
+<td>Spot 账户间转账时标识目标账户</td>
+</tr>
+</tbody>
+</table>
+<p>kraken.future的底层配置信息</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api_key + api_secret</td>
+<td>API 请求签名认证</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>Future 账户间转账时标识目标账户</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">获取资产<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_6">🔥 统一接口<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>可以获取不同交易所，不同子账户，不同钱包内的资产</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<ul>
+<li>对于不同交易所，不同子账户，不同钱包内的资产可能会返回负数，负数的含义会不一样</li>
+<li>对于kraken，资产返回负数表示该资产支持借贷，并且目前自己的资产已经用完，开始使用借贷的部分，会返回负数，这时候该资产是无法转出的</li>
+<li>对于kraken future，usd返回负数表示表示有欠款，未实现盈亏还没有结算，这时候是无法转usd出来的</li>
+<li>函数使用之前，<code>AccountType</code>要预先配置好对应的<code>api_key &amp; api_secret</code></li>
+<li>该函数只会查询并返回<code>symbols</code>对应的资产数量，没有定义在<code>symbols</code>中的资产不会返回</li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_balances</span><span class="p">(</span>
+    <span class="n">exchange</span><span class="p">:</span> <span class="n">Exchange</span><span class="p">,</span>          <span class="c1"># BINANCE / KRAKEN / KRAKEN_FUTURE</span>
+    <span class="n">account</span><span class="p">:</span> <span class="n">AccountType</span><span class="p">,</span>        <span class="c1"># main / trade / future / close_position</span>
+    <span class="n">symbols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Currency</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Currency</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="_7">示例<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>获取不同交易所，不同子账户，不同钱包内的资产</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.exchange.multi_account_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_balances</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">Currency</span>
+
+<span class="c1"># 查询 Binance trade 账户的 USDC/USDT 余额</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_balances</span><span class="p">(</span>
+    <span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span> 
+    <span class="s2">&quot;trade&quot;</span><span class="p">,</span> 
+    <span class="p">[</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># 查询 Kraken trade 账户的多个币种余额</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_balances</span><span class="p">(</span>
+    <span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> 
+    <span class="s2">&quot;trade&quot;</span><span class="p">,</span> 
+    <span class="p">[</span><span class="n">Currency</span><span class="o">.</span><span class="n">USD</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">BTC</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">ETH</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># 查询 Kraken Future main 账户余额</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_balances</span><span class="p">(</span>
+    <span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN_FUTURE</span><span class="p">,</span> 
+    <span class="s2">&quot;main&quot;</span><span class="p">,</span> 
+    <span class="p">[</span><span class="n">Currency</span><span class="o">.</span><span class="n">USD</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># 处理结果</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">currency</span><span class="p">,</span> <span class="n">balance</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">currency</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">balance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;查询失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="_8">转账<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">转账类型分类<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>有三大类的转账</li>
+</ul>
+<div class="highlight"><pre><span></span><code>转账类型
+├── 同交易所转账
+│   ├── 类型一：同钱包-跨账户
+│   │   ├── binance_spot_transfer      # Binance Spot 子账户间
+│   │   ├── kraken_spot_transfer       # Kraken Spot 子账户间
+│   │   └── kraken_future_transfer     # Kraken Future 子账户间
+│   └── 类型二：同账户-跨钱包
+│       ├── kraken_spot_to_future_transfer  # Kraken Spot → Kraken Future
+│       └── kraken_future_to_spot_transfer  # Kraken Future → Kraken Spot
+└── 类型三：跨交易所转账
+    ├── kraken_to_binance_withdraw     # Kraken → Binance
+    └── binance_to_kraken_withdraw     # Binance → Kraken
+</code></pre></div>
+<p><strong>三种转账维度</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>类型一：同钱包-跨账户</td>
+<td>同类型钱包在不同账户间转账</td>
+<td>main.spot → trade.spot</td>
+</tr>
+<tr>
+<td>类型二：同账户-跨钱包</td>
+<td>同一账户内 Spot 与 Future 间转账</td>
+<td>main.spot → main.future</td>
+</tr>
+<tr>
+<td>类型三：跨交易所转账</td>
+<td>不同交易所间提币</td>
+<td>kraken.main.spot → binance.trade.spot</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">权限与约束<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>转账类型</th>
+<th>API 使用权限</th>
+<th>约束条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binance Spot 账户间</td>
+<td>必须用主账户 API</td>
+<td>需要配置 email</td>
+</tr>
+<tr>
+<td>Kraken Spot 账户间</td>
+<td>必须用主账户 API</td>
+<td>需要配置 account_public_id</td>
+</tr>
+<tr>
+<td>Kraken Future 账户间</td>
+<td>必须用主账户 API</td>
+<td>需要配置 uid</td>
+</tr>
+<tr>
+<td>Kraken Spot → Future</td>
+<td>用对应账户自己的 API</td>
+<td>同一子账户内</td>
+</tr>
+<tr>
+<td>Kraken Future → Spot</td>
+<td>用对应账户自己的 API</td>
+<td>同一子账户内</td>
+</tr>
+<tr>
+<td>Kraken → Binance</td>
+<td>Kraken 主账户 API</td>
+<td>仅从 main 发起</td>
+</tr>
+<tr>
+<td>Binance → Kraken</td>
+<td>Binance 主账户 API</td>
+<td>main → main</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_11">🔥 统一接口<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>可以在不同交易所，不同子账户，不同钱包内进行转账</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<ul>
+<li>函数使用之前，<code>AccountType</code>要预先配置好对应的<code>api_key &amp; api_secret</code></li>
+<li>对于不同子账户之间进行转账，参考<strong>权限与约束</strong>中的<strong>约束条件</strong>进行配置</li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">transfer</span><span class="p">(</span>
+    <span class="n">from_exchange</span><span class="p">:</span> <span class="n">Exchange</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="p">:</span> <span class="n">AccountType</span><span class="p">,</span>
+    <span class="n">to_exchange</span><span class="p">:</span> <span class="n">Exchange</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="p">:</span> <span class="n">AccountType</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="p">:</span> <span class="n">Currency</span><span class="p">,</span>
+    <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</code></pre></div>
+<h2 id="_12">转账案例<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h3 id="binance-spot">Binance Spot 账户间<a class="headerlink" href="#binance-spot" title="Permanent link">&para;</a></h3>
+<ul>
+<li>可以在任意子账户的spot之间相互转账</li>
+<li>只能使用主账户的api key和api secret来执行转账</li>
+<li>底层需要设置每个账户的email信息, 如果不指定from_email或者to_email, 也就是设置为None, 默认为主账户</li>
+<li>我们在底层已经配置了account和email映射, 可以直接使用</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 方式一: 使用 底层转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">binance_spot_transfer</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;trade&quot;</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 方式二: 使用 统一转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">transfer</span><span class="p">(</span>
+    <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;trade&quot;</span><span class="p">,</span>
+    <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="kraken-spot">Kraken Spot 账户间<a class="headerlink" href="#kraken-spot" title="Permanent link">&para;</a></h3>
+<ul>
+<li>可以在任意子账户的spot之间相互转账</li>
+<li>只能使用主账户的api key和api secret来执行转账</li>
+<li>底层需要设置每个账户的public account id信息来标识每个账户</li>
+<li>我们在底层已经配置了account和public account id映射, 可以直接使用</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 方式一: 使用 底层转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">kraken_spot_transfer</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;future&quot;</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;close_position&quot;</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 方式二: 使用 统一转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">transfer</span><span class="p">(</span>
+    <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;future&quot;</span><span class="p">,</span>
+    <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;close_position&quot;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="kraken-future">Kraken Future 账户间<a class="headerlink" href="#kraken-future" title="Permanent link">&para;</a></h3>
+<ul>
+<li>可以在任意子账户的future之间相互转账</li>
+<li>只能使用主账户的api key和api secret来执行转账</li>
+<li>底层需要设置每个账户的uid信息来标识每个账户</li>
+<li>目前只有 main和 future 账户有配置uid, trade 和 close_position 暂无</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 方式一: 使用 底层转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">kraken_future_transfer</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;future&quot;</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 方式二: 使用 统一转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">transfer</span><span class="p">(</span>
+    <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN_FUTURE</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN_FUTURE</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;future&quot;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="kraken-spot-future">Kraken Spot → Future<a class="headerlink" href="#kraken-spot-future" title="Permanent link">&para;</a></h3>
+<ul>
+<li>使用对应spot账户的api key 和api secret</li>
+<li>同一个账户内，从 spot -&gt; future</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 方式一: 使用 底层转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">kraken_spot_to_future_transfer</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 方式二: 使用 统一转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">transfer</span><span class="p">(</span>
+    <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN_FUTURE</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="kraken-future-spot">Kraken Future → Spot<a class="headerlink" href="#kraken-future-spot" title="Permanent link">&para;</a></h3>
+<ul>
+<li>使用对应future账户的api key 和api secret</li>
+<li>同一个账户内，从 future -&gt; spot</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 方式一: 使用 底层转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">kraken_future_to_spot_transfer</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>   
+
+<span class="c1"># 方式二: 使用 统一转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">transfer</span><span class="p">(</span>
+    <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN_FUTURE</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="kraken-binance">Kraken → Binance<a class="headerlink" href="#kraken-binance" title="Permanent link">&para;</a></h3>
+<ul>
+<li>底层使用 Kraken 提现接口将指定币种的资金从账户中提取，发送至预设的提现地址（通过 address 和 key 指定）。地址必须已在 Kraken 后台添加并命名（key）且通过验证。</li>
+<li>该API的功能：从 Kraken 主账户提币到 Binance 账户，可以是主账户，也可以是子账户</li>
+<li>目标address对应一个目标账户，key对应一个币种，例如：我们要转账到binance子账户，子账户有一个address，一个key对应一个币种<ul>
+<li>address: <code>0x....a651</code></li>
+<li>key: <code>sub1-usdc</code>, 币种: usdc</li>
+<li>key: <code>sub1-usdt</code>, 币种: usdt</li>
+</ul>
+</li>
+<li>所有的配置提前已经设置好，只需要调用提现接口即可，不需要关心address和key的配置细节</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 方式一: 使用 底层转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">kraken_to_binance_withdraw</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;trade&quot;</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 方式二: 使用 统一转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">transfer</span><span class="p">(</span>
+    <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;trade&quot;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="binance-kraken">Binance → Kraken<a class="headerlink" href="#binance-kraken" title="Permanent link">&para;</a></h3>
+<ul>
+<li>从 Binance 主账户提币到 Kraken 主账户。不能转到Kraken的子账户</li>
+<li>转所有的币，公用一个address</li>
+<li>所有的配置提前已经设置好，只需要调用提现接口即可，不需要关心address的配置细节</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 方式一: 使用 底层转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">binance_to_kraken_withdraw</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 方式二: 使用 统一转账 函数</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">transfer</span><span class="p">(</span>
+    <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span>
+    <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mf">10.0</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账成功: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;转账失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow", "search.highlight", "search.suggest", "search.share", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

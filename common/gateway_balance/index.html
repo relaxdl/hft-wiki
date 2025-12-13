@@ -10,11 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://wiki.vikingtrading.net/common/transfer/">
+        <link rel="canonical" href="https://wiki.vikingtrading.net/common/gateway_balance/">
       
       
-        <link rel="prev" href="../shm_best_practice/">
+        <link rel="prev" href="../transfer_task_manager/">
       
+      
+        <link rel="next" href="../gateway_order/">
       
       
         
@@ -25,7 +27,7 @@
     
     
       
-        <title>转账 - HFT技术文档中心</title>
+        <title>资产 - HFT技术文档中心</title>
       
     
     
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#gateway" class="md-skip">
           跳转至
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              转账
+              资产
             
           </span>
         </div>
@@ -325,6 +327,10 @@
   
     
     
+      
+        
+      
+        
       
         
       
@@ -603,6 +609,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -730,6 +740,182 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_balance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    资产&策略资产
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shm_custom_signal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义信号
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    转账
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    转账
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统一API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_task_manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    任务
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -751,6 +937,8 @@
       
         
       
+        
+      
     
     
     
@@ -762,17 +950,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
         
           
-          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
     
   
-    高层接口
+    网关
   
 
     
@@ -783,12 +971,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2_5">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6">
             <span class="md-nav__icon md-icon"></span>
             
   
-    高层接口
+    网关
   
 
           </label>
@@ -817,7 +1005,7 @@
   <span class="md-ellipsis">
     
   
-    转账
+    资产
   
 
     
@@ -835,7 +1023,7 @@
   <span class="md-ellipsis">
     
   
-    转账
+    资产
   
 
     
@@ -861,22 +1049,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        账户体系
+        如何维护资产
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="账户体系">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何读取资产
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="如何读取资产">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        账户命名规范
+        资产
       
     </span>
   </a>
@@ -887,49 +1086,10 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        账户定义案例
+        策略资产
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        账户配置案例
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="账户配置案例">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#binance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Binance 账户
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kraken" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kraken 账户
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -939,22 +1099,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#ipc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        获取资产
+        IPC命令
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="获取资产">
+    <nav class="md-nav" aria-label="IPC命令">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        统一接口
+        子策略申请或者归还资金
       
     </span>
   </a>
@@ -962,10 +1122,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        示例
+        转账成功
       
     </span>
   </a>
@@ -981,6 +1141,154 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gateway_order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    订单
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IPC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipc_pubsub/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    发布&订阅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipc_command/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1028,22 +1336,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        账户体系
+        如何维护资产
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="账户体系">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何读取资产
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="如何读取资产">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        账户命名规范
+        资产
       
     </span>
   </a>
@@ -1054,49 +1373,10 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        账户定义案例
+        策略资产
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        账户配置案例
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="账户配置案例">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#binance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Binance 账户
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kraken" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kraken 账户
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1106,22 +1386,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#ipc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        获取资产
+        IPC命令
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="获取资产">
+    <nav class="md-nav" aria-label="IPC命令">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        统一接口
+        子策略申请或者归还资金
       
     </span>
   </a>
@@ -1129,10 +1409,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        示例
+        转账成功
       
     </span>
   </a>
@@ -1208,7 +1488,7 @@
         <a href="./" class="md-path__link">
           
   <span class="md-ellipsis">
-    高层接口
+    网关
   </span>
 
         </a>
@@ -1227,226 +1507,151 @@
 
 
 
-<h1 id="_1">转账<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>文档描述了一个多账户资产管理模块，对多个交易所的多个账户的多个钱包进行统一封装，提供：</p>
+<h1 id="gateway">gateway的资产管理<a class="headerlink" href="#gateway" title="Permanent link">&para;</a></h1>
 <ul>
-<li><strong>转账功能</strong>：账户间、钱包间、跨交易所的资产转移</li>
-<li><strong>余额查询</strong>：统一的余额获取接口</li>
+<li>网关模块负责管理和同步资产。将最新的资产信息写入共享内存，其它进程可以从共享内存中读取最新的资产信息</li>
+<li>共享内存中所有的信息，只能有一个写入者，所以<strong>网关模块是资产的唯一维护者，其它所有的模块只能读取，不能修改资产</strong></li>
+<li>支持虚拟账户，详见 <a href="../shm_balance/">共享内存资产&amp;策略资产</a></li>
 </ul>
-<h2 id="_2">账户体系<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>转账系统基于底层的账户体系来工作，统一的账户体系，屏蔽了不同交易所，不同钱包类型的差异。转账系统在使用的时候，不需要关心底层的这些差异</p>
-<h3 id="_3">账户命名规范<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h2 id="_1">如何维护资产<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>采用三段式命名：交易所.账户名.钱包类型</li>
-<li><strong>账户名</strong>是系统内部为每个账户自定义的名字，在转账的时候，用这个名字可以直接转账。同一个交易所的同一个账户名，对应一个子账户</li>
+<li><strong>初始化</strong>：系统初始化的时候，通过REST API获取资产余额 → 初始化资产</li>
+<li><strong>成交</strong>：每次有成交发生的时候，本地计算余额变化 → 更新到共享内存</li>
+<li><strong>定时同步</strong>：每60秒 REST API 校验并修正，有具体的校验和修正逻辑</li>
+<li><strong>IPC命令</strong>：外部指令调整资金 → 调用虚拟账户相关的API来分配&amp;管理资金</li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">注意</p>
+<h2 id="_2">如何读取资产<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong>通过API直接从共享内存中读取资产信息</strong></p>
+<h3 id="_3">资产<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>简单的资产逻辑，没有虚拟子账户的概念</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+
+<span class="n">get_single_quote_currency</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">getSingleQuoteCurrency</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_balance</span><span class="p">(</span><span class="n">exchange</span><span class="p">:</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">currency</span><span class="p">:</span> <span class="n">Currency</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleQuote</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_single_quote_currency</span><span class="p">(</span>
+        <span class="n">exchange</span><span class="p">,</span>
+        <span class="n">DataType</span><span class="o">.</span><span class="n">BALANCE</span><span class="p">,</span>
+        <span class="n">currency</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="c1"># 获取并输出USDT余额</span>
+<span class="n">usdt_balance</span> <span class="o">=</span> <span class="n">get_balance</span><span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;USDT Balance: </span><span class="si">{</span><span class="n">usdt_balance</span><span class="o">.</span><span class="n">mid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="_4">策略资产<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>模拟虚拟子账户的逻辑，每个虚拟子账户对一个子策略</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrategyBalanceManager</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+
+<span class="c1"># 创建管理器（Kraken交易所，8个策略槽位）</span>
+<span class="n">manager</span> <span class="o">=</span> <span class="n">StrategyBalanceManager</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> <span class="n">strategy_count</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>      <span class="c1"># 总资金</span>
+<span class="n">available</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 主策略（可用）</span>
+<span class="n">strategy_a</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 策略A</span>
+<span class="n">strategy_b</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># 策略B</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;USDC: total=</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">, available=</span><span class="si">{</span><span class="n">available</span><span class="si">}</span><span class="s2">, strategy_a=</span><span class="si">{</span><span class="n">strategy_a</span><span class="si">}</span><span class="s2">, strategy_b=</span><span class="si">{</span><span class="n">strategy_b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="ipc">IPC命令<a class="headerlink" href="#ipc" title="Permanent link">&para;</a></h2>
+<p><strong>策略和网关在不同的进程，通过RPC的方式进行资金操作</strong></p>
+<h3 id="_5">子策略申请或者归还资金<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>
-<li>这是一个简化的抽象，交易所实际的账户体系比这个更复杂，这个简化的抽象可以让转账系统更方便的工作</li>
-<li>三段式的命名，对应到API的接口上，用2个字段就可以描述。交易所和钱包类型，可以用<code>Exchange</code>来标识，<code>Exchange.KRAKEN, Exchange.KRAKEN_FUTURE</code>，账户名称可以是任意预先定义好的字符串</li>
-<li><strong>同一个交易所，不同子账户之间转账，在底层需要有唯一的标识来标识不同的子账户</strong>。不同的交易所需要的配置不一样，例如：binance每个子账户需要配置一个email信息，kraken每个子账户需要配置一个public account id，kraken_future每个子账户需要配置一个uid等。这些信息在底层配置好之后，上层应用在使用API的时候不需要关心转账系统底层的这些差异</li>
+<li>调用allocate或者release来申请或者归还资金</li>
 </ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">JSON</label><label for="__tabbed_1_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1">// 申请资金</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;strategy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w">          </span><span class="c1">// 策略名称</span>
+<span class="w">    </span><span class="nt">&quot;cmd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;allocate&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1">// 申请资金</span>
+<span class="w">    </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;usd&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1">// 币种</span>
+<span class="w">    </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">            </span><span class="c1">// 申请金额</span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">                </span><span class="c1">// 子策略索引</span>
+<span class="p">}</span>
+
+<span class="c1">// 归还资金</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;strategy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w">          </span><span class="c1">// 策略名称</span>
+<span class="w">    </span><span class="nt">&quot;cmd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;release&quot;</span><span class="p">,</span><span class="w">         </span><span class="c1">// 归还资金</span>
+<span class="w">    </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;usd&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1">// 币种</span>
+<span class="w">    </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">            </span><span class="c1">// 归还金额</span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">                </span><span class="c1">// 子策略索引</span>
+<span class="p">}</span>
+</code></pre></div>
 </div>
-<div class="highlight"><pre><span></span><code>kraken.trade.spot
-   │     │     │
-   │     │     └── 钱包类型: spot / future
-   │     └──────── 账户名称: main / trade / future / close_position
-   └────────────── 交易所: kraken / binance
-</code></pre></div>
-<h3 id="_4">账户定义案例<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p><strong>账户名称</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Kraken 账户名</span>
-<span class="n">KrakenAccountType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;trade&quot;</span><span class="p">,</span> <span class="s2">&quot;future&quot;</span><span class="p">,</span> <span class="s2">&quot;close_position&quot;</span><span class="p">]</span>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.ipc.ipc_command_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPCCommandSystem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">KRAKEN_STRATEGY_BALANCE_CMD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common.kraken_gateway_proto</span><span class="w"> </span><span class="kn">import</span> <span class="n">kraken_strategy_balance</span>
 
-<span class="c1"># Binance 账户名</span>
-<span class="n">BinanceAccountType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;trade&quot;</span><span class="p">]</span>
+<span class="c1"># 初始化 IPC 命令系统</span>
+<span class="n">command_system</span> <span class="o">=</span> <span class="n">IPCCommandSystem</span><span class="p">(</span><span class="s2">&quot;my_strategy&quot;</span><span class="p">)</span>
+<span class="n">command_system</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
-<span class="c1"># 统一账户名</span>
-<span class="n">AccountType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">KrakenAccountType</span><span class="p">,</span> <span class="n">BinanceAccountType</span><span class="p">]</span>
+<span class="c1"># 申请资金</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="n">kraken_strategy_balance</span><span class="p">(</span>
+    <span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">,</span>
+    <span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;allocate&quot;</span><span class="p">,</span>
+    <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;usd&quot;</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mi">100</span>
+<span class="p">)</span>
+<span class="k">await</span> <span class="n">command_system</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&quot;kraken_gateway&quot;</span><span class="p">,</span> <span class="n">KRAKEN_STRATEGY_BALANCE_CMD</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+<span class="c1"># 归还资金</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="n">kraken_strategy_balance</span><span class="p">(</span>
+    <span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">,</span>
+    <span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;release&quot;</span><span class="p">,</span>
+    <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;usd&quot;</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="mi">100</span>
+<span class="p">)</span>
+<span class="k">await</span> <span class="n">command_system</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&quot;kraken_gateway&quot;</span><span class="p">,</span> <span class="n">KRAKEN_STRATEGY_BALANCE_CMD</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Exchange 枚举与钱包类型</strong></p>
-<div class="highlight"><pre><span></span><code><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span>       <span class="c1"># → Binance Spot</span>
-<span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span>        <span class="c1"># → Kraken Spot</span>
-<span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN_FUTURE</span> <span class="c1"># → Kraken Future</span>
-</code></pre></div>
-<p><strong>通过 Exchange + AccountType 的组合，可以唯一确定一个账户：</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> <span class="s2">&quot;trade&quot;</span><span class="p">)</span>        <span class="c1"># → kraken.trade.spot</span>
-<span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN_FUTURE</span><span class="p">,</span> <span class="s2">&quot;main&quot;</span><span class="p">)</span>  <span class="c1"># → kraken.main.future</span>
-<span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span> <span class="s2">&quot;trade&quot;</span><span class="p">)</span>       <span class="c1"># → binance.trade.spot</span>
-</code></pre></div>
-<h3 id="_5">账户配置案例<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>下面是具体的案例</p>
-<h4 id="binance">Binance 账户<a class="headerlink" href="#binance" title="Permanent link">&para;</a></h4>
-<table>
-<thead>
-<tr>
-<th>账户标识</th>
-<th>账户名</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>binance.main.spot</td>
-<td>main</td>
-<td>跨交易所提币出入口</td>
-</tr>
-<tr>
-<td>binance.trade.spot</td>
-<td>trade</td>
-<td>稳定币套利交易</td>
-</tr>
-</tbody>
-</table>
-<p>binance账户的底层配置信息</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>api_key + api_secret</td>
-<td>API 请求签名认证</td>
-</tr>
-<tr>
-<td>email</td>
-<td>Spot 账户间转账时标识目标账户</td>
-</tr>
-</tbody>
-</table>
-<h4 id="kraken">Kraken 账户<a class="headerlink" href="#kraken" title="Permanent link">&para;</a></h4>
-<table>
-<thead>
-<tr>
-<th>账户标识</th>
-<th>账户名</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>kraken.main.spot</td>
-<td>main</td>
-<td>跨交易所提币出入口</td>
-</tr>
-<tr>
-<td>kraken.trade.spot</td>
-<td>trade</td>
-<td>日常现货交易</td>
-</tr>
-<tr>
-<td>kraken.future.spot</td>
-<td>future</td>
-<td>空头保证金中转站</td>
-</tr>
-<tr>
-<td>kraken.future.future</td>
-<td>future</td>
-<td>空头合约交易</td>
-</tr>
-<tr>
-<td>kraken.close_position.spot</td>
-<td>close_position</td>
-<td>子账户平仓</td>
-</tr>
-</tbody>
-</table>
-<p>kraken的底层配置信息</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>api_key + api_secret</td>
-<td>API 请求签名认证</td>
-</tr>
-<tr>
-<td>account_public_id</td>
-<td>Spot 账户间转账时标识目标账户</td>
-</tr>
-</tbody>
-</table>
-<p>kraken.future的底层配置信息</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>api_key + api_secret</td>
-<td>API 请求签名认证</td>
-</tr>
-<tr>
-<td>uid</td>
-<td>Future 账户间转账时标识目标账户</td>
-</tr>
-</tbody>
-</table>
-<h2 id="_6">获取资产<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="_7">统一接口<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<ul>
-<li>可以获取不同交易所，不同子账户，不同钱包内的资产</li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">注意</p>
-<ul>
-<li>对于不同交易所，不同子账户，不同钱包内的资产可能会返回负数，负数的含义会不一样</li>
-<li>对于kraken，资产返回负数表示该资产支持借贷，并且目前自己的资产已经用完，开始使用借贷的部分，会返回负数，这时候该资产是无法转出的</li>
-<li>对于kraken future，usd返回负数表示表示有欠款，未实现盈亏还没有结算，这时候是无法转usd出来的</li>
-<li>函数使用之前，<code>AccountType</code>要预先配置好对应的<code>api_key &amp; api_secret</code></li>
-<li>该函数只会查询并返回<code>symbols</code>对应的资产数量，没有定义在<code>symbols</code>中的资产不会返回</li>
-</ul>
 </div>
-<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_balances</span><span class="p">(</span>
-    <span class="n">exchange</span><span class="p">:</span> <span class="n">Exchange</span><span class="p">,</span>          <span class="c1"># BINANCE / KRAKEN / KRAKEN_FUTURE</span>
-    <span class="n">account</span><span class="p">:</span> <span class="n">AccountType</span><span class="p">,</span>        <span class="c1"># main / trade / future / close_position</span>
-    <span class="n">symbols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Currency</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Currency</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span>
+</div>
+</div>
+<h3 id="_6">转账成功<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>成功转入或者转出后，调用adjust通知网关调整总资产</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">JSON</label><label for="__tabbed_2_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1">// 转账：资金转出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;strategy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w">       </span><span class="c1">// 策略名称</span>
+<span class="w">    </span><span class="nt">&quot;cmd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;adjust&quot;</span><span class="p">,</span><span class="w">       </span><span class="c1">// 命令类型</span>
+<span class="w">    </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;usd&quot;</span><span class="p">,</span><span class="w">     </span><span class="c1">// 币种</span>
+<span class="w">    </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1000</span><span class="p">,</span><span class="w">       </span><span class="c1">// 调整金额（负数表示转出）</span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">             </span><span class="c1">// 索引（0=总资金）</span>
+<span class="p">}</span>
 </code></pre></div>
-<h3 id="_8">示例<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p><strong>获取不同交易所，不同子账户，不同钱包内的资产</strong></p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.exchange.multi_account_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_balances</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">Currency</span>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.ipc.ipc_command_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPCCommandSystem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">KRAKEN_STRATEGY_BALANCE_CMD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common.kraken_gateway_proto</span><span class="w"> </span><span class="kn">import</span> <span class="n">kraken_strategy_balance</span>
 
-<span class="c1"># 查询 Binance trade 账户的 USDC/USDT 余额</span>
-<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_balances</span><span class="p">(</span>
-    <span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span> 
-    <span class="s2">&quot;trade&quot;</span><span class="p">,</span> 
-    <span class="p">[</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">]</span>
+<span class="c1"># 初始化 IPC 命令系统</span>
+<span class="n">command_system</span> <span class="o">=</span> <span class="n">IPCCommandSystem</span><span class="p">(</span><span class="s2">&quot;my_strategy&quot;</span><span class="p">)</span>
+<span class="n">command_system</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># 转账成功后通知网关调整总资产</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="n">kraken_strategy_balance</span><span class="p">(</span>
+    <span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">,</span>
+    <span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;adjust&quot;</span><span class="p">,</span>
+    <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;usd&quot;</span><span class="p">,</span>
+    <span class="n">delta</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span>  <span class="c1"># 负数表示转出</span>
+    <span class="n">index</span><span class="o">=</span><span class="mi">0</span>       <span class="c1"># 0=总资金</span>
 <span class="p">)</span>
-
-<span class="c1"># 查询 Kraken trade 账户的多个币种余额</span>
-<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_balances</span><span class="p">(</span>
-    <span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> 
-    <span class="s2">&quot;trade&quot;</span><span class="p">,</span> 
-    <span class="p">[</span><span class="n">Currency</span><span class="o">.</span><span class="n">USD</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">BTC</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">ETH</span><span class="p">]</span>
-<span class="p">)</span>
-
-<span class="c1"># 查询 Kraken Future main 账户余额</span>
-<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_balances</span><span class="p">(</span>
-    <span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN_FUTURE</span><span class="p">,</span> 
-    <span class="s2">&quot;main&quot;</span><span class="p">,</span> 
-    <span class="p">[</span><span class="n">Currency</span><span class="o">.</span><span class="n">USD</span><span class="p">,</span> <span class="n">Currency</span><span class="o">.</span><span class="n">USDT</span><span class="p">]</span>
-<span class="p">)</span>
-
-<span class="c1"># 处理结果</span>
-<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">currency</span><span class="p">,</span> <span class="n">balance</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">currency</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">balance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;查询失败: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">command_system</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&quot;kraken_gateway&quot;</span><span class="p">,</span> <span class="n">KRAKEN_STRATEGY_BALANCE_CMD</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 </code></pre></div>
+</div>
+</div>
+</div>
 
 
 
