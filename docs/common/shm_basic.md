@@ -371,7 +371,7 @@ std::cout << "Ask=" << ticker->askPrice << " "
 ### 全局Ring Buffer管理器
 
 * SharedMemoryTicker
-* 全局统一的 Ticker 共享内存管理器，管理所有交易所、所有交易对的 Ticker 共享内存
+* 全局统一的 Ticker 共享内存管理器，**管理所有交易所、所有交易对**的 Ticker 共享内存
 * 提供全局静态接口，无需手动管理 RingBuffer 实例
 * 懒加载机制：首次访问时自动创建共享内存
 * 自动路由：根据 exchange 和 symbol 自动找到对应的 RingBuffer，使用位运算编码，更高效的构建key
