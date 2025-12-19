@@ -19,6 +19,7 @@
 
     * 对于多数业务场景，ShareMemoryPairQuote通过内置的`DataType`大都可以覆盖到。需要额外扩展的业务场景，`（ns, category, key）`的含义业务逻辑自己去定义即可
     * 我们通过pybind导出的所有enum行为和IntEnum是一致的，可以直接转换为int，所以把Currency，CurrencyPair或者Exchange直接映射成ns，category，key都是可以的，根据业务需要，自行组合即可
+    * 自定义信号最多支持三级索引，如果只需要一级或者2级所以，将ns或者category设置成0即可
 
 ## 案例
 
