@@ -1109,6 +1109,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service如何同步订单
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1312,6 +1323,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service如何同步订单
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1398,7 +1420,7 @@
 <h1 id="gateway">gateway的订单管理<a class="headerlink" href="#gateway" title="Permanent link">&para;</a></h1>
 <ul>
 <li>网关模块负责管理和同步订单。确保整个系统内，所有的进程拿到的订单快照数据是一致的</li>
-<li><strong>网关模块是订单的唯一维护者，其它所有进程只需要读取本地最新的订单快照数据即可</strong>，订单的同步基于底层的 <a href="../ipc_pubsub/">IPC 发布&amp;订阅</a> 模块来实现的</li>
+<li><strong>网关模块是订单的唯一维护者，其它所有进程只需要读取本地同步后，最新的订单快照数据即可</strong>，订单的跨进程同步基于底层的 <a href="../ipc_pubsub/">IPC 发布&amp;订阅</a> 模块来实现的</li>
 </ul>
 <h2 id="_1">订单数据流<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1446,17 +1468,21 @@
 └───────────────────────────────────────────────────┘
 </code></pre></div>
 <h2 id="_2">订单状态<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>不同交易所推送的订单状态会有差异，这里是我们系统内部对订单状态的定义</li>
+<li>只有<code>NONE，NEW，PARTIAL_FILLED</code>三种状态的订单应该留在本地订单列表中，其它状态都应该立即从本地删除</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">OrderStatus</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">uint8_t</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">UNKNOWN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="n">NONE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">    </span><span class="n">NEW</span><span class="p">,</span>
-<span class="w">    </span><span class="n">FAILED</span><span class="p">,</span>
-<span class="w">    </span><span class="n">PARTIAL_FILLED</span><span class="p">,</span>
-<span class="w">    </span><span class="n">FILLED</span><span class="p">,</span>
-<span class="w">    </span><span class="n">CANCELED</span><span class="p">,</span>
-<span class="w">    </span><span class="n">CLOSED</span><span class="p">,</span>
-<span class="w">    </span><span class="n">EXPIRED</span>
+<span class="w">    </span><span class="n">UNKNOWN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">       </span><span class="c1">// 未知状态</span>
+<span class="w">    </span><span class="n">NONE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">          </span><span class="c1">// 下单时预占位，订单已发送但尚未被交易所确认</span>
+<span class="w">    </span><span class="n">NEW</span><span class="p">,</span><span class="w">               </span><span class="c1">// 订单已被交易所接受，挂在订单册上</span>
+<span class="w">    </span><span class="n">FAILED</span><span class="p">,</span><span class="w">            </span><span class="c1">// 下单失败</span>
+<span class="w">    </span><span class="n">PARTIAL_FILLED</span><span class="p">,</span><span class="w">    </span><span class="c1">// 部分成交</span>
+<span class="w">    </span><span class="n">FILLED</span><span class="p">,</span><span class="w">            </span><span class="c1">// 完全成交</span>
+<span class="w">    </span><span class="n">CANCELED</span><span class="p">,</span><span class="w">          </span><span class="c1">// 已撤销</span>
+<span class="w">    </span><span class="n">CLOSED</span><span class="p">,</span><span class="w">            </span><span class="c1">// 已关闭</span>
+<span class="w">    </span><span class="n">EXPIRED</span><span class="w">            </span><span class="c1">// 已过期</span>
 <span class="p">};</span>
 </code></pre></div>
 <h2 id="_3">如何维护订单<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -1465,7 +1491,7 @@
 <li><strong>订单状态变化</strong>：每次收到交易所推送的订单状态变化信息，更新gateway本地订单缓存 → 广播order</li>
 <li><strong>下单</strong>：收到系统内部其它组件的下单请求，会立即将这个订单添加到gateway本地订单缓存，不需要等交易所返回 → 广播order</li>
 <li><strong>定时同步</strong>：每60秒 REST API 校验并修正，有具体的校验和修正逻辑，并把修正后的结果广播出去 → 广播order_batch<ul>
-<li>每60秒gateway会广播一次订单snapshot，所有的service在收到订单快照之后，直接覆盖本地的订单列表即可</li>
+<li>每60秒gateway会广播一次订单snapshot，所有的service在收到订单快照之后，<strong>直接覆盖本地的订单列表即可</strong></li>
 <li>所有的service进程在启动之后，都会有大于60秒的预热期，这段时间是不会下单的，确保service在下单前，一定能同步到一份最新的订单数据</li>
 </ul>
 </li>
@@ -1474,17 +1500,50 @@
 <li>在其它节点同步订单的时候，由于异常导致的僵尸订单会被snapshot覆盖，从而在其它节点上被删除</li>
 </ul>
 </li>
+<li><strong>网络异常，时序问题</strong>：有记住处理网络异常和订单同步时候的时序问题</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">注意</p>
 <ul>
 <li>总的来说我们采用一种<strong>保守</strong>的订单同步机制，确保本地的订单是交易所订单的<strong>超集</strong>，这种机制在风控，头寸管理，资金管理上更有优势</li>
-<li>不管任何情况发生，有机制<strong>确保订单一定会被撤掉，而不会有订单一直留在交易所的订单册上</strong></li>
-<li>不管任何情况发生，本地都不会有<strong>僵尸订单</strong>长期存在，这些订单一定会被清理掉</li>
+<li><strong>交易所有，而本地没有</strong>：不管任何错误或者异常发生，有机制<strong>确保交易所的订单一定会被同步到本地而不会漏掉，从而一定会被撤掉，而不会有订单一直留在交易所的订单册上</strong></li>
+<li><strong>本地有，而交易所没有</strong>：不管任何错误或者异常发生，本地都不会有<strong>僵尸订单</strong>长期存在，这些订单一定会被清理掉</li>
 <li>下单之后，会立即将订单添加到本地订单缓存中，不需要等交易所的返回</li>
 <li>下单之后，也可以立即撤单，不需要等交易所推送的下单成功消息</li>
 </ul>
 </div>
+<h2 id="service">Service如何同步订单<a class="headerlink" href="#service" title="Permanent link">&para;</a></h2>
+<p>对于service来说，在配置中增加如下配置，订单同步信息会自动路由到对应的<code>on_order</code>和<code>on_my_order_batch</code>回调中，所有的同步逻辑，框架会在底层自动完成</p>
+<p><strong>配置信息：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;service.mm_demo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;class_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MMDemoService&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;setting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="err">...</span>
+<span class="w">            </span><span class="nt">&quot;ipc_subscribers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;exchange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;channel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_order&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;symbols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;exchange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;channel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_order_batch&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;symbols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="err">...</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>回调函数：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MMDemoService</span><span class="p">(</span><span class="n">ServiceBase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_my_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">my_order</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_my_order_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">my_order_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+</code></pre></div>
 
 
 

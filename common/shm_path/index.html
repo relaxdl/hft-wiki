@@ -761,10 +761,49 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="三种类型的数据">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        类型一
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        类型二
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        类型三
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         路径示例
@@ -1277,10 +1316,49 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="三种类型的数据">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        类型一
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        类型二
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        类型三
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         路径示例
@@ -1379,22 +1457,22 @@
 <li>不同的进程通过文件的inode信息生成跨进程共享的share memory key，<strong>确保不同进程attach到同一块共享内存</strong></li>
 </ul>
 <p>共享内存中有三大类数据，可以满足各种类型的策略需求</p>
-<p><strong>类型一</strong></p>
-<p>内部预定义的一些基础数据类型，例如：fair price，volatility，premium等</p>
+<h3 id="_3">类型一<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>内部预定义的一些基础数据类型</strong>，例如：fair price，volatility，premium等</p>
 <div class="highlight"><pre><span></span><code><span class="hll">/tmp/hft/shm/exchange.type.symbol.valueType
 </span>kraken.fair_price.usdt.pair_quote
 </code></pre></div>
-<p><strong>类型二</strong></p>
-<p>市场数据类的，例如：trade，ticker，snapshot等</p>
+<h3 id="_4">类型二<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>市场数据类的</strong>，例如：trade，ticker，snapshot等</p>
 <div class="highlight"><pre><span></span><code><span class="hll">/tmp/hft/shm/exchange.channel.symbol
 </span>kraken.trade.btcusd
 </code></pre></div>
-<p><strong>类型三</strong></p>
-<p>任意自定义的中间信号，三级索引，每个索引的含义上层应用自己维护，例如：策略状态，需要跨进程共享的一些策略信号等</p>
+<h3 id="_5">类型三<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>任意自定义的中间信号</strong>，三级索引，每个索引的含义上层应用自己维护，例如：策略状态，需要跨进程共享的一些策略信号等</p>
 <div class="highlight"><pre><span></span><code><span class="hll">/tmp/hft/shm/namespace.category.key.valueType
 </span>1.2.3.pair_quote
 </code></pre></div>
-<h2 id="_3">路径示例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_6">路径示例<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>下面是一些常见的路径</p>
 <table>
 <thead>

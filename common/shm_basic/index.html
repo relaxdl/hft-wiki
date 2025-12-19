@@ -2095,7 +2095,7 @@ writeIndex = 0 (覆盖旧数据)
 <h3 id="ring-buffer_2">全局Ring Buffer管理器<a class="headerlink" href="#ring-buffer_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>SharedMemoryTicker</li>
-<li>全局统一的 Ticker 共享内存管理器，管理所有交易所、所有交易对的 Ticker 共享内存</li>
+<li>全局统一的 Ticker 共享内存管理器，<strong>管理所有交易所、所有交易对</strong>的 Ticker 共享内存</li>
 <li>提供全局静态接口，无需手动管理 RingBuffer 实例</li>
 <li>懒加载机制：首次访问时自动创建共享内存</li>
 <li>自动路由：根据 exchange 和 symbol 自动找到对应的 RingBuffer，使用位运算编码，更高效的构建key</li>

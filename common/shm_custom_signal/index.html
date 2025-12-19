@@ -786,6 +786,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义信号
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -802,6 +820,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设计对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        案例
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1203,6 +1262,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设计对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        案例
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1285,6 +1374,190 @@
 
 
 <h1 id="_1">共享内存自定义信号<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>对于一些常用的基础数据类型，例如：Fair Price，Premium，Volatility，Balance等和一些常规的市场数据类型，例如：Trade，Ticker，Snapshot等。数据结构都是标准化的，<strong>在共享内存中都做了预定义，可以直接使用</strong>。我们还有另外一些业务场景，需要跨进程的共享一些自定义的数据类型，这时候预定义的数据类型不能满足业务需求，比如：一些策略计算的中间信号，多周期溢价的组合等也需要跨进程共享。这里我们设计了一套机制，每个策略可以根据自己的需求，自定义写入共享内存中数据的含义，上层策略自己能理解即可</p>
+<h2 id="_2">设计对比<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>这里我们以<code>PairQuote</code>这个数据结构为例，对比下ShareMemoryPairQuote和ShareMemoryCustomPairQuote</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>ShareMemoryPairQuote</th>
+<th>ShareMemoryCustomPairQuote</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用途</td>
+<td>内置数据类型</td>
+<td>自定义因子/信号/策略数据（灵活扩展）</td>
+</tr>
+<tr>
+<td>参数类型</td>
+<td>枚举类型（Exchange, DataType, Symbol）</td>
+<td>int 类型（ns, category, key）</td>
+</tr>
+<tr>
+<td>重载版本</td>
+<td>2个（CurrencyPair + Currency）</td>
+<td>1个</td>
+</tr>
+<tr>
+<td>路径格式</td>
+<td><code>exchange.dataType.symbol.valueType</code></td>
+<td><code>ns.category.key.valueType</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<ul>
+<li>对于多数业务场景，ShareMemoryPairQuote通过内置的<code>DataType</code>大都可以覆盖到。需要额外扩展的业务场景，<code>（ns, category, key）</code>的含义业务逻辑自己去定义即可</li>
+<li>我们通过pybind导出的所有enum行为和IntEnum是一致的，可以直接转换为int，所以把Currency，CurrencyPair或者Exchange直接映射成ns，category，key都是可以的，根据业务需要，自行组合即可</li>
+<li>自定义信号最多支持三级索引，如果只需要一级或者2级所以，将ns或者category设置成0即可</li>
+</ul>
+</div>
+<h2 id="_3">案例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>以PairQuote和Custom PairQuote为例，演示共享内存的读写操作</li>
+</ul>
+<p><strong>示例：写入PairQuote</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="n">PairQuote</span><span class="w"> </span><span class="n">quote</span><span class="p">;</span>
+<span class="n">quote</span><span class="p">.</span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1734500000000000</span><span class="p">;</span><span class="w">      </span><span class="c1">// 16位微秒时间戳</span>
+<span class="n">quote</span><span class="p">.</span><span class="n">localTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1734500000000000</span><span class="p">;</span>
+<span class="n">quote</span><span class="p">.</span><span class="n">ask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50100.5</span><span class="p">;</span>
+<span class="n">quote</span><span class="p">.</span><span class="n">bid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50000.0</span><span class="p">;</span>
+
+<span class="n">ShareMemoryPairQuote</span><span class="o">::</span><span class="n">write</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Exchange</span><span class="o">::</span><span class="n">BINANCE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">DataType</span><span class="o">::</span><span class="n">FAIR_PRICE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CurrencyPair</span><span class="o">::</span><span class="n">BTC_USDT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">quote</span>
+<span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+
+<span class="n">write_pair_quote_currency_pair</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">writePairQuoteCurrencyPair</span>
+
+<span class="n">quote</span> <span class="o">=</span> <span class="n">PairQuote</span><span class="p">(</span>
+    <span class="n">timestamp</span><span class="o">=</span><span class="mi">1734500000000000</span><span class="p">,</span>      <span class="c1"># 16位微秒时间戳</span>
+    <span class="n">localTimestamp</span><span class="o">=</span><span class="mi">1734500000000000</span><span class="p">,</span>
+    <span class="n">ask</span><span class="o">=</span><span class="mf">50100.5</span><span class="p">,</span>
+    <span class="n">bid</span><span class="o">=</span><span class="mf">50000.0</span>
+<span class="p">)</span>
+
+<span class="n">write_pair_quote_currency_pair</span><span class="p">(</span>
+    <span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span>
+    <span class="n">DataType</span><span class="o">.</span><span class="n">FAIR_PRICE</span><span class="p">,</span>
+    <span class="n">CurrencyPair</span><span class="o">.</span><span class="n">BTC_USDT</span><span class="p">,</span>
+    <span class="n">quote</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>示例：读取PairQuote</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="n">PairQuote</span><span class="o">*</span><span class="w"> </span><span class="n">quote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShareMemoryPairQuote</span><span class="o">::</span><span class="n">get</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Exchange</span><span class="o">::</span><span class="n">BINANCE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">DataType</span><span class="o">::</span><span class="n">FAIR_PRICE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CurrencyPair</span><span class="o">::</span><span class="n">BTC_USDT</span>
+<span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;bid: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">quote</span><span class="o">-&gt;</span><span class="n">bid</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, ask: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">quote</span><span class="o">-&gt;</span><span class="n">ask</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+
+<span class="n">get_pair_quote_currency_pair</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">getPairQuoteCurrencyPair</span>  
+
+<span class="n">quote</span> <span class="o">=</span> <span class="n">get_pair_quote_currency_pair</span><span class="p">(</span>
+    <span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span>
+    <span class="n">DataType</span><span class="o">.</span><span class="n">FAIR_PRICE</span><span class="p">,</span>
+    <span class="n">CurrencyPair</span><span class="o">.</span><span class="n">BTC_USDT</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bid: </span><span class="si">{</span><span class="n">quote</span><span class="o">.</span><span class="n">bid</span><span class="si">}</span><span class="s2">, ask: </span><span class="si">{</span><span class="n">quote</span><span class="o">.</span><span class="n">ask</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>示例：写入Custom PairQuote</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">ns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">        </span><span class="c1">// 命名空间</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span><span class="c1">// 类别</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">101</span><span class="p">;</span><span class="w">     </span><span class="c1">// 键名</span>
+
+<span class="n">PairQuote</span><span class="w"> </span><span class="n">quote</span><span class="p">;</span>
+<span class="n">quote</span><span class="p">.</span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1734500000000000</span><span class="p">;</span><span class="w">      </span><span class="c1">// 16位微秒时间戳</span>
+<span class="n">quote</span><span class="p">.</span><span class="n">localTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1734500000000000</span><span class="p">;</span>
+<span class="n">quote</span><span class="p">.</span><span class="n">ask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50100.5</span><span class="p">;</span>
+<span class="n">quote</span><span class="p">.</span><span class="n">bid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50000.0</span><span class="p">;</span>
+
+<span class="n">ShareMemoryCustomPairQuote</span><span class="o">::</span><span class="n">write</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span><span class="w"> </span><span class="n">category</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">quote</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+
+<span class="n">write_custom_pair_quote</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">writeCustomPairQuote</span>
+
+<span class="n">ns</span> <span class="o">=</span> <span class="mi">1</span>        <span class="c1"># 命名空间</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 类别</span>
+<span class="n">key</span> <span class="o">=</span> <span class="mi">101</span>     <span class="c1"># 键名</span>
+
+<span class="n">quote</span> <span class="o">=</span> <span class="n">PairQuote</span><span class="p">(</span>
+    <span class="n">timestamp</span><span class="o">=</span><span class="mi">1734500000000000</span><span class="p">,</span>      <span class="c1"># 16位微秒时间戳</span>
+    <span class="n">localTimestamp</span><span class="o">=</span><span class="mi">1734500000000000</span><span class="p">,</span>
+    <span class="n">ask</span><span class="o">=</span><span class="mf">50100.5</span><span class="p">,</span>
+    <span class="n">bid</span><span class="o">=</span><span class="mf">50000.0</span>
+<span class="p">)</span>
+
+<span class="n">write_custom_pair_quote</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">quote</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>示例：读取Custom PairQuote</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">ns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">101</span><span class="p">;</span>
+
+<span class="n">PairQuote</span><span class="o">*</span><span class="w"> </span><span class="n">quote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShareMemoryCustomPairQuote</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span><span class="w"> </span><span class="n">category</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;bid: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">quote</span><span class="o">-&gt;</span><span class="n">bid</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, ask: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">quote</span><span class="o">-&gt;</span><span class="n">ask</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+
+<span class="n">get_custom_pair_quote</span> <span class="o">=</span> <span class="n">hft</span><span class="o">.</span><span class="n">getCustomPairQuote</span>
+
+<span class="n">ns</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">key</span> <span class="o">=</span> <span class="mi">101</span>
+
+<span class="n">quote</span> <span class="o">=</span> <span class="n">get_custom_pair_quote</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bid: </span><span class="si">{</span><span class="n">quote</span><span class="o">.</span><span class="n">bid</span><span class="si">}</span><span class="s2">, ask: </span><span class="si">{</span><span class="n">quote</span><span class="o">.</span><span class="n">ask</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 
 
 
