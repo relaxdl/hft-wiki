@@ -271,6 +271,28 @@ if available + credit_limit < 0:
     # 子策略需要重新申请资金...
 ```
 
+#### 资金的状态检测
+
+* 网关模块会定期更新资产，及时资产没有变化，也会在和交易所同步成功后更新下资产的时间戳，如果资产超过一个阈值名有更新，可以任务资产状态不可用
+
+
+```python
+import time
+from hftpy.common import StrategyBalanceManager, StrategyBalance
+import hft
+
+manager = StrategyBalanceManager(hft.Exchange.KRAKEN, strategy_count=8)
+max_timestamp_delay = 10_000_000  # 10秒，单位微秒
+
+current_time = int(time.time() * 1e6)
+currency_balance: StrategyBalance = manager.get(hft.Currency.USDC)
+
+# 时效性检测：检查数据是否过期
+if (current_time - currency_balance.localTimestamp) > max_timestamp_delay:
+    logger.warning(f"Invalid balance data for {hft.Currency.USDC}, {currency_balance}")
+    return
+```
+
 ## 借贷
 
 借贷是一个额外的逻辑，账户中存储的资产是不包括借贷额度的。**每种资产的借贷额度配置文件中单独配置**。资产当前的数量+借贷额度，是这个资产当前真正的可用额度。例如：如果一个资产当前的余额是100，借贷额度是50，这个资产的当前可用额度是`100+50=150`；如果一个资产当前的余额是-30，借贷额度是50，这个资产当前可用额度是`-30+50=20`。正常情况下，主策略（资金池）中的资金加上借贷额度，应该是大于等于0的。如果不满足这个条件，表示资金状态出错，需要用`reset`重置资金状态
