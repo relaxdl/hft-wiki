@@ -73,11 +73,11 @@ last_success = manager.get_last_success_time(key_b)
 current_time = int(time.time() * 1_000_000)
 if last_success is None or current_time - last_success > 120 * 1_000_000:
     manager.add_task(
-        from_exchange=Exchange.KRAKEN,
-        from_account="trade",
-        to_exchange=Exchange.KRAKEN,
-        to_account="close_position",
-        currency=Currency.USD,
+        from_exchange=key_b.from_exchange,
+        from_account=key_b.from_account,
+        to_exchange=key_b.to_exchange,
+        to_account=key_b.to_account,
+        currency=key_b.currency,
         amount=500.0,
         extra=""
     )
@@ -91,17 +91,17 @@ for key, value in manager.get_all_tasks():
         continue
     
     # 执行转账
-    success = await transfer(
+    result = await transfer(
         from_exchange=key.from_exchange,
         from_account=key.from_account,
         to_exchange=key.to_exchange,
         to_account=key.to_account,
-        currency=key.currency,
+        symbol=key.currency,
         amount=value.amount
     )
     
-    if success:
-        # 转账成功，删除任务并记录成功时间
+    if result.success:
+        # 转账成功，删除任务
         manager.remove_task(key)
 
         # 记录成功转账的时间
