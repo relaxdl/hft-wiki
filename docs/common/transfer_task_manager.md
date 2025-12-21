@@ -15,6 +15,7 @@
     * **执行转账任务**的时间点可以是撤挂单的间隙，如果转账失败应该重试，直到任务成功为止
     * **重复转账的问题**：同样的转账任务，也就是`TransferTaskKey`相同的任务，可以重复添加，并不会生成多条转账任务，在任务成功执行前，只会有一条转账任务
     * 这里描述的是单步转账的任务，也就是成功执行一次`A->B`转账操作就结束了。另外还有链式转账任务`A->B->C->D`，链式转账任务依赖于单步转账任务。我们通常的做法是成功执行一次单步`A->B`转账任务后，再创建后续的转账任务链`B->C->D`，有专门的**转账任务执行器**来执行后续的链式转账操作。后续步骤的到账时间未知，涉及到链上提款时间会更久，所以需要一个专门的转账任务执行器来执行后续的转账操作，直到资金成功转入最终的目标账户
+    * 在创建转账任务的时候，有一个附加字段`extra`，作用是转账成功后，可以根据这个字段执行自定义的后续业务逻辑
 
 **数据结构**
 
@@ -32,6 +33,7 @@ class TransferTaskValue(NamedTuple):
     """转账任务Value"""
     amount: float
     timestamp: int
+    extra: Optional[str] = None  # 附加信息
 ```
 
 **使用示例**
@@ -55,6 +57,7 @@ manager.add_task(
     to_account="main",
     currency=Currency.USDC,
     amount=1000.0
+    extra=""
 )
 
 # 子策略B：需要从 Kraken trade 转 500 USD 到 kraken close_position
@@ -75,7 +78,8 @@ if last_success is None or current_time - last_success > 120 * 1_000_000:
         to_exchange=Exchange.KRAKEN,
         to_account="close_position",
         currency=Currency.USD,
-        amount=500.0
+        amount=500.0,
+        extra=""
     )
 
 # ========== 消费者：执行器遍历并执行 ==========
@@ -102,6 +106,10 @@ for key, value in manager.get_all_tasks():
 
         # 记录成功转账的时间
         manager.mark_success(key)
+
+        if value.extra = "..."
+            # 可以执行后续逻辑
+            pass
     # 转账失败，保留任务，下次重试
 
 # ========== 定期清理过期任务 ==========
