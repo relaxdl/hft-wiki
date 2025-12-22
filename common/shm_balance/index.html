@@ -942,6 +942,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        资金的状态检测
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -953,7 +964,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         借贷
@@ -1535,6 +1546,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        资金的状态检测
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1546,7 +1568,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         借贷
@@ -1919,7 +1941,26 @@
     <span class="n">manager</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span> <span class="n">real_balance</span><span class="p">)</span>
     <span class="c1"># 子策略需要重新申请资金...</span>
 </code></pre></div>
-<h2 id="_13">借贷<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h4 id="_13">资金的状态检测<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>网关模块会定期更新资产，及时资产没有变化，也会在和交易所同步成功后更新下资产的时间戳，如果资产超过一个阈值名有更新，可以任务资产状态不可用</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrategyBalanceManager</span><span class="p">,</span> <span class="n">StrategyBalance</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hft</span>
+
+<span class="n">manager</span> <span class="o">=</span> <span class="n">StrategyBalanceManager</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> <span class="n">strategy_count</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">max_timestamp_delay</span> <span class="o">=</span> <span class="mi">10_000_000</span>  <span class="c1"># 10秒，单位微秒</span>
+
+<span class="n">current_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">)</span>
+<span class="n">currency_balance</span><span class="p">:</span> <span class="n">StrategyBalance</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">)</span>
+
+<span class="c1"># 时效性检测：检查数据是否过期</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">current_time</span> <span class="o">-</span> <span class="n">currency_balance</span><span class="o">.</span><span class="n">localTimestamp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_timestamp_delay</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid balance data for </span><span class="si">{</span><span class="n">hft</span><span class="o">.</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">currency_balance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span>
+</code></pre></div>
+<h2 id="_14">借贷<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <p>借贷是一个额外的逻辑，账户中存储的资产是不包括借贷额度的。<strong>每种资产的借贷额度配置文件中单独配置</strong>。资产当前的数量+借贷额度，是这个资产当前真正的可用额度。例如：如果一个资产当前的余额是100，借贷额度是50，这个资产的当前可用额度是<code>100+50=150</code>；如果一个资产当前的余额是-30，借贷额度是50，这个资产当前可用额度是<code>-30+50=20</code>。正常情况下，主策略（资金池）中的资金加上借贷额度，应该是大于等于0的。如果不满足这个条件，表示资金状态出错，需要用<code>reset</code>重置资金状态</p>
 
 

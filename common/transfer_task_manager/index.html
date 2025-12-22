@@ -1385,6 +1385,7 @@
 <li><strong>执行转账任务</strong>的时间点可以是撤挂单的间隙，如果转账失败应该重试，直到任务成功为止</li>
 <li><strong>重复转账的问题</strong>：同样的转账任务，也就是<code>TransferTaskKey</code>相同的任务，可以重复添加，并不会生成多条转账任务，在任务成功执行前，只会有一条转账任务</li>
 <li>这里描述的是单步转账的任务，也就是成功执行一次<code>A-&gt;B</code>转账操作就结束了。另外还有链式转账任务<code>A-&gt;B-&gt;C-&gt;D</code>，链式转账任务依赖于单步转账任务。我们通常的做法是成功执行一次单步<code>A-&gt;B</code>转账任务后，再创建后续的转账任务链<code>B-&gt;C-&gt;D</code>，有专门的<strong>转账任务执行器</strong>来执行后续的链式转账操作。后续步骤的到账时间未知，涉及到链上提款时间会更久，所以需要一个专门的转账任务执行器来执行后续的转账操作，直到资金成功转入最终的目标账户</li>
+<li>在创建转账任务的时候，有一个附加字段<code>extra</code>，作用是转账成功后，可以根据这个字段执行自定义的后续业务逻辑</li>
 </ul>
 </div>
 <p><strong>数据结构</strong></p>
@@ -1401,6 +1402,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;转账任务Value&quot;&quot;&quot;</span>
     <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">extra</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 附加信息</span>
 </code></pre></div>
 <p><strong>使用示例</strong></p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
@@ -1421,6 +1423,7 @@
     <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
     <span class="n">currency</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USDC</span><span class="p">,</span>
     <span class="n">amount</span><span class="o">=</span><span class="mf">1000.0</span>
+    <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 <span class="p">)</span>
 
 <span class="c1"># 子策略B：需要从 Kraken trade 转 500 USD 到 kraken close_position</span>
@@ -1436,12 +1439,13 @@
 <span class="n">current_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1_000_000</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">last_success</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">current_time</span> <span class="o">-</span> <span class="n">last_success</span> <span class="o">&gt;</span> <span class="mi">120</span> <span class="o">*</span> <span class="mi">1_000_000</span><span class="p">:</span>
     <span class="n">manager</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
-        <span class="n">from_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
-        <span class="n">from_account</span><span class="o">=</span><span class="s2">&quot;trade&quot;</span><span class="p">,</span>
-        <span class="n">to_exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
-        <span class="n">to_account</span><span class="o">=</span><span class="s2">&quot;close_position&quot;</span><span class="p">,</span>
-        <span class="n">currency</span><span class="o">=</span><span class="n">Currency</span><span class="o">.</span><span class="n">USD</span><span class="p">,</span>
-        <span class="n">amount</span><span class="o">=</span><span class="mf">500.0</span>
+        <span class="n">from_exchange</span><span class="o">=</span><span class="n">key_b</span><span class="o">.</span><span class="n">from_exchange</span><span class="p">,</span>
+        <span class="n">from_account</span><span class="o">=</span><span class="n">key_b</span><span class="o">.</span><span class="n">from_account</span><span class="p">,</span>
+        <span class="n">to_exchange</span><span class="o">=</span><span class="n">key_b</span><span class="o">.</span><span class="n">to_exchange</span><span class="p">,</span>
+        <span class="n">to_account</span><span class="o">=</span><span class="n">key_b</span><span class="o">.</span><span class="n">to_account</span><span class="p">,</span>
+        <span class="n">currency</span><span class="o">=</span><span class="n">key_b</span><span class="o">.</span><span class="n">currency</span><span class="p">,</span>
+        <span class="n">amount</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span>
+        <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
     <span class="p">)</span>
 
 <span class="c1"># ========== 消费者：执行器遍历并执行 ==========</span>
@@ -1453,21 +1457,25 @@
         <span class="k">continue</span>
 
     <span class="c1"># 执行转账</span>
-    <span class="n">success</span> <span class="o">=</span> <span class="k">await</span> <span class="n">transfer</span><span class="p">(</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">transfer</span><span class="p">(</span>
         <span class="n">from_exchange</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">from_exchange</span><span class="p">,</span>
         <span class="n">from_account</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">from_account</span><span class="p">,</span>
         <span class="n">to_exchange</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">to_exchange</span><span class="p">,</span>
         <span class="n">to_account</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">to_account</span><span class="p">,</span>
-        <span class="n">currency</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">currency</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">currency</span><span class="p">,</span>
         <span class="n">amount</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">amount</span>
     <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-        <span class="c1"># 转账成功，删除任务并记录成功时间</span>
+    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+        <span class="c1"># 转账成功，删除任务</span>
         <span class="n">manager</span><span class="o">.</span><span class="n">remove_task</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
         <span class="c1"># 记录成功转账的时间</span>
         <span class="n">manager</span><span class="o">.</span><span class="n">mark_success</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">extra</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span>
+            <span class="c1"># 可以执行后续逻辑</span>
+            <span class="k">pass</span>
     <span class="c1"># 转账失败，保留任务，下次重试</span>
 
 <span class="c1"># ========== 定期清理过期任务 ==========</span>
