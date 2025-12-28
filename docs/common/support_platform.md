@@ -30,5 +30,6 @@
 | 操作系统 | 版本 | 是否支持 | 供应商 |
 | :--- | :--- | :---: | :--- |
 | CentOS | 8.5 | ✅ | aliyun |
-| Amazon Linux | 2023 | ✅ | amazon aws (不支持CentOS) |
-| Ubuntu Linux | 24.04 | ✅ | beeks (只支持Ubuntu) |
+| Amazon Linux | 2023 | ✅ | amazon aws |
+| Ubuntu Linux | 24.04 | ✅ | beeks |
+| Rocky Linux | 9.7 | ✅ | beeks | 

@@ -22,6 +22,10 @@ nav:
       - 最佳实践: common/shm_best_practice.md
       - 资产&策略资产: common/shm_balance.md
       - 自定义信号: common/shm_custom_signal.md
+    - 交易所:
+      - REST API: common/exchange_rest_api.md
+      - Websocket API: common/exchange_websocket_api.md
+      - Websocket Stream: common/exchange_websocket_stream.md
     - 转账:
       - 统一API: common/transfer_api.md
       - 任务: common/transfer_task_manager.md
