@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://wiki.vikingtrading.net/common/ipc_pubsub/">
+        <link rel="canonical" href="https://wiki.vikingtrading.net/common/exchange_websocket_stream/">
       
       
-        <link rel="prev" href="../gateway_order/">
+        <link rel="prev" href="../exchange_rest_api/">
       
       
-        <link rel="next" href="../ipc_command/">
+        <link rel="next" href="../transfer_api/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>发布&订阅 - HFT技术文档中心</title>
+        <title>Websocket Stream - HFT技术文档中心</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ipc" class="md-skip">
+        <a href="#websocket-stream" class="md-skip">
           跳转至
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              发布&订阅
+              Websocket Stream
             
           </span>
         </div>
@@ -810,8 +810,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -826,11 +828,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
         
           
           <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
@@ -851,7 +853,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -894,10 +896,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../exchange_websocket_stream/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Websocket Stream
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -913,6 +942,114 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设计思路
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        类的继承结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        流程图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observer 接口规范
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        子类如何订阅一个Channel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何启动一个Stream
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用示例
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        和Service集成
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1170,10 +1307,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -1188,11 +1323,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
         
           
           <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
@@ -1213,7 +1348,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1228,37 +1363,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    发布&订阅
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../ipc_pubsub/" class="md-nav__link">
         
   
   
@@ -1274,109 +1382,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        概述
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        消息格式
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#publisher" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Publisher
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#subscriber" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Subscriber
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#service" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        和Service的集成
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="和Service的集成">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#publisher_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Publisher
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#subscriber_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Subscriber
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1455,7 +1460,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        概述
+        设计思路
       
     </span>
   </a>
@@ -1466,7 +1471,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        消息格式
+        类的继承结构
       
     </span>
   </a>
@@ -1474,10 +1479,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#publisher" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Publisher
+        流程图
       
     </span>
   </a>
@@ -1485,10 +1490,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#subscriber" class="md-nav__link">
+  <a href="#observer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Subscriber
+        Observer 接口规范
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        子类如何订阅一个Channel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何启动一个Stream
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用示例
       
     </span>
   </a>
@@ -1499,38 +1537,10 @@
   <a href="#service" class="md-nav__link">
     <span class="md-ellipsis">
       
-        和Service的集成
+        和Service集成
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="和Service的集成">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#publisher_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Publisher
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#subscriber_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Subscriber
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1595,10 +1605,10 @@
     
     
       <li class="md-path__item">
-        <a href="./" class="md-path__link">
+        <a href="../exchange_rest_api/" class="md-path__link">
           
   <span class="md-ellipsis">
-    IPC
+    交易所
   </span>
 
         </a>
@@ -1617,141 +1627,80 @@
 
 
 
-<h1 id="ipc">IPC 发布&amp;订阅<a class="headerlink" href="#ipc" title="Permanent link">&para;</a></h1>
-<h2 id="_1">概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>对于交易所的消息，策略进程可以直接从交易所订阅，消息经过解析后，会分发到对应的<code>on_&lt;type&gt;</code>回调中处理。这在简单的业务场景是没有问题的。对于多进程的业务场景，不同的子策略会跑在不同的进程中，我们希望<strong>只有一个进程从交易所订阅一份数据，然后将处理好的数据分发给不同的策略进程</strong>。最常见的两个业务场景是hft market接收处理ticker stream和trade stream，将处理好的ticker和trade分发出去，gateway接收处理order stream，将处理好的order分发出去。<strong>对于消息的订阅者来说，不需要区分消息到底是直接从交易所订阅的，还是从内部的IPC Channel订阅的，在行为上应该是完全一致的</strong>。</p>
+<h1 id="websocket-stream">Websocket Stream<a class="headerlink" href="#websocket-stream" title="Permanent link">&para;</a></h1>
+<h2 id="_1">设计思路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>目前支持<code>ticker, trade, my_order, my_order_batch</code>这样一些常见消息的发布和订阅</li>
-<li>一种类型的消息会发布到一个固定的地址，<strong>发布消息就是向一个地址pub message，一个地址只能有一个发布者，可以有多个订阅者</strong>，对于trade，ticker这类消息，发布者通常是hft market，对于order这类消息，发布者通常是gateway，地址如下：<ul>
-<li><code>/hft/zmq/binance.ticker.ipc</code></li>
-<li><code>/hft/zmq/binance.trade.ipc</code></li>
-<li><code>/hft/zmq/binance.my_order.ipc</code></li>
-<li><code>/hft/zmq/binance.my_order_batch.ipc</code></li>
+<li>Stream是交易所Websocket数据的抽象，底层对应多个TCP链接，通常一个Channel对应一个TCP链接</li>
+<li><strong>工厂模式 + 观察者模式</strong>：Stream通过<code>get_exchange_stream()</code>统一创建，负责<strong>接收交易所推送的消息</strong>，Service是Observer，负责<strong>处理解析后的消息</strong><ul>
+<li>Stream: 每个交易所，每个Channel的消息都会启动一个协程来接收，接收到的数据通过队列异步分发给多个观察者</li>
+<li>Service: 每个交易所，每个Channel的消息都会启动一个协程来处理</li>
 </ul>
 </li>
-<li>消息通过protobuf来跨语言传输，对于订阅者来说，<strong>订阅市场直接推送的消息和订阅gateway或者hft market推送的消息行为上是一致的，都是在<code>on_&lt;type&gt;</code>回调中处理</strong></li>
-<li>C++和Python都可以进行消息的订阅&amp;发布</li>
-</ul>
-<h2 id="_2">消息格式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li>16个字节的topic，可以用于交易对的过滤</li>
-</ul>
-<div class="highlight"><pre><span></span><code>┌──────────────────────┬────────────────────────┐
-│  Topic (16 bytes)    │  Protobuf Data (变长)   │
-│  固定长度，右填充空格   │  序列化后的消息数据       │
-└──────────────────────┴────────────────────────┘
-</code></pre></div>
-<h2 id="publisher">Publisher<a class="headerlink" href="#publisher" title="Permanent link">&para;</a></h2>
-<p>这里介绍的是Python一侧的Publisher的设计</p>
-<ul>
-<li><strong>单例模式</strong>：全局只有一个实例。方便socket的全局管理</li>
-<li><strong>懒加载</strong>：Socket只在首次使用的时候创建，不需要调用者显示创建，系统底层会根据消息的类型自动创建对应的Socket</li>
-<li><strong>多通道的支持</strong>：每个exchange + channel的组合对应一个底层的Socket</li>
-<li><strong>是否需要独立的协程来发布消息</strong>：不需要</li>
-</ul>
-<p><strong>使用示例</strong></p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.ipc</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPCPublisher</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">CurrencyPair</span><span class="p">,</span> <span class="n">Side</span><span class="p">,</span> <span class="n">OrderStatus</span><span class="p">,</span> <span class="n">OrderType</span>
-
-<span class="hll"><span class="c1"># 获取单例实例</span>
-</span><span class="hll"><span class="n">publisher</span> <span class="o">=</span> <span class="n">IPCPublisher</span><span class="p">()</span>
-</span><span class="hll">
-</span><span class="hll"><span class="c1"># 发送 Ticker 数据</span>
-</span><span class="hll"><span class="k">await</span> <span class="n">publisher</span><span class="o">.</span><span class="n">send_ticker</span><span class="p">(</span>
-</span><span class="hll">    <span class="n">exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span>
-</span><span class="hll">    <span class="n">symbol</span><span class="o">=</span><span class="n">CurrencyPair</span><span class="o">.</span><span class="n">BTC_USDT</span><span class="p">,</span>
-</span><span class="hll">    <span class="n">ask_price</span><span class="o">=</span><span class="mf">50000.5</span><span class="p">,</span>
-</span><span class="hll">    <span class="n">ask_volume</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
-</span><span class="hll">    <span class="n">bid_price</span><span class="o">=</span><span class="mf">50000.0</span><span class="p">,</span>
-</span><span class="hll">    <span class="n">bid_volume</span><span class="o">=</span><span class="mf">2.0</span>
-</span><span class="hll"><span class="p">)</span>
-</span>
-<span class="c1"># 发送 Trade 数据</span>
-<span class="k">await</span> <span class="n">publisher</span><span class="o">.</span><span class="n">send_trade</span><span class="p">(</span>
-    <span class="n">exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span>
-    <span class="n">symbol</span><span class="o">=</span><span class="n">CurrencyPair</span><span class="o">.</span><span class="n">BTC_USDT</span><span class="p">,</span>
-    <span class="n">price</span><span class="o">=</span><span class="mf">50000.2</span><span class="p">,</span>
-    <span class="n">volume</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">side</span><span class="o">=</span><span class="n">Side</span><span class="o">.</span><span class="n">BUY</span>
-<span class="p">)</span>
-
-<span class="c1"># 发送订单数据</span>
-<span class="k">await</span> <span class="n">publisher</span><span class="o">.</span><span class="n">send_my_order</span><span class="p">(</span>
-    <span class="n">exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
-    <span class="n">symbol</span><span class="o">=</span><span class="n">CurrencyPair</span><span class="o">.</span><span class="n">BTC_USDT</span><span class="p">,</span>
-    <span class="n">order_id</span><span class="o">=</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span>
-    <span class="n">client_order_id</span><span class="o">=</span><span class="s2">&quot;my_order_001&quot;</span><span class="p">,</span>
-    <span class="n">side</span><span class="o">=</span><span class="n">Side</span><span class="o">.</span><span class="n">BUY</span><span class="p">,</span>
-    <span class="n">status</span><span class="o">=</span><span class="n">OrderStatus</span><span class="o">.</span><span class="n">FILLED</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="n">OrderType</span><span class="o">.</span><span class="n">LIMIT</span><span class="p">,</span>
-    <span class="n">price</span><span class="o">=</span><span class="mf">50000.0</span><span class="p">,</span>
-    <span class="n">avg_price</span><span class="o">=</span><span class="mf">49999.5</span><span class="p">,</span>
-    <span class="n">volume</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-    <span class="n">filled_volume</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-    <span class="n">fee</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
-    <span class="n">extra_data</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span>
-<span class="p">)</span>
-
-<span class="c1"># 关闭连接</span>
-<span class="k">await</span> <span class="n">publisher</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</code></pre></div>
-<h2 id="subscriber">Subscriber<a class="headerlink" href="#subscriber" title="Permanent link">&para;</a></h2>
-<p>这里介绍的是Python一侧的Subscriber的设计</p>
-<ul>
-<li><strong>观察者模式</strong>：通过<code>bind_observer()</code>绑定多个观察者，通常service就是一个观察者</li>
-<li><strong>异步并发</strong>：每个订阅通道对应一种类型的消息，需要2个协程和一个队列，详细的协程设计图在下方<ul>
-<li>一个独立协程接收数据【Subscriber】</li>
-<li>一个消息队列【Observer】</li>
-<li>一个独立的协程消费数据【Observer】</li>
+<li>一个Stream可以绑定多个Observer，每个Observer就是一个Service，Stream收到消息后将消息推送到Service对应的queue中，<strong>通过queue实现消息的传递</strong>。消息的接收和消息的处理在不同的协程中，消息的处理不会block消息的接收</li>
+<li>Stream有两个核心变量：<code>currency_pairs</code>和<code>subscribe_channels</code><ul>
+<li><code>currency_pairs</code>：订阅的交易对列表，为了简化设计，是所有Channel共享的</li>
+<li><code>subscribe_channels</code>：订阅的Channel列表</li>
 </ul>
 </li>
-<li><strong>自动分发</strong>：解析后自动推送到 Observer 队列，Observer的<strong>最佳实践是对于每种类型的消息，启动一个独立的协程消费处理</strong></li>
+<li><code>start()</code>函数会启动所有协程，<strong>每个channel对应一个协程</strong>，如果我们要订阅3个Channel，会启动3个协程</li>
+<li>Stream底层封装好了TCP超时，重连的策略&amp;逻辑，每个交易所只需要使用默认的配置即可。对于同一个交易所，不同的Channel共享一个重连策略，这也是合理的，如果一个Channel可以连接上，其它同所的channel应该都可以连接上</li>
 </ul>
-<p><strong>流程图</strong></p>
-<div class="highlight"><pre><span></span><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                              IPCSubscriber (生产者协程)                                  │
-│                                                                                        │
-│   ┌─────────────────────┐   ┌─────────────────────┐   ┌─────────────────────┐          │
-│   │  协程 1              │   │  协程 2              │   │  协程 3             │          │
-│   │  BINANCE/TICKER     │   │  BINANCE/TRADE      │   │  KRAKEN/MY_ORDER    │          │
-│   │                     │   │                     │   │                     │          │
-│   │  await recv()       │   │  await recv()       │   │  await recv()       │          │
-│   │       ↓             │   │       ↓             │   │       ↓             │          │
-│   │  put_nowait()       │   │  put_nowait()       │   │  put_nowait()       │          │
-│   └──────────┬──────────┘   └──────────┬──────────┘   └──────────┬──────────┘          │
-│              │                         │                         │                     │
-└──────────────┼─────────────────────────┼─────────────────────────┼─────────────────────┘
-               │                         │                         │
-               ▼                         ▼                         ▼
-        ┌─────────────┐           ┌─────────────┐           ┌─────────────┐
-        │ticker_queue │           │ trade_queue │           │my_order_queue│
-        │  asyncio.Q  │           │  asyncio.Q  │           │  asyncio.Q  │
-        └──────┬──────┘           └──────┬──────┘           └──────┬──────┘
-               │                         │                         │
-               ▼                         ▼                         ▼
-┌──────────────┼─────────────────────────┼─────────────────────────┼─────────────────────┐
-│              │                         │                         │                     │
-│   ┌──────────┴──────────┐   ┌──────────┴──────────┐   ┌──────────┴──────────┐          │
-│   │  协程 A              │   │  协程 B              │   │  协程 C             │          │
-│   │  process_tickers()  │   │  process_trades()   │   │  process_orders()   │          │
-│   │                     │   │                     │   │                     │          │
-│   │  await queue.get()  │   │  await queue.get()  │   │  await queue.get()  │          │
-│   │       ↓             │   │       ↓             │   │       ↓             │          │
-│   │  handle(ticker)     │   │  handle(trade)      │   │  handle(order)      │          │
-│   └─────────────────────┘   └─────────────────────┘   └─────────────────────┘          │
-│                                                                                        │
-│                               DataHandler (消费者协程)                                   │
-└─────────────────────────────────────────────────────────────────────────────────────────┘
+<h2 id="_2">类的继承结构<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>StreamBase (基类 - ABC)
+    ├── KrakenStream
+    ├── BinanceStream
+    ├── BinanceFutureStream
+    ├── CoinbaseStream
+    ├── OkxStream
+    ├── OkxSwapStream
+    ├── KrakenFutureStream
+    └── IBStream
 </code></pre></div>
-<p><strong>订阅配置格式</strong></p>
-<div class="highlight"><pre><span></span><code><span class="n">subscriptions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="c1"># (交易所, 频道, Topic列表)</span>
-    <span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span> <span class="n">Channel</span><span class="o">.</span><span class="n">TICKER</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;btcusdt&quot;</span><span class="p">,</span> <span class="s2">&quot;ethusdt&quot;</span><span class="p">]),</span>  <span class="c1"># 订阅多个 topic</span>
-    <span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span> <span class="n">Channel</span><span class="o">.</span><span class="n">TRADE</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>                       <span class="c1"># 订阅所有 topic</span>
-    <span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> <span class="n">Channel</span><span class="o">.</span><span class="n">MY_ORDER</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;btcusdt&quot;</span><span class="p">]),</span>           <span class="c1"># 订阅单个 topic</span>
-<span class="p">]</span>
+<h2 id="_3">流程图<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>生产者</strong>：<code>StreamBase</code>，每个Channel一个协程，从 WebSocket 接收数据</li>
+<li><strong>解析</strong>：<code>on_xxx()</code>，将 JSON 解析为 Ticker/Trade/MyOrder 等对象</li>
+<li><strong>队列</strong>：<code>asyncio.Queue</code>，异步队列，解耦生产者和消费者</li>
+<li><strong>消费者</strong>：<code>ServiceBase</code>，每个队列一个协程，处理业务逻辑</li>
+</ul>
+<div class="highlight"><pre><span></span><code>┌───────────────────────────────────────────────────────────────┐
+│                   StreamBase（生产者协程）                      │
+│                                                               │
+│  ┌─────────────────────────┐  ┌─────────────────────────┐     │
+│  │        协程 1            │  │        协程 2           │     │
+│  │    ticker_channel       │  │    trade_channel        │    │
+│  │                         │  │                         │    │
+│  │    await recv()         │  │    await recv()         │    │
+│  │          ↓              │  │          ↓              │    │
+│  │    on_ticker()          │  │    on_trade()           │    │
+│  │          ↓              │  │          ↓              │    │
+│  │    put_nowait()         │  │    put_nowait()         │    │
+│  └────────────┬────────────┘  └────────────┬────────────┘    │
+│               │                            │                 │
+└───────────────┼────────────────────────────┼─────────────────┘
+                │                            │
+                ▼                            ▼
+         ┌─────────────┐              ┌─────────────┐
+         │ticker_queue │              │ trade_queue │
+         │ asyncio.Q   │              │ asyncio.Q   │
+         └──────┬──────┘              └──────┬──────┘
+                │                            │
+                ▼                            ▼
+┌───────────────────────────────────────────────────────────────┐
+│                   ServiceBase（消费者协程）                     │
+│                                                               │
+│  ┌─────────────────────────┐  ┌─────────────────────────┐     │
+│  │        协程 A            │  │        协程 B           │     │
+│  │   process_tickers()     │  │   process_trades()      │    │
+│  │                         │  │                         │    │
+│  │  await queue.get()      │  │  await queue.get()      │    │
+│  │          ↓              │  │          ↓              │    │
+│  │  on_ticker(ticker)      │  │  on_trade(trade)        │    │
+│  └─────────────────────────┘  └─────────────────────────┘    │
+│                                                               │
+└───────────────────────────────────────────────────────────────┘
 </code></pre></div>
-<p><strong>Observer 接口规范</strong></p>
+<h2 id="observer">Observer 接口规范<a class="headerlink" href="#observer" title="Permanent link">&para;</a></h2>
 <ul>
 <li>观察者需要实现相应的队列属性</li>
 </ul>
@@ -1762,116 +1711,151 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">my_order_queue</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>      <span class="c1"># Channel.MY_ORDER</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">my_order_batch_queue</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span> <span class="c1"># Channel.MY_ORDER_BATCH</span>
 </code></pre></div>
-<p><strong>使用示例</strong></p>
+<h2 id="channel">子类如何订阅一个Channel<a class="headerlink" href="#channel" title="Permanent link">&para;</a></h2>
+<p>通过<code>run_channel</code>会启动一个协程，连接到某个交易所的某个Channel，<strong>下面是子类中启动一个Channel的典型逻辑，提供三个回调函数:</strong></p>
+<ul>
+<li><code>on_packet</code>：收到json消息的回调</li>
+<li><code>on_connected</code>：连接成功的回调</li>
+<li><code>on_disconnected</code>：连接断开的回调</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">on_ticker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_msg</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="n">ticker</span> <span class="o">=</span> <span class="n">json_msg</span>  <span class="c1"># parse</span>
+    <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_observers</span><span class="p">:</span>
+        <span class="n">ob</span><span class="o">.</span><span class="n">ticker_queue</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">ticker_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">subscribe_wrapper</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s1">&#39;your subscribe message&#39;</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;your websocket host&quot;</span><span class="p">,</span>   <span class="c1"># WebSocket主机地址</span>
+            <span class="s2">&quot;channel&quot;</span><span class="p">:</span> <span class="n">Channel</span><span class="o">.</span><span class="n">TICKER</span><span class="p">,</span>       <span class="c1"># 当前频道</span>
+            <span class="s2">&quot;subscribe&quot;</span><span class="p">:</span> <span class="n">subscribe_wrapper</span><span class="p">,</span>  <span class="c1"># 订阅消息的生成函数</span>
+            <span class="s2">&quot;on_packet&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_ticker</span><span class="p">,</span>     <span class="c1"># 收到消息后的处理回调</span>
+            <span class="s2">&quot;on_connected&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>            <span class="c1"># 连接成功后的回调(可扩展)</span>
+            <span class="s2">&quot;on_disconnected&quot;</span><span class="p">:</span> <span class="kc">None</span>          <span class="c1"># 连接断开后的回调(可扩展)</span>
+    <span class="p">}</span>
+    <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_channel</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="stream">如何启动一个Stream<a class="headerlink" href="#stream" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.exchange</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_exchange_stream</span>
+
+<span class="c1"># 创建stream</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;exchange&quot;</span><span class="p">:</span> <span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+    <span class="s2">&quot;currency_pairs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">CurrencyPair</span><span class="o">.</span><span class="n">BTC_USD</span><span class="p">,</span> <span class="n">CurrencyPair</span><span class="o">.</span><span class="n">ETH_USD</span><span class="p">],</span>
+    <span class="s2">&quot;subscribe_channels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Channel</span><span class="o">.</span><span class="n">TICKER</span><span class="p">,</span> <span class="n">Channel</span><span class="o">.</span><span class="n">TRADE</span><span class="p">],</span>
+    <span class="s2">&quot;api_key&quot;</span><span class="p">:</span> <span class="s2">&quot;your api key&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;api_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;your api secret&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;api_auth_data&quot;</span><span class="p">:</span> <span class="s2">&quot;your auth data&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;api_host&quot;</span><span class="p">:</span> <span class="s2">&quot;your api host&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;reconnect_times&quot;</span><span class="p">:</span> <span class="s2">&quot;your reconnect policy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;subscribe_args&quot;</span><span class="p">:</span> <span class="s2">&quot;subscribe args&quot;</span>
+<span class="p">}</span>
+<span class="n">stream</span> <span class="o">=</span> <span class="n">get_exchange_stream</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<span class="n">stream</span><span class="o">.</span><span class="n">bind_observer</span><span class="p">(</span><span class="n">service</span><span class="p">)</span>
+
+<span class="c1"># 启动stream - 启动协程</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>
+</code></pre></div>
+<h2 id="_4">使用示例<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<ul>
+<li>如果只是订阅公共的Channel，不需要传递<code>api_key</code>和<code>api_secret</code></li>
+<li>Websocket Stream通常和Service集成在一起使用，但这并不是必须得。Websocket Stream也创建后可以独立使用，只需要绑定的Observer符合接口规范即可</li>
+</ul>
+</div>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.ipc</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPCSubscriber</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">Channel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">CurrencyPair</span><span class="p">,</span> <span class="n">Channel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hftpy.exchange</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_exchange_stream</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">DataHandler</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;数据处理观察者&quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ticker_queue</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trade_queue</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">my_order_queue</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">my_order_batch_queue</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
 
     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">process_tickers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;处理 Ticker 数据&quot;&quot;&quot;</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">ticker</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticker_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;收到 Ticker: </span><span class="si">{</span><span class="n">ticker</span><span class="o">.</span><span class="n">bid_price</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">ticker</span><span class="o">.</span><span class="n">ask_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;收到 Ticker: </span><span class="si">{</span><span class="n">ticker</span><span class="o">.</span><span class="n">symbol</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">ticker</span><span class="o">.</span><span class="n">bidPrice</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">ticker</span><span class="o">.</span><span class="n">askPrice</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">process_trades</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;处理 Trade 数据&quot;&quot;&quot;</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">trade</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">trade_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;收到 Trade: </span><span class="si">{</span><span class="n">trade</span><span class="o">.</span><span class="n">price</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">trade</span><span class="o">.</span><span class="n">volume</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;收到 Trade: </span><span class="si">{</span><span class="n">trade</span><span class="o">.</span><span class="n">symbol</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">trade</span><span class="o">.</span><span class="n">price</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">trade</span><span class="o">.</span><span class="n">volume</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="c1"># 定义订阅配置</span>
-    <span class="n">subscriptions</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span> <span class="n">Channel</span><span class="o">.</span><span class="n">TICKER</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;btcusdt&quot;</span><span class="p">,</span> <span class="s2">&quot;ethusdt&quot;</span><span class="p">]),</span>
-        <span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span> <span class="n">Channel</span><span class="o">.</span><span class="n">TRADE</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>  <span class="c1"># 订阅所有 trade</span>
-        <span class="p">(</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span> <span class="n">Channel</span><span class="o">.</span><span class="n">MY_ORDER</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-    <span class="p">]</span>
+    <span class="c1"># 创建 Stream</span>
+    <span class="n">stream</span> <span class="o">=</span> <span class="n">get_exchange_stream</span><span class="p">(</span>
+        <span class="n">exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">KRAKEN</span><span class="p">,</span>
+        <span class="n">currency_pairs</span><span class="o">=</span><span class="p">[</span><span class="n">CurrencyPair</span><span class="o">.</span><span class="n">BTC_USD</span><span class="p">,</span> <span class="n">CurrencyPair</span><span class="o">.</span><span class="n">ETH_USD</span><span class="p">],</span>
+        <span class="n">subscribe_channels</span><span class="o">=</span><span class="p">[</span><span class="n">Channel</span><span class="o">.</span><span class="n">TICKER</span><span class="p">,</span> <span class="n">Channel</span><span class="o">.</span><span class="n">TRADE</span><span class="p">],</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>        <span class="c1"># 公共频道不需要认证</span>
+        <span class="n">api_secret</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">subscribe_args</span><span class="o">=</span><span class="p">{}</span>
+    <span class="p">)</span>
 
-    <span class="c1"># 创建订阅者和观察者</span>
-<span class="hll">    <span class="n">subscriber</span> <span class="o">=</span> <span class="n">IPCSubscriber</span><span class="p">(</span><span class="n">subscriptions</span><span class="p">)</span>
-</span><span class="hll">    <span class="n">handler</span> <span class="o">=</span> <span class="n">DataHandler</span><span class="p">()</span>
-</span><span class="hll">    <span class="n">subscriber</span><span class="o">.</span><span class="n">bind_observer</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+    <span class="c1"># 创建观察者并绑定</span>
+    <span class="n">handler</span> <span class="o">=</span> <span class="n">DataHandler</span><span class="p">()</span>
+<span class="hll">    <span class="n">stream</span><span class="o">.</span><span class="n">bind_observer</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
 </span>
     <span class="c1"># 启动所有任务</span>
     <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
-        <span class="n">subscriber</span><span class="o">.</span><span class="n">start</span><span class="p">(),</span>
-        <span class="n">handler</span><span class="o">.</span><span class="n">process_tickers</span><span class="p">(),</span>
-        <span class="n">handler</span><span class="o">.</span><span class="n">process_trades</span><span class="p">(),</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">start</span><span class="p">(),</span>              <span class="c1"># 启动 WebSocket 订阅</span>
+        <span class="n">handler</span><span class="o">.</span><span class="n">process_tickers</span><span class="p">(),</span>   <span class="c1"># 消费 Ticker 数据</span>
+        <span class="n">handler</span><span class="o">.</span><span class="n">process_trades</span><span class="p">(),</span>    <span class="c1"># 消费 Trade 数据</span>
     <span class="p">)</span>
 
-
-<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </code></pre></div>
-<h2 id="service">和Service的集成<a class="headerlink" href="#service" title="Permanent link">&para;</a></h2>
-<h3 id="publisher_1">Publisher<a class="headerlink" href="#publisher_1" title="Permanent link">&para;</a></h3>
+<h2 id="service">和Service集成<a class="headerlink" href="#service" title="Permanent link">&para;</a></h2>
 <ul>
-<li>对于发布者来说，service内部有<code>ipc_publisher</code>这个内置变量可以直接使用</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># service内置变量，不需要额外初始化，直接使用</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">ipc_publisher</span><span class="p">:</span> <span class="n">IPCPublisher</span> <span class="o">=</span> <span class="n">IPCPublisher</span><span class="p">()</span>
-
-<span class="c1"># 发送 Trade 数据</span>
-<span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipc_publisher</span><span class="o">.</span><span class="n">send_trade</span><span class="p">(</span>
-    <span class="n">exchange</span><span class="o">=</span><span class="n">Exchange</span><span class="o">.</span><span class="n">BINANCE</span><span class="p">,</span>
-    <span class="n">symbol</span><span class="o">=</span><span class="n">CurrencyPair</span><span class="o">.</span><span class="n">BTC_USDT</span><span class="p">,</span>
-    <span class="n">price</span><span class="o">=</span><span class="mf">50000.2</span><span class="p">,</span>
-    <span class="n">volume</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">side</span><span class="o">=</span><span class="n">Side</span><span class="o">.</span><span class="n">BUY</span>
-<span class="p">)</span>
-</code></pre></div>
-<h3 id="subscriber_1">Subscriber<a class="headerlink" href="#subscriber_1" title="Permanent link">&para;</a></h3>
-<ul>
-<li>对于订阅者来说，在service配置中增加如下配置，消息会自动路由到对应的<code>on_&lt;type&gt;</code>回调中<ul>
-<li>service本身就是一个Observer，实现了Subscriber Observer要求的队列属性</li>
-<li>在启动的时候，service底层会自动将配置信息转换成订阅参数，进行不同channel的订阅</li>
+<li>需要订阅交易所的数据，只需要在Service配置中增加如下配置，消息会自动路由到对应的<code>on_&lt;type&gt;</code>回调中<ul>
+<li>Service本身就是一个Observer，实现了Subscriber Observer要求的队列属性</li>
+<li>在启动的时候，Service底层会自动将配置信息转换成订阅参数，进行不同Channel的订阅</li>
 </ul>
 </li>
-<li>下面这个例子中，<code>ticker，trade，my_order</code>中配置的symbol都可以是空列表，则不进行过滤，会订阅这个channel所有交易对的消息</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<ul>
+<li>如果订阅的是私有的Channel，需要提供<code>api_key</code>和<code>api_secret</code>来创建REST API，因为大部分交易所建立Websocket私有链接的时候，都需要REST API来获取认证Token</li>
+<li>Websocket Stream通常和Service集成在一起使用，但这并不是必须得。Websocket Stream也创建后可以独立使用，只需要绑定的Observer符合接口规范即可</li>
+</ul>
+</div>
 <p><strong>配置信息：</strong></p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;service.mm_demo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;class_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MMDemoService&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;setting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="err">...</span>
-<span class="w">            </span><span class="nt">&quot;ipc_subscribers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+
+<span class="w">            </span><span class="nt">&quot;apis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                </span><span class="p">{</span>
 <span class="w">                    </span><span class="nt">&quot;exchange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
-<span class="hll"><span class="w">                    </span><span class="nt">&quot;channel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span>
-</span><span class="w">                    </span><span class="nt">&quot;symbols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="nt">&quot;api_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your api key&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;api_secret&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your api secret&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;streams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;exchange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;currency_pairs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                        </span><span class="s2">&quot;btc/usdt&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="s2">&quot;eth/usdt&quot;</span>
-<span class="w">                    </span><span class="p">]</span>
-<span class="w">                </span><span class="p">},</span>
-<span class="w">                </span><span class="p">{</span>
-<span class="w">                    </span><span class="nt">&quot;exchange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
-<span class="hll"><span class="w">                    </span><span class="nt">&quot;channel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;trade&quot;</span><span class="p">,</span>
-</span><span class="w">                    </span><span class="nt">&quot;symbols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                        </span><span class="s2">&quot;btc/usdt&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s2">&quot;eth/usdt&quot;</span>
-<span class="w">                    </span><span class="p">]</span>
-<span class="w">                </span><span class="p">},</span>
-<span class="w">                </span><span class="p">{</span>
-<span class="w">                    </span><span class="nt">&quot;exchange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
-<span class="hll"><span class="w">                    </span><span class="nt">&quot;channel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_order&quot;</span><span class="p">,</span>
-</span><span class="w">                    </span><span class="nt">&quot;symbols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                        </span><span class="s2">&quot;btc/usdt&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s2">&quot;eth/usdt&quot;</span>
-<span class="w">                    </span><span class="p">]</span>
-<span class="w">                </span><span class="p">},</span>
-<span class="w">                </span><span class="p">{</span>
-<span class="w">                    </span><span class="nt">&quot;exchange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
-<span class="hll"><span class="w">                    </span><span class="nt">&quot;channel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_order_batch&quot;</span><span class="p">,</span>
-</span><span class="w">                    </span><span class="nt">&quot;symbols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">                    </span><span class="p">],</span>
+<span class="w">                    </span><span class="nt">&quot;subscribe_channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="hll"><span class="w">                        </span><span class="s2">&quot;my_trade&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="w">                        </span><span class="s2">&quot;my_order&quot;</span>
+</span><span class="w">                    </span><span class="p">]</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">],</span>
 <span class="w">            </span><span class="err">...</span>
@@ -1881,13 +1865,10 @@
 </code></pre></div>
 <p><strong>回调函数：</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MMDemoService</span><span class="p">(</span><span class="n">ServiceBase</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_ticker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ticker</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_my_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">my_order</span><span class="p">:</span> <span class="n">MyOrder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">pass</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_trade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trade</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">pass</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_my_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">my_order</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">pass</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_my_order_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">my_order_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_my_trade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">my_trade</span><span class="p">:</span> <span class="n">MyTrade</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">pass</span>
 </code></pre></div>
 
