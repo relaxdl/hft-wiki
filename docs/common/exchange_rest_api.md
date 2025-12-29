@@ -21,6 +21,7 @@ HttpBase (基类)
 !!! note "注意"
     
     * 如果只是调用REST API的公共接口，不需要传递`api_key`和`api_secret`
+    * REST API不依赖其它任何模块，创建后可以独立使用
 
 ```python
 from hftpy.common import Exchange, CurrencyPair, Side
