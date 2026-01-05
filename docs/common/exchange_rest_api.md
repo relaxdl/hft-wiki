@@ -2,7 +2,7 @@
 
 ## Python
 
-* **工厂模式 + 单例模式**，KrakenAPI, BinanceAPI每个交易所的REST API全局只有一个实例。单例模式的好处是只需要在系统初始化的时候创建一次，后续在任何函数内可以直接调用。并且方便对进程内API的调用速率做全局控制
+* **工厂模式 + 单例模式**，KrakenAPI，BinanceAPI每个交易所的REST API全局只有一个实例。单例模式的好处是只需要在系统初始化的时候创建一次，后续在任何函数内可以直接调用。并且方便对进程内API的调用速率做全局控制
 * **如何使用**：在系统初始化的时候，使用`create_exchange_api`创建一次api，之后就可以通过`get_exchange_api`获取使用了
 * 调用REST API的私有接口，需要在创建的时候提供`api_key`和`api_secret`等认证信息。如果只调用共有接口，创建的时候不需要认证信息
 
@@ -23,7 +23,7 @@ HttpBase (基类)
     * 如果只是调用REST API的公共接口，不需要传递`api_key`和`api_secret`
     * REST API不依赖其它任何模块，创建后可以独立使用
 
-```python
+```python hl_lines="5-12"
 from hftpy.common import Exchange, CurrencyPair, Side
 from hftpy.exchange import create_exchange_api, get_exchange_api
 
@@ -56,7 +56,7 @@ code, response = await rest_api.place_order(**params)
 
 ### 和Service的集成
 
-* 只需要在service的配置文件中，增加需要的交易所配置信息，就可以直接使用。service在启动的时候，会根据配置，自动创建REST API。
+* 只需要在service的配置文件中，增加需要的交易所配置信息，就可以直接使用。service在启动的时候，会根据配置，自动创建REST API
 * 下面的案例中，配置了2个交易所的认证信息，binance和coinbase的api在service中可以直接使用
 
 **配置信息：**
