@@ -26,6 +26,10 @@ nav:
       - REST API: common/exchange_rest_api.md
       - Websocket API: common/exchange_websocket_api.md
       - Websocket Stream: common/exchange_websocket_stream.md
+    - 配置:
+      - 静态配置: common/config_spec.md
+      - 跨进程的动态配置: common/config_param.md
+      - Service配置: common/config_service.md
     - 转账:
       - 统一API: common/transfer_api.md
       - 任务: common/transfer_task_manager.md
